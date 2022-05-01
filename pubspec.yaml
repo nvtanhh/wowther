@@ -12,13 +12,23 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  http: ^0.13.4
+  get_it: ^7.2.0
+  injectable: ^1.5.3
+  flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
+  json_annotation: ^4.5.0
+  firebase_core: ^1.11.0
+  hive: ^2.1.0
+  path_provider: ^2.0.9
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  
   flutter_lints: ^1.0.0
+  injectable_generator: ^1.5.3
+  build_runner: ^2.1.10
 
 flutter:
   uses-material-design: true
@@ -34,4 +44,4 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+  

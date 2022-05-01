@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "989039084471",
+    "project_id": "fir-bbe1c",
+    "storage_bucket": "fir-bbe1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989039084471:android:b56bb52cbc0f7987ce5e32",
+        "android_client_info": {
+          "package_name": "com.tanhnv.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989039084471-9qkemijdf0q870j77ss6d6glk0bmvgqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJN9-1wnwqTlOaskFLACx4bF5IRn8txe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989039084471-9qkemijdf0q870j77ss6d6glk0bmvgqf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989039084471-7h3npru2afhqv7uabrtffi5gs5c53eqb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tanhnv.demo.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

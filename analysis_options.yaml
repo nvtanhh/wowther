@@ -7,7 +7,8 @@ analyzer:
     missing_required_param: warning
     missing_return: warning
     todo: ignore
-
+  exclude:
+    - ./**.g.dart
 linter:
   rules:
     - always_declare_return_types

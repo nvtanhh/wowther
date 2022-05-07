@@ -14,6 +14,7 @@ class DatabaseUtil {
   static void registerAdapter<Type>(TypeAdapter<Type> adapter) {
     try {
       Hive.registerAdapter(adapter);
+      // ignore: avoid_catching_errors
     } on HiveError catch (error) {
       debugPrint(error.toString());
     }

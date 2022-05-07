@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 
-import 'firebase.service.dart';
+import '../services/firebase.service.dart';
 
 @module
-abstract class AppModule {
+abstract class RegisterModule {
   @preResolve
   Future<FirebaseService> get fireService => FirebaseService.init();
 }

@@ -1,10 +1,19 @@
 part of 'sign_in_cubit.dart';
 
-abstract class SignInState extends Equatable {
-  const SignInState();
+class SignInState extends Equatable {
+  final bool isSubmitted;
+  const SignInState({
+    this.isSubmitted = false,
+  });
+
+  SignInState copyWith({
+    bool? isSubmitted,
+  }) {
+    return SignInState(
+      isSubmitted: isSubmitted ?? this.isSubmitted,
+    );
+  }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [isSubmitted];
 }
-
-class SignInInitial extends SignInState {}

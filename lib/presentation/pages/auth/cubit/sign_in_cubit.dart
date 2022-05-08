@@ -4,5 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
-  SignInCubit() : super(SignInInitial());
+  SignInCubit() : super(const SignInState());
+
+  void testObserver() {
+    print('testObserver');
+    emit(state.copyWith(isSubmitted: true));
+  }
 }

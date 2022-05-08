@@ -5,4 +5,7 @@ class UserState extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  // TODO - remove latter
+  bool get isLoggedIn => false;
 }

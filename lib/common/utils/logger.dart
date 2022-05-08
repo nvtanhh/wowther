@@ -3,7 +3,7 @@ import 'package:logger/logger.dart' as logger;
 
 @singleton
 class Logger {
-  final _logger = logger.Logger(printer: logger.PrettyPrinter());
+  final _logger = logger.Logger();
 
   void logInfo(String message) {
     _logger.i(message);

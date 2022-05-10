@@ -13,7 +13,7 @@ class ThemeRepositoryImpl implements ThemeRepository {
   ThemeRepositoryImpl(this._themeLocalDataSource);
 
   @override
-  Future<String> getDefaultFontFamily() async {
+  Future<String> getDefaultFont() async {
     return _themeLocalDataSource.defaultFont;
   }
 
@@ -29,7 +29,7 @@ class ThemeRepositoryImpl implements ThemeRepository {
   }
 
   @override
-  Future<List<ThemeModel>> getSupportedTheme() async {
+  Future<List<ThemeModel>> getSupportedThemes() async {
     return _themeLocalDataSource.supportedThemes
         .map((item) => ThemeModel.fromJson(item))
         .toList();

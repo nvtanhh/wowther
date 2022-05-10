@@ -6,8 +6,6 @@ part 'setting_state.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
   SettingBloc() : super(SettingInitial()) {
-    on<SettingEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<SettingEvent>((event, emit) {});
   }
 }

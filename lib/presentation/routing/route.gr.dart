@@ -17,15 +17,23 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    SignInRoute.name: (routeData) {
+    SignInWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SignInWrapper());
     },
-    SettingRoute.name: (routeData) {
+    SettingWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SettingWrapper());
     },
-    TodoRoute.name: (routeData) {
+    ThemeSettingPageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const ThemeSettingPage());
+    },
+    FontSettingPageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const FontSettingPage());
+    },
+    TodoWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const TodoWrapper());
     }
@@ -34,33 +42,54 @@ class _$AppRouter extends RootStackRouter {
   @override
   List<RouteConfig> get routes => [
         RouteConfig('/#redirect',
-            path: '/', redirectTo: 'sign-in', fullMatch: true),
-        RouteConfig(SignInRoute.name, path: 'sign-in'),
-        RouteConfig(SettingRoute.name, path: 'setting'),
-        RouteConfig(TodoRoute.name, path: 'todo')
+            path: '/', redirectTo: '/sign-in', fullMatch: true),
+        RouteConfig(SignInWrapperRoute.name, path: '/sign-in'),
+        RouteConfig(SettingWrapperRoute.name, path: '/setting'),
+        RouteConfig(ThemeSettingPageRoute.name, path: '/setting/theme'),
+        RouteConfig(FontSettingPageRoute.name, path: '/setting/font'),
+        RouteConfig(TodoWrapperRoute.name, path: '/todo')
       ];
 }
 
 /// generated route for
 /// [SignInWrapper]
-class SignInRoute extends PageRouteInfo<void> {
-  const SignInRoute() : super(SignInRoute.name, path: 'sign-in');
+class SignInWrapperRoute extends PageRouteInfo<void> {
+  const SignInWrapperRoute() : super(SignInWrapperRoute.name, path: '/sign-in');
 
-  static const String name = 'SignInRoute';
+  static const String name = 'SignInWrapperRoute';
 }
 
 /// generated route for
 /// [SettingWrapper]
-class SettingRoute extends PageRouteInfo<void> {
-  const SettingRoute() : super(SettingRoute.name, path: 'setting');
+class SettingWrapperRoute extends PageRouteInfo<void> {
+  const SettingWrapperRoute()
+      : super(SettingWrapperRoute.name, path: '/setting');
 
-  static const String name = 'SettingRoute';
+  static const String name = 'SettingWrapperRoute';
+}
+
+/// generated route for
+/// [ThemeSettingPage]
+class ThemeSettingPageRoute extends PageRouteInfo<void> {
+  const ThemeSettingPageRoute()
+      : super(ThemeSettingPageRoute.name, path: '/setting/theme');
+
+  static const String name = 'ThemeSettingPageRoute';
+}
+
+/// generated route for
+/// [FontSettingPage]
+class FontSettingPageRoute extends PageRouteInfo<void> {
+  const FontSettingPageRoute()
+      : super(FontSettingPageRoute.name, path: '/setting/font');
+
+  static const String name = 'FontSettingPageRoute';
 }
 
 /// generated route for
 /// [TodoWrapper]
-class TodoRoute extends PageRouteInfo<void> {
-  const TodoRoute() : super(TodoRoute.name, path: 'todo');
+class TodoWrapperRoute extends PageRouteInfo<void> {
+  const TodoWrapperRoute() : super(TodoWrapperRoute.name, path: '/todo');
 
-  static const String name = 'TodoRoute';
+  static const String name = 'TodoWrapperRoute';
 }

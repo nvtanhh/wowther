@@ -9,10 +9,14 @@ import '../pages/todo/todo_index.dart';
 part 'route.gr.dart';
 
 @MaterialAutoRouter(
-  replaceInRouteName: 'Wrapper,Route',
   routes: <AutoRoute>[
+    // authentication
     AutoRoute(page: SignInWrapper, initial: true, path: RouteConstants.signIn),
+    // setting
     AutoRoute(page: SettingWrapper, path: RouteConstants.setting),
+    AutoRoute(page: ThemeSettingPage, path: RouteConstants.themeSetting),
+    AutoRoute(page: FontSettingPage, path: RouteConstants.fontSetting),
+    // todo
     AutoRoute(page: TodoWrapper, path: RouteConstants.todo),
   ],
 )

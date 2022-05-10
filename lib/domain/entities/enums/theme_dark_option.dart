@@ -1,1 +1,1 @@
-enum DarkOption { dynamic, alwaysOn, alwaysOff }
+enum DarkOption { dynamic, on, off }

@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../common/extensions/extensions.index.dart';
 import '../../../../../common/injector/injection.dart';
 import '../../../../../domain/entities/theme_entity.dart';
 import '../../../../common_widgets/common_widget.index.dart';
@@ -9,8 +11,9 @@ import '../../../../shared_blocs/shared_bloc_index.dart';
 class ThemeSettingPage extends StatelessWidget {
   const ThemeSettingPage({Key? key}) : super(key: key);
 
-  void onChange(ThemeEntity theme) {
+  void _onChange(ThemeEntity theme, {required BuildContext context}) {
     locator<ThemeCubit>().onChangeTheme(theme: theme);
+    context.router.pop();
   }
 
   @override
@@ -37,14 +40,14 @@ class ThemeSettingPage extends StatelessWidget {
                 }
 
                 return AppListTitle(
-                  title: item.name,
+                  title: item.name.capitalize(),
                   leading: Container(
                     width: 24,
                     height: 24,
                     color: item.primary,
                   ),
                   trailing: trailing,
-                  onPressed: () => onChange(item),
+                  onPressed: () => _onChange(item, context: context),
                   border: item != state.supportedThemes!.last,
                 );
               },

@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/theme_entity.dart';
 import '../../domain/repositories/theme_repository.dart';
-import '../datasources/local/theme_local_datasouce.dart';
+import '../datasources/local/theme_local_datasource.dart';
 import '../models/theme_model.dart';
 
 @Injectable(as: ThemeRepository)
@@ -55,7 +55,6 @@ class ThemeRepositoryImpl implements ThemeRepository {
         colorScheme = ColorScheme.dark(
           primary: theme.primary,
           secondary: theme.secondary,
-          surface: const Color(0xff121212),
           background: const Color(0xff010101),
           error: Colors.red,
         );

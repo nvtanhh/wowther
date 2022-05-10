@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/constants/constants.index.dart';
+import '../../../../common/extensions/extensions.index.dart';
 import '../../../../common/injector/injection.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../common_widgets/common_widget.index.dart';
@@ -18,14 +19,12 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  DarkOption darkOption = DarkOption.dynamic;
-  bool pushNotification = false;
-  bool emailNotification = false;
-  bool alertLogin = false;
+  late DarkOption _darkOption;
   Timer? debounce;
 
   @override
   void initState() {
+    _darkOption = locator<ThemeCubit>().state.darkOption!;
     super.initState();
   }
 
@@ -37,8 +36,8 @@ class _SettingPageState extends State<SettingPage> {
 
   void syncSetting() {}
 
-  void _toggleDarkMode(DarkOption? value) {
-    locator<ThemeCubit>().toggleDarkMode(value);
+  void _applyDarkMode() {
+    locator<ThemeCubit>().onChangeTheme(darkOption: _darkOption);
   }
 
   ///On navigation
@@ -51,7 +50,7 @@ class _SettingPageState extends State<SettingPage> {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        darkOption = locator<ThemeCubit>().state.darkOption!;
+        _darkOption = locator<ThemeCubit>().state.darkOption!;
         return AlertDialog(
           title: Text('Dark Mode'),
           content: StatefulBuilder(
@@ -63,30 +62,25 @@ class _SettingPageState extends State<SettingPage> {
                       title: Text('Dynamic'),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkOption.dynamic,
-                      groupValue: darkOption,
-                      onChanged: _toggleDarkMode,
+                      groupValue: _darkOption,
+                      onChanged: (value) =>
+                          setState(() => _darkOption = DarkOption.dynamic),
                     ),
                     RadioListTile<DarkOption>(
-                      title: Text('alwaysOn'),
+                      title: Text('On'),
                       activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.alwaysOn,
-                      groupValue: darkOption,
-                      onChanged: (value) {
-                        setState(() {
-                          darkOption = DarkOption.alwaysOn;
-                        });
-                      },
+                      value: DarkOption.on,
+                      groupValue: _darkOption,
+                      onChanged: (_) =>
+                          setState(() => _darkOption = DarkOption.on),
                     ),
                     RadioListTile<DarkOption>(
-                      title: Text('alwaysOff'),
+                      title: Text('Off'),
                       activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.alwaysOff,
-                      groupValue: darkOption,
-                      onChanged: (value) {
-                        setState(() {
-                          darkOption = DarkOption.alwaysOff;
-                        });
-                      },
+                      value: DarkOption.off,
+                      groupValue: _darkOption,
+                      onChanged: (_) =>
+                          setState(() => _darkOption = DarkOption.off),
                     ),
                   ],
                 ),
@@ -105,6 +99,7 @@ class _SettingPageState extends State<SettingPage> {
               'Apply',
               onPressed: () {
                 Navigator.pop(context, true);
+                _applyDarkMode();
               },
             ),
           ],
@@ -192,7 +187,7 @@ class _SettingPageState extends State<SettingPage> {
               trailing: Row(
                 children: <Widget>[
                   Text(
-                    darkOption.name,
+                    _darkOption.name.capitalize(),
                     style: Theme.of(context).textTheme.caption,
                   ),
                   const Icon(Icons.keyboard_arrow_right),

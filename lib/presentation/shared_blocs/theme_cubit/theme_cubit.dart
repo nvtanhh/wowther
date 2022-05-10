@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../common/injector/injection.dart';
 import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../domain/entities/theme_entity.dart';
 import '../../../domain/repositories/theme_repository.dart';
@@ -12,8 +11,8 @@ part 'theme_state.dart';
 
 @lazySingleton
 class ThemeCubit extends Cubit<ThemeState> {
-  final ThemeRepository _themeRepository = locator<ThemeRepository>();
-  ThemeCubit() : super(const ThemeState()) {
+  final ThemeRepository _themeRepository;
+  ThemeCubit(this._themeRepository) : super(const ThemeState()) {
     init();
   }
 
@@ -54,9 +53,6 @@ class ThemeCubit extends Cubit<ThemeState> {
     font ??= state.font!;
     darkOption ??= state.darkOption!;
 
-    ThemeState themeState;
-
-    final defaultFont = await _themeRepository.getDefaultFontFamily();
     final lightTheme = await _themeRepository.getTheme(
       theme: theme,
       brightness: Brightness.light,
@@ -65,23 +61,7 @@ class ThemeCubit extends Cubit<ThemeState> {
     final darkTheme = await _themeRepository.getTheme(
       theme: theme,
       brightness: Brightness.dark,
-      font: defaultFont,
-    );
-    themeState = ThemeState(
-      theme: theme,
-      lightTheme: _getThemeByDarkOption(
-        darkOption,
-        lightTheme: lightTheme,
-        darkTheme: darkTheme,
-        isDarkTheme: true,
-      ),
-      darkTheme: _getThemeByDarkOption(
-        darkOption,
-        lightTheme: lightTheme,
-        darkTheme: darkTheme,
-      ),
       font: font,
-      darkOption: darkOption,
     );
 
     // ///Preference save
@@ -97,11 +77,24 @@ class ThemeCubit extends Cubit<ThemeState> {
     //   UtilPreferences.setString(Preferences.font, themeState.font!);
     // }
 
-    emit(themeState);
-  }
-
-  void toggleDarkMode(DarkOption? darkOption) {
-    emit(state.copyWith(darkOption: darkOption));
+    emit(
+      state.copyWith(
+        theme: theme,
+        lightTheme: _getThemeByDarkOption(
+          darkOption,
+          lightTheme: lightTheme,
+          darkTheme: darkTheme,
+        ),
+        darkTheme: _getThemeByDarkOption(
+          darkOption,
+          lightTheme: lightTheme,
+          darkTheme: darkTheme,
+          isDarkTheme: true,
+        ),
+        font: font,
+        darkOption: darkOption,
+      ),
+    );
   }
 }
 
@@ -114,9 +107,9 @@ ThemeData _getThemeByDarkOption(
   switch (darkOption) {
     case DarkOption.dynamic:
       return isDarkTheme ? darkTheme : lightTheme;
-    case DarkOption.alwaysOn:
+    case DarkOption.on:
       return darkTheme;
-    case DarkOption.alwaysOff:
+    case DarkOption.off:
       return lightTheme;
   }
 }

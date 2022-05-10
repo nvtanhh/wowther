@@ -1,7 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_resources/presentation/pages/setting/ui/setting_page.dart';
 import 'package:flutter_resources/presentation/shared_blocs/shared_bloc_index.dart';
 
 import '../common/injector/injection.dart';
@@ -14,14 +12,14 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeCubit(),
+    return BlocProvider<ThemeCubit>(
+      create: (_) => locator<ThemeCubit>(),
       child: BlocProvider<UserCubit>(
         create: (_) => locator<UserCubit>(),
-        child: BlocBuilder<UserCubit, UserState>(
-          builder: (context, userState) {
-            return BlocBuilder<ThemeCubit, ThemeState>(
-              builder: (context, theme) {
+        child: BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, theme) {
+            return BlocBuilder<UserCubit, UserState>(
+              builder: (context, userState) {
                 return MaterialApp.router(
                   theme: theme.lightTheme,
                   darkTheme: theme.darkTheme,

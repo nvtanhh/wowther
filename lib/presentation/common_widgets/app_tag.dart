@@ -85,12 +85,13 @@ class AppTag extends StatelessWidget {
             ),
             child: Row(
               children: <Widget>[
-                icon != null
-                    ? Padding(
-                        padding: const EdgeInsets.only(right: 4),
-                        child: icon,
-                      )
-                    : Container(),
+                if (icon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: icon,
+                  )
+                else
+                  const SizedBox(),
                 Text(
                   text,
                   style: Theme.of(context)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resources/domain/entities/theme_entity.dart';
+
+import '../entities/theme_entity.dart';
 
 abstract class ThemeRepository {
   Future<String> getDefaultFontFamily();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resources/domain/entities/theme_entity.dart';
+import '../../domain/entities/theme_entity.dart';
 
 import '../../common/utils/utils.index.dart';
 

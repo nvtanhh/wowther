@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_resources/presentation/app.dart';
 
 import 'common/injector/injection.dart';
 import 'common/utils/logger.dart';
+import 'presentation/app.dart';
 
 class AppBlocObserver extends BlocObserver {
   final _logger = locator<Logger>();

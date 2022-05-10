@@ -55,14 +55,14 @@ class AppButton extends StatelessWidget {
             icon: icon!,
             label: Row(
               mainAxisSize: mainAxisSize,
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   text,
                   style: Theme.of(context).textTheme.button!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold),
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 buildLoading(Theme.of(context).primaryColor)
               ],
@@ -79,14 +79,14 @@ class AppButton extends StatelessWidget {
           onPressed: disabled ? null : onPressed,
           child: Row(
             mainAxisSize: mainAxisSize,
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 text,
                 style: Theme.of(context).textTheme.button!.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold),
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               buildLoading(Theme.of(context).primaryColor)
             ],
@@ -100,14 +100,14 @@ class AppButton extends StatelessWidget {
             icon: icon!,
             label: Row(
               mainAxisSize: mainAxisSize,
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   text,
                   style: Theme.of(context).textTheme.button!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold),
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 buildLoading(Theme.of(context).primaryColor)
               ],
@@ -118,14 +118,14 @@ class AppButton extends StatelessWidget {
           onPressed: disabled ? null : onPressed,
           child: Row(
             mainAxisSize: mainAxisSize,
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 text,
                 style: Theme.of(context).textTheme.button!.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold),
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               buildLoading(Theme.of(context).primaryColor)
             ],
@@ -144,13 +144,14 @@ class AppButton extends StatelessWidget {
             icon: icon!,
             label: Row(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   text,
                   style: Theme.of(context).textTheme.button!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 buildLoading(Colors.white)
               ],
@@ -167,7 +168,6 @@ class AppButton extends StatelessWidget {
           ),
           child: Row(
             mainAxisSize: mainAxisSize,
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(

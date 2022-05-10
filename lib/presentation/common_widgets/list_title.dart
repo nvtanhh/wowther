@@ -43,10 +43,7 @@ class AppListTitle extends StatelessWidget {
     }
     if (border) {
       borderWidget = Border(
-        bottom: BorderSide(
-          width: 1,
-          color: Theme.of(context).dividerColor,
-        ),
+        bottom: BorderSide(color: Theme.of(context).dividerColor),
       );
     }
     return GestureDetector(
@@ -62,7 +59,6 @@ class AppListTitle extends StatelessWidget {
                   border: borderWidget,
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Expanded(
                       child: Padding(

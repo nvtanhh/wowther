@@ -29,6 +29,7 @@ linter:
     - avoid_private_typedef_functions
     - avoid_redundant_argument_values
     - avoid_relative_lib_imports
+    - prefer_relative_imports
     - avoid_return_types_on_setters
     - avoid_returning_null_for_future
     - avoid_returning_null_for_void

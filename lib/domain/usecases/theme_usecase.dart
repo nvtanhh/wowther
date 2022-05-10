@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resources/domain/entities/theme_entity.dart';
-import 'package:flutter_resources/domain/repositories/theme_repository.dart';
+import '../entities/theme_entity.dart';
+import '../repositories/theme_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

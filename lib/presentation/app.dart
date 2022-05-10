@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'shared_blocs/shared_bloc_index.dart';
 
-import '../common/injector/injection.dart';
+import '/injector/injection.dart';
 import 'routing/route.dart';
+import 'shared_blocs/shared_bloc_index.dart';
 
 class TodoApp extends StatelessWidget {
   TodoApp({Key? key}) : super(key: key);

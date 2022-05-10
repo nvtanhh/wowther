@@ -4,9 +4,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '/injector/injection.dart';
 import '../../../../common/constants/constants.index.dart';
 import '../../../../common/extensions/extensions.index.dart';
-import '../../../../common/injector/injection.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../common_widgets/common_widget.index.dart';
 import '../../../shared_blocs/theme_cubit/theme_cubit.dart';

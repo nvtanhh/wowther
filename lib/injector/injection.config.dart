@@ -7,15 +7,16 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../data/datasources/local/theme_local_datasource.dart' as _i6;
-import '../../data/repositories/theme_repository_impl.dart' as _i8;
-import '../../domain/repositories/theme_repository.dart' as _i7;
-import '../../domain/usecases/theme_usecase.dart' as _i9;
-import '../../presentation/routing/route.dart' as _i3;
-import '../../presentation/shared_blocs/shared_bloc_index.dart' as _i10;
-import '../../presentation/shared_blocs/theme_cubit/theme_cubit.dart' as _i11;
-import '../utils/logger.dart' as _i5;
-import 'register.module.dart' as _i4; // ignore_for_file: unnecessary_lambdas
+import '../common/utils/logger.dart' as _i5;
+import '../data/datasources/local/theme_local_datasource.dart' as _i6;
+import '../data/repositories/theme_repository_impl.dart' as _i8;
+import '../domain/repositories/theme_repository.dart' as _i7;
+import '../domain/usecases/theme_usecase.dart' as _i9;
+import '../presentation/routing/route.dart' as _i3;
+import '../presentation/shared_blocs/shared_bloc_index.dart' as _i10;
+import '../presentation/shared_blocs/theme_cubit/theme_cubit.dart' as _i11;
+import '../services/services.index.dart' as _i4;
+import 'register.module.dart' as _i12; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -38,4 +39,4 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   return get;
 }
 
-class _$RegisterModule extends _i4.RegisterModule {}
+class _$RegisterModule extends _i12.RegisterModule {}

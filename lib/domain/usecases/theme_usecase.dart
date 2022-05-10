@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+
 import '../entities/theme_entity.dart';
 import '../repositories/theme_repository.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class ThemeUseCase {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../common/extensions/extensions.index.dart';
-import '../../../../../common/injector/injection.dart';
 import '../../../../../domain/entities/theme_entity.dart';
+import '../../../../../injector/injection.dart';
 import '../../../../common_widgets/common_widget.index.dart';
 import '../../../../shared_blocs/shared_bloc_index.dart';
 

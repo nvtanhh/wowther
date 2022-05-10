@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'common/injector/injection.dart';
 import 'common/utils/logger.dart';
+import 'injector/injection.dart';
 import 'presentation/app.dart';
 
 class AppBlocObserver extends BlocObserver {

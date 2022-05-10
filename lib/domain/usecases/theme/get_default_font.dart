@@ -3,12 +3,12 @@ import 'package:injectable/injectable.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable
-class GetDefaultFont {
+class GetStorageOrDefaultFont {
   final ThemeRepository themeRepository;
 
-  GetDefaultFont(this.themeRepository);
+  GetStorageOrDefaultFont(this.themeRepository);
 
   Future<String> call() async {
-    return themeRepository.getDefaultFont();
+    return themeRepository.getStorageOrDefaultFont();
   }
 }

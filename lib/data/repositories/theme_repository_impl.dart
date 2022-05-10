@@ -13,8 +13,9 @@ class ThemeRepositoryImpl implements ThemeRepository {
   ThemeRepositoryImpl(this._themeLocalDataSource);
 
   @override
-  Future<String> getDefaultFont() async {
-    return _themeLocalDataSource.defaultFont;
+  Future<String> getStorageOrDefaultFont() async {
+    final storageFont = _themeLocalDataSource.getStorageFont();
+    return storageFont ?? _themeLocalDataSource.defaultFont;
   }
 
   @override
@@ -23,9 +24,10 @@ class ThemeRepositoryImpl implements ThemeRepository {
   }
 
   @override
-  Future<ThemeModel> getDefaultTheme() async {
+  Future<ThemeModel> getStorageOrDefaultTheme() async {
+    final storageTheme = _themeLocalDataSource.getStorageTheme();
     final data = _themeLocalDataSource.supportedThemes.first;
-    return ThemeModel.fromJson(data);
+    return storageTheme ?? ThemeModel.fromJson(data);
   }
 
   @override

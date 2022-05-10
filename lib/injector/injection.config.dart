@@ -34,19 +34,19 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       preResolve: true);
   gh.singleton<_i5.Logger>(_i5.Logger());
   gh.lazySingleton<_i6.ThemeCubit>(() => _i6.ThemeCubit(
-      get<_i7.GetDefaultFont>(),
+      get<_i7.GetStorageOrDefaultFont>(),
       get<_i7.GetSupportedFonts>(),
-      get<_i7.GetDefaultTheme>(),
+      get<_i7.GetStorageOrDefaultTheme>(),
       get<_i7.GetSupportedThemes>(),
       get<_i7.GetTheme>()));
   gh.factory<_i8.ThemeLocalDataSource>(() => _i8.ThemeLocalDataSource());
   gh.factory<_i9.ThemeRepository>(
       () => _i10.ThemeRepositoryImpl(get<_i8.ThemeLocalDataSource>()));
   gh.factory<_i11.UserCubit>(() => registerModule.userCubit);
-  gh.factory<_i12.GetDefaultFont>(
-      () => _i12.GetDefaultFont(get<_i9.ThemeRepository>()));
-  gh.factory<_i13.GetDefaultTheme>(
-      () => _i13.GetDefaultTheme(get<_i9.ThemeRepository>()));
+  gh.factory<_i12.GetStorageOrDefaultFont>(
+      () => _i12.GetStorageOrDefaultFont(get<_i9.ThemeRepository>()));
+  gh.factory<_i13.GetStorageOrDefaultTheme>(
+      () => _i13.GetStorageOrDefaultTheme(get<_i9.ThemeRepository>()));
   gh.factory<_i14.GetSupportedFonts>(
       () => _i14.GetSupportedFonts(get<_i9.ThemeRepository>()));
   gh.factory<_i15.GetSupportedThemes>(

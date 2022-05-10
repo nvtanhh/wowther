@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../entities/theme_entity.dart';
 
 abstract class ThemeRepository {
-  Future<String> getDefaultFont();
+  Future<String> getStorageOrDefaultFont();
 
   Future<List<String>> getSupportedFonts();
 
-  Future<ThemeEntity> getDefaultTheme();
+  Future<ThemeEntity> getStorageOrDefaultTheme();
 
   Future<List<ThemeEntity>> getSupportedThemes();
 

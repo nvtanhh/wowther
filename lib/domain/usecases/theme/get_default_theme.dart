@@ -4,12 +4,12 @@ import '../../entities/theme_entity.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable
-class GetDefaultTheme {
+class GetStorageOrDefaultTheme {
   final ThemeRepository themeRepository;
 
-  GetDefaultTheme(this.themeRepository);
+  GetStorageOrDefaultTheme(this.themeRepository);
 
   Future<ThemeEntity> call() async {
-    return themeRepository.getDefaultTheme();
+    return themeRepository.getStorageOrDefaultTheme();
   }
 }

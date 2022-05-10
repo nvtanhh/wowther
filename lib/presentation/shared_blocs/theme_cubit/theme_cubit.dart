@@ -12,16 +12,16 @@ part 'theme_state.dart';
 @lazySingleton
 class ThemeCubit extends Cubit<ThemeState> {
   // usecases
-  final GetDefaultFont _getDefaultFont;
+  final GetStorageOrDefaultFont _getStorageOrDefaultFont;
   final GetSupportedFonts _getSupportedFonts;
-  final GetDefaultTheme _getDefaultTheme;
+  final GetStorageOrDefaultTheme _getStorageOrDefaultTheme;
   final GetSupportedThemes _getSupportedThemes;
   final GetTheme _getTheme;
 
   ThemeCubit(
-    this._getDefaultFont,
+    this._getStorageOrDefaultFont,
     this._getSupportedFonts,
-    this._getDefaultTheme,
+    this._getStorageOrDefaultTheme,
     this._getSupportedThemes,
     this._getTheme,
   ) : super(const ThemeState()) {
@@ -31,8 +31,8 @@ class ThemeCubit extends Cubit<ThemeState> {
   Future<void> init() async {
     final supportedFonts = await _getSupportedFonts.call();
     final supportedThemes = await _getSupportedThemes.call();
-    final defaultFont = await _getDefaultFont.call();
-    final defaultTheme = await _getDefaultTheme.call();
+    final defaultFont = await _getStorageOrDefaultFont.call();
+    final defaultTheme = await _getStorageOrDefaultTheme.call();
     final lightTheme = await _getTheme.call(
       theme: defaultTheme,
       brightness: Brightness.light,

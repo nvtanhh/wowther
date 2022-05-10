@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../presentation/routing/route.dart';
 import '../../presentation/shared_blocs/shared_bloc_index.dart';
@@ -14,4 +15,8 @@ abstract class RegisterModule {
 
   @injectable
   UserCubit get userCubit => UserCubit();
+
+  @singleton
+  Future<SharedPreferences> get preferencesStorage =>
+      SharedPreferences.getInstance();
 }

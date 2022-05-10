@@ -1,4 +1,11 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../domain/entities/theme_entity.dart';
+import '../../../injector/injection.dart';
+import '../../models/theme_model.dart';
 
 @injectable
 class ThemeLocalDataSource {
@@ -34,4 +41,24 @@ class ThemeLocalDataSource {
       "secondary": "ff832400",
     },
   ];
+
+  String? getStorageFont() {
+    return locator<SharedPreferences>().getString('font');
+  }
+
+  void storeFont(String font) {
+    locator<SharedPreferences>().setString('font', font);
+  }
+
+  ThemeModel? getStorageTheme() {
+    final data = locator<SharedPreferences>().getString('theme');
+    return data != null
+        ? ThemeModel.fromJson(json.decode(data) as Map<String, dynamic>)
+        : null;
+  }
+
+  void storeTheme(ThemeEntity theme) {
+    locator<SharedPreferences>()
+        .setString('theme', (theme as ThemeModel).toJson().toString());
+  }
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../common/utils/utils.index.dart';
 import '../../domain/entities/theme_entity.dart';
 
-class ThemeModel extends ThemeEntity {
-  ThemeModel({
+class ThemeColorModel extends ThemeColorEntity {
+  ThemeColorModel({
     required String name,
     required Color primary,
     required Color secondary,
@@ -14,8 +14,8 @@ class ThemeModel extends ThemeEntity {
           secondary: secondary,
         );
 
-  factory ThemeModel.fromJson(Map<String, dynamic> json) {
-    return ThemeModel(
+  factory ThemeColorModel.fromJson(Map<String, dynamic> json) {
+    return ThemeColorModel(
       name: (json['name'] ?? '') as String,
       primary: UtilColor.getColorFromHex(json['primary'] as String),
       secondary: UtilColor.getColorFromHex(json['secondary'] as String),

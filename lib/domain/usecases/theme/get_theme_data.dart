@@ -5,17 +5,17 @@ import '../../entities/theme_entity.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable
-class GetTheme {
-  final ThemeRepository themeRepository;
+class GetThemeData {
+  final ThemeRepository _themeRepository;
 
-  GetTheme(this.themeRepository);
+  GetThemeData(this._themeRepository);
 
   Future<ThemeData> call({
-    required ThemeEntity theme,
+    required ThemeColorEntity theme,
     required Brightness brightness,
     String? font,
   }) async {
-    return themeRepository.getTheme(
+    return _themeRepository.getThemeData(
       theme: theme,
       brightness: brightness,
       font: font,

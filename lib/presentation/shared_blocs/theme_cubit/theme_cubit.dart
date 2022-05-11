@@ -5,25 +5,41 @@ import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../domain/entities/theme_entity.dart';
-import '../../../domain/usecases/theme/theme_usecase.index.dart';
+import '../../../domain/usecases/theme/get_dark_mode_option.dart';
+import '../../../domain/usecases/theme/get_default_font.dart';
+import '../../../domain/usecases/theme/get_default_theme_color.dart';
+import '../../../domain/usecases/theme/get_supported_fonts.dart';
+import '../../../domain/usecases/theme/get_supported_theme_colors.dart';
+import '../../../domain/usecases/theme/get_theme_data.dart';
+import '../../../domain/usecases/theme/store_dark_mode_option.dart';
+import '../../../domain/usecases/theme/store_font.dart';
+import '../../../domain/usecases/theme/store_theme_color.dart';
 
 part 'theme_state.dart';
 
-@lazySingleton
+@singleton
 class ThemeCubit extends Cubit<ThemeState> {
   // usecases
   final GetStorageOrDefaultFont _getStorageOrDefaultFont;
   final GetSupportedFonts _getSupportedFonts;
-  final GetStorageOrDefaultTheme _getStorageOrDefaultTheme;
-  final GetSupportedThemes _getSupportedThemes;
-  final GetTheme _getTheme;
+  final GetStorageOrDefaultThemeColor _getStorageOrDefaultTheme;
+  final GetSupportedThemeColors _getSupportedThemes;
+  final GetThemeData _getThemeData;
+  final GetDarkModeOption _getDarkModeOption;
+  final StoreThemeColor _storeThemeColor;
+  final StoreFont _storeFont;
+  final StoreDarkModeOption _storeDarkModeOption;
 
   ThemeCubit(
     this._getStorageOrDefaultFont,
     this._getSupportedFonts,
     this._getStorageOrDefaultTheme,
     this._getSupportedThemes,
-    this._getTheme,
+    this._getThemeData,
+    this._getDarkModeOption,
+    this._storeThemeColor,
+    this._storeFont,
+    this._storeDarkModeOption,
   ) : super(const ThemeState()) {
     init();
   }
@@ -33,12 +49,13 @@ class ThemeCubit extends Cubit<ThemeState> {
     final supportedThemes = await _getSupportedThemes.call();
     final defaultFont = await _getStorageOrDefaultFont.call();
     final defaultTheme = await _getStorageOrDefaultTheme.call();
-    final lightTheme = await _getTheme.call(
+    final darkModeOption = await _getDarkModeOption.call();
+    final lightTheme = await _getThemeData.call(
       theme: defaultTheme,
       brightness: Brightness.light,
       font: defaultFont,
     );
-    final darkTheme = await _getTheme.call(
+    final darkTheme = await _getThemeData.call(
       theme: defaultTheme,
       brightness: Brightness.dark,
       font: defaultFont,
@@ -49,7 +66,7 @@ class ThemeCubit extends Cubit<ThemeState> {
         font: defaultFont,
         lightTheme: lightTheme,
         darkTheme: darkTheme,
-        darkOption: DarkOption.dynamic,
+        darkOption: darkModeOption,
         supportedFonts: supportedFonts,
         supportedThemes: supportedThemes,
       ),
@@ -57,37 +74,34 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   Future<void> onChangeTheme({
-    ThemeEntity? theme,
+    ThemeColorEntity? theme,
     String? font,
-    DarkOption? darkOption,
+    DarkModeOption? darkOption,
   }) async {
     theme ??= state.theme!;
     font ??= state.font!;
     darkOption ??= state.darkOption!;
 
-    final lightTheme = await _getTheme.call(
+    final lightTheme = await _getThemeData.call(
       theme: theme,
       brightness: Brightness.light,
       font: font,
     );
-    final darkTheme = await _getTheme.call(
+    final darkTheme = await _getThemeData.call(
       theme: theme,
       brightness: Brightness.dark,
       font: font,
     );
 
-    // ///Preference save
-    // UtilPreferences.setString(Preferences.darkOption, darkOption.name);
-
-    // UtilPreferences.setString(
-    //   Preferences.theme,
-    //   jsonEncode(themeState.theme.toJson()),
-    // );
-
-    // ///Preference save
-    // if (themeState.font != null) {
-    //   UtilPreferences.setString(Preferences.font, themeState.font!);
-    // }
+    if (font != state.font) {
+      _storeFont.call(font);
+    }
+    if (theme != state.theme) {
+      _storeThemeColor.call(theme);
+    }
+    if (darkOption != state.darkOption) {
+      _storeDarkModeOption.call(darkOption);
+    }
 
     emit(
       state.copyWith(
@@ -111,17 +125,17 @@ class ThemeCubit extends Cubit<ThemeState> {
 }
 
 ThemeData _getThemeByDarkOption(
-  DarkOption darkOption, {
+  DarkModeOption darkOption, {
   required ThemeData lightTheme,
   required ThemeData darkTheme,
   bool isDarkTheme = false,
 }) {
   switch (darkOption) {
-    case DarkOption.dynamic:
+    case DarkModeOption.dynamic:
       return isDarkTheme ? darkTheme : lightTheme;
-    case DarkOption.on:
+    case DarkModeOption.on:
       return darkTheme;
-    case DarkOption.off:
+    case DarkModeOption.off:
       return lightTheme;
   }
 }

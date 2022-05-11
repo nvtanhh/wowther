@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ThemeEntity {
+class ThemeColorEntity {
   final String name;
   final Color primary;
   final Color secondary;
 
-  ThemeEntity({
+  ThemeColorEntity({
     required this.name,
     required this.primary,
     required this.secondary,

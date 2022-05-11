@@ -20,5 +20,4 @@ part 'route.gr.dart';
     AutoRoute(page: TodoWrapper, path: RouteConstants.todo),
   ],
 )
-// extend the generated private router
 class AppRouter extends _$AppRouter {}

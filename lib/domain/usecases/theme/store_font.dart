@@ -3,12 +3,12 @@ import 'package:injectable/injectable.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable
-class GetSupportedFonts {
+class StoreFont {
   final ThemeRepository _themeRepository;
 
-  GetSupportedFonts(this._themeRepository);
+  StoreFont(this._themeRepository);
 
-  Future<List<String>> call() async {
-    return _themeRepository.getSupportedFonts();
+  Future<void> call(String font) async {
+    return _themeRepository.storeFont(font);
   }
 }

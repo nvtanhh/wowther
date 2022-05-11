@@ -1,5 +1,6 @@
 class StorageConstants {
+  // Theming
   static const String font = 'font';
-  static const String theme = 'theme';
-  static const String darkOption = 'darkOption';
+  static const String themeColor = 'themeColor';
+  static const String darkModeOption = 'darkModeOption';
 }

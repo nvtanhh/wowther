@@ -11,7 +11,7 @@ import '../../../../shared_blocs/shared_bloc_index.dart';
 class ThemeSettingPage extends StatelessWidget {
   const ThemeSettingPage({Key? key}) : super(key: key);
 
-  void _onChange(ThemeEntity theme, {required BuildContext context}) {
+  void _onChange(ThemeColorEntity theme, {required BuildContext context}) {
     locator<ThemeCubit>().onChangeTheme(theme: theme);
     context.router.pop();
   }

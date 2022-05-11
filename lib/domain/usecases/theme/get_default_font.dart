@@ -4,11 +4,11 @@ import '../../repositories/theme_repository.dart';
 
 @injectable
 class GetStorageOrDefaultFont {
-  final ThemeRepository themeRepository;
+  final ThemeRepository _themeRepository;
 
-  GetStorageOrDefaultFont(this.themeRepository);
+  GetStorageOrDefaultFont(this._themeRepository);
 
   Future<String> call() async {
-    return themeRepository.getStorageOrDefaultFont();
+    return _themeRepository.getStorageOrDefaultFont();
   }
 }

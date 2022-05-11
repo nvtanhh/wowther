@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/entities/enums/theme_dark_option.dart';
 import '../../domain/entities/theme_entity.dart';
 import '../../domain/repositories/theme_repository.dart';
 import '../datasources/local/theme_local_datasource.dart';
@@ -8,38 +9,59 @@ import '../models/theme_model.dart';
 
 @Injectable(as: ThemeRepository)
 class ThemeRepositoryImpl implements ThemeRepository {
-  final ThemeLocalDataSource _themeLocalDataSource;
+  final ThemeLocalDataSource _localDatasource;
 
-  ThemeRepositoryImpl(this._themeLocalDataSource);
+  ThemeRepositoryImpl(this._localDatasource);
 
   @override
   Future<String> getStorageOrDefaultFont() async {
-    final storageFont = _themeLocalDataSource.getStorageFont();
-    return storageFont ?? _themeLocalDataSource.defaultFont;
+    final storageFont = _localDatasource.getStoredFont();
+    return storageFont ?? _localDatasource.defaultFont;
   }
 
   @override
   Future<List<String>> getSupportedFonts() async {
-    return _themeLocalDataSource.supportedFonts;
+    return _localDatasource.supportedFonts;
   }
 
   @override
-  Future<ThemeModel> getStorageOrDefaultTheme() async {
-    final storageTheme = _themeLocalDataSource.getStorageTheme();
-    final data = _themeLocalDataSource.supportedThemes.first;
-    return storageTheme ?? ThemeModel.fromJson(data);
+  void storeFont(String font) {
+    _localDatasource.storeFont(font);
   }
 
   @override
-  Future<List<ThemeModel>> getSupportedThemes() async {
-    return _themeLocalDataSource.supportedThemes
-        .map((item) => ThemeModel.fromJson(item))
+  Future<ThemeColorModel> getStorageOrDefaultThemeColor() async {
+    final storageTheme = _localDatasource.getStoredTheme();
+    final data = _localDatasource.supportedThemes.first;
+    return storageTheme ?? ThemeColorModel.fromJson(data);
+  }
+
+  @override
+  Future<List<ThemeColorModel>> getSupportedThemeColors() async {
+    return _localDatasource.supportedThemes
+        .map((item) => ThemeColorModel.fromJson(item))
         .toList();
   }
 
   @override
-  Future<ThemeData> getTheme({
-    required ThemeEntity theme,
+  void storeThemeColor(ThemeColorEntity theme) {
+    _localDatasource.storeThemeColor(theme);
+  }
+
+  @override
+  Future<DarkModeOption> getDarkModeOption() async {
+    return (await _localDatasource.getStoredDarkModeOption()) ??
+        DarkModeOption.dynamic;
+  }
+
+  @override
+  void storeDarkModeOption(DarkModeOption darkModeOption) {
+    _localDatasource.storeDarkModeOption(darkModeOption);
+  }
+
+  @override
+  Future<ThemeData> getThemeData({
+    required ThemeColorEntity theme,
     required Brightness brightness,
     String? font,
   }) async {

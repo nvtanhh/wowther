@@ -3,12 +3,18 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../common/constants/constants.index.dart';
+import '../../../common/utils/utils.index.dart';
+import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../domain/entities/theme_entity.dart';
 import '../../../injector/injection.dart';
 import '../../models/theme_model.dart';
 
 @injectable
 class ThemeLocalDataSource {
+  final SharedPreferences _preferencesStorage;
+  ThemeLocalDataSource(this._preferencesStorage);
+
   final String defaultFont = 'ProximaNova';
 
   final List<String> supportedFonts = [
@@ -42,23 +48,49 @@ class ThemeLocalDataSource {
     },
   ];
 
-  String? getStorageFont() {
-    return locator<SharedPreferences>().getString('font');
+  String? getStoredFont() {
+    return _preferencesStorage.getString(StorageConstants.font);
   }
 
   void storeFont(String font) {
-    locator<SharedPreferences>().setString('font', font);
+    _preferencesStorage.setString(StorageConstants.font, font);
   }
 
-  ThemeModel? getStorageTheme() {
-    final data = locator<SharedPreferences>().getString('theme');
-    return data != null
-        ? ThemeModel.fromJson(json.decode(data) as Map<String, dynamic>)
-        : null;
+  ThemeColorModel? getStoredTheme() {
+    try {
+      final data = _preferencesStorage.getString(StorageConstants.themeColor);
+      return data != null
+          ? ThemeColorModel.fromJson(jsonDecode(data) as Map<String, dynamic>)
+          : null;
+    } catch (e) {
+      locator<Logger>().logError(e.toString());
+      _preferencesStorage.remove(StorageConstants.themeColor);
+      return null;
+    }
   }
 
-  void storeTheme(ThemeEntity theme) {
-    locator<SharedPreferences>()
-        .setString('theme', (theme as ThemeModel).toJson().toString());
+  void storeThemeColor(ThemeColorEntity theme) {
+    _preferencesStorage.setString(
+      StorageConstants.themeColor,
+      jsonEncode((theme as ThemeColorModel).toJson()),
+    );
+  }
+
+  Future<DarkModeOption?> getStoredDarkModeOption() async {
+    try {
+      final data =
+          _preferencesStorage.getString(StorageConstants.darkModeOption);
+      if (data == null) return null;
+      return DarkModeOption.values.firstWhere((item) => item.name == data);
+    } catch (e) {
+      locator<Logger>().logError(e.toString());
+      _preferencesStorage.remove(StorageConstants.darkModeOption);
+      return null;
+    }
+  }
+
+  void storeDarkModeOption(DarkModeOption darkModeOption) {
+    _preferencesStorage.setString(
+        StorageConstants.darkModeOption, darkModeOption.name);
   }
 }

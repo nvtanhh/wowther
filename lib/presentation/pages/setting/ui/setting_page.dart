@@ -19,12 +19,13 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  late DarkOption _darkOption;
+  late DarkModeOption _darkOption;
   Timer? debounce;
 
   @override
   void initState() {
-    _darkOption = locator<ThemeCubit>().state.darkOption!;
+    _darkOption =
+        locator<ThemeCubit>().state.darkOption ?? DarkModeOption.dynamic;
     super.initState();
   }
 
@@ -50,7 +51,6 @@ class _SettingPageState extends State<SettingPage> {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        _darkOption = locator<ThemeCubit>().state.darkOption!;
         return AlertDialog(
           title: Text('Dark Mode'),
           content: StatefulBuilder(
@@ -58,29 +58,29 @@ class _SettingPageState extends State<SettingPage> {
               return SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    RadioListTile<DarkOption>(
+                    RadioListTile<DarkModeOption>(
                       title: Text('Dynamic'),
                       activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.dynamic,
+                      value: DarkModeOption.dynamic,
                       groupValue: _darkOption,
                       onChanged: (value) =>
-                          setState(() => _darkOption = DarkOption.dynamic),
+                          setState(() => _darkOption = DarkModeOption.dynamic),
                     ),
-                    RadioListTile<DarkOption>(
+                    RadioListTile<DarkModeOption>(
                       title: Text('On'),
                       activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.on,
+                      value: DarkModeOption.on,
                       groupValue: _darkOption,
                       onChanged: (_) =>
-                          setState(() => _darkOption = DarkOption.on),
+                          setState(() => _darkOption = DarkModeOption.on),
                     ),
-                    RadioListTile<DarkOption>(
+                    RadioListTile<DarkModeOption>(
                       title: Text('Off'),
                       activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.off,
+                      value: DarkModeOption.off,
                       groupValue: _darkOption,
                       onChanged: (_) =>
-                          setState(() => _darkOption = DarkOption.off),
+                          setState(() => _darkOption = DarkModeOption.off),
                     ),
                   ],
                 ),

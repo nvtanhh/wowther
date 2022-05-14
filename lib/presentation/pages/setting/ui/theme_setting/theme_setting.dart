@@ -18,7 +18,7 @@ class ThemeSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonPage(
       appBar: AppBar(
         centerTitle: true,
         title: Text('Theme'),

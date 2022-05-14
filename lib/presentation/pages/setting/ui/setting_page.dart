@@ -11,98 +11,76 @@ import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../common_widgets/common_widget.index.dart';
 import '../../../shared_blocs/theme_cubit/theme_cubit.dart';
 
-class SettingPage extends StatefulWidget {
+class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
 
-  @override
-  _SettingPageState createState() => _SettingPageState();
-}
-
-class _SettingPageState extends State<SettingPage> {
-  late DarkModeOption _darkOption;
-  Timer? debounce;
-
-  @override
-  void initState() {
-    _darkOption =
-        locator<ThemeCubit>().state.darkOption ?? DarkModeOption.dynamic;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    debounce?.cancel();
-    super.dispose();
-  }
-
-  void syncSetting() {}
-
-  void _applyDarkMode() {
-    locator<ThemeCubit>().onChangeTheme(darkOption: _darkOption);
+  void _applyDarkMode(BuildContext context, DarkModeOption darkOption) {
+    locator<ThemeCubit>().onChangeTheme(darkOption: darkOption);
   }
 
   ///On navigation
-  void onNavigate(String route) {
+  void onNavigate(BuildContext context, String route) {
     context.router.pushNamed(route);
   }
 
-  Future<void> showDarkModeSetting() async {
+  Future<void> showDarkModeSetting(BuildContext context) async {
+    DarkModeOption darkOption = locator<ThemeCubit>().state.darkOption!;
     showDialog<bool>(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Dark Mode'),
-          content: StatefulBuilder(
-            builder: (context, setState) {
-              return SingleChildScrollView(
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text('Dark Mode'),
+              content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     RadioListTile<DarkModeOption>(
                       title: Text('Dynamic'),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkModeOption.dynamic,
-                      groupValue: _darkOption,
+                      groupValue: darkOption,
                       onChanged: (value) =>
-                          setState(() => _darkOption = DarkModeOption.dynamic),
+                          setState(() => darkOption = DarkModeOption.dynamic),
                     ),
                     RadioListTile<DarkModeOption>(
                       title: Text('On'),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkModeOption.on,
-                      groupValue: _darkOption,
+                      groupValue: darkOption,
                       onChanged: (_) =>
-                          setState(() => _darkOption = DarkModeOption.on),
+                          setState(() => darkOption = DarkModeOption.on),
                     ),
                     RadioListTile<DarkModeOption>(
                       title: Text('Off'),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkModeOption.off,
-                      groupValue: _darkOption,
+                      groupValue: darkOption,
                       onChanged: (_) =>
-                          setState(() => _darkOption = DarkModeOption.off),
+                          setState(() => darkOption = DarkModeOption.off),
                     ),
                   ],
                 ),
-              );
-            },
-          ),
-          actions: <Widget>[
-            AppButton(
-              'Close',
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              type: ButtonType.text,
-            ),
-            AppButton(
-              'Apply',
-              onPressed: () {
-                Navigator.pop(context, true);
-                _applyDarkMode();
-              },
-            ),
-          ],
+              ),
+              actions: <Widget>[
+                AppButton(
+                  'Close',
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  type: ButtonType.text,
+                ),
+                AppButton(
+                  'Apply',
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                    _applyDarkMode(context, darkOption);
+                  },
+                ),
+              ],
+            );
+          },
         );
       },
     );
@@ -110,7 +88,7 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonPage(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
@@ -148,7 +126,7 @@ class _SettingPageState extends State<SettingPage> {
                   //     ],
                   //   ),
                   // ),
-                  buildThemingWidgets(),
+                  buildThemingWidgets(context),
                 ],
               ),
             ),
@@ -158,7 +136,7 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  Widget buildThemingWidgets() {
+  Widget buildThemingWidgets(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return Column(
@@ -169,7 +147,7 @@ class _SettingPageState extends State<SettingPage> {
                 color: Theme.of(context).primaryColor,
               ),
               title: 'Theme',
-              onPressed: () => onNavigate(RouteConstants.themeSetting),
+              onPressed: () => onNavigate(context, RouteConstants.themeSetting),
               trailing: Container(
                 margin: const EdgeInsets.only(right: 8),
                 width: 16,
@@ -183,11 +161,11 @@ class _SettingPageState extends State<SettingPage> {
                 color: Theme.of(context).primaryColor,
               ),
               title: 'Dark Mode',
-              onPressed: showDarkModeSetting,
+              onPressed: () => showDarkModeSetting(context),
               trailing: Row(
                 children: <Widget>[
                   Text(
-                    _darkOption.name.capitalize(),
+                    state.darkOption!.name.capitalize(),
                     style: Theme.of(context).textTheme.caption,
                   ),
                   const Icon(Icons.keyboard_arrow_right),
@@ -200,7 +178,7 @@ class _SettingPageState extends State<SettingPage> {
                 color: Theme.of(context).primaryColor,
               ),
               title: 'Font',
-              onPressed: () => onNavigate(RouteConstants.fontSetting),
+              onPressed: () => onNavigate(context, RouteConstants.fontSetting),
               trailing: Row(
                 children: <Widget>[
                   Text(

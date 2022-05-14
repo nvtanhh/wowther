@@ -91,6 +91,8 @@ class ThemeLocalDataSource {
 
   void storeDarkModeOption(DarkModeOption darkModeOption) {
     _preferencesStorage.setString(
-        StorageConstants.darkModeOption, darkModeOption.name);
+      StorageConstants.darkModeOption,
+      darkModeOption.name,
+    );
   }
 }

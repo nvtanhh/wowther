@@ -14,7 +14,7 @@ class FontSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonPage(
       body: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return CustomScrollView(

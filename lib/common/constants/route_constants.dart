@@ -4,5 +4,6 @@ class RouteConstants {
   static const String themeSetting = '/setting/theme';
   static const String fontSetting = '/setting/font';
   static const String darkModeSetting = '/setting/dark-mode';
+  static const String languageSetting = '/setting/language';
   static const String todo = '/todo';
 }

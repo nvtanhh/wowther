@@ -3,13 +3,15 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../common/utils/utils.index.dart';
 import '/injector/injection.dart';
 import '../../../../common/constants/constants.index.dart';
 import '../../../../common/extensions/extensions.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../common_widgets/common_widget.index.dart';
-import '../../../shared_blocs/theme_cubit/theme_cubit.dart';
+import '../../../shared_blocs/shared_bloc_index.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -32,12 +34,18 @@ class SettingPage extends StatelessWidget {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text('Dark Mode'),
+              title: ThemedText(
+                AppLocalizations.of(context)!.settings__title,
+                size: ThemedTextSize.large,
+              ),
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     RadioListTile<DarkModeOption>(
-                      title: Text('Dynamic'),
+                      title: ThemedText(
+                        AppLocalizations.of(context)!
+                            .settings__theme_dark_mode_dynamic,
+                      ),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkModeOption.dynamic,
                       groupValue: darkOption,
@@ -45,7 +53,10 @@ class SettingPage extends StatelessWidget {
                           setState(() => darkOption = DarkModeOption.dynamic),
                     ),
                     RadioListTile<DarkModeOption>(
-                      title: Text('On'),
+                      title: ThemedText(
+                        AppLocalizations.of(context)!
+                            .settings__theme_dark_mode_on,
+                      ),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkModeOption.on,
                       groupValue: darkOption,
@@ -53,7 +64,10 @@ class SettingPage extends StatelessWidget {
                           setState(() => darkOption = DarkModeOption.on),
                     ),
                     RadioListTile<DarkModeOption>(
-                      title: Text('Off'),
+                      title: ThemedText(
+                        AppLocalizations.of(context)!
+                            .settings__theme_dark_mode_off,
+                      ),
                       activeColor: Theme.of(context).primaryColor,
                       value: DarkModeOption.off,
                       groupValue: darkOption,
@@ -65,14 +79,14 @@ class SettingPage extends StatelessWidget {
               ),
               actions: <Widget>[
                 AppButton(
-                  'Close',
+                  AppLocalizations.of(context)!.global__close,
                   onPressed: () {
                     Navigator.pop(context, false);
                   },
                   type: ButtonType.text,
                 ),
                 AppButton(
-                  'Apply',
+                  AppLocalizations.of(context)!.global__apply,
                   onPressed: () {
                     Navigator.pop(context, true);
                     _applyDarkMode(context, darkOption);
@@ -96,7 +110,10 @@ class SettingPage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             centerTitle: true,
-            title: Text('Setting'),
+            title: ThemedText(
+              AppLocalizations.of(context)!.settings__title,
+              size: ThemedTextSize.large,
+            ),
             pinned: true,
           ),
           SliverSafeArea(
@@ -105,27 +122,32 @@ class SettingPage extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   const SizedBox(height: 8),
-                  // AppListTitle(
-                  //   leading: Icon(
-                  //     Icons.language_outlined,
-                  //     color: Theme.of(context).primaryColor,
-                  //   ),
-                  //   title: Translate.of(context).translate('language'),
-                  //   onPressed: () {
-                  //     onNavigate(Routes.changeLanguage);
-                  //   },
-                  //   trailing: Row(
-                  //     children: <Widget>[
-                  //       Text(
-                  //         UtilLanguage.getGlobalLanguageName(
-                  //           AppBloc.languageCubit.state.languageCode,
-                  //         ),
-                  //         style: Theme.of(context).textTheme.caption,
-                  //       ),
-                  //       const Icon(Icons.keyboard_arrow_right),
-                  //     ],
-                  //   ),
-                  // ),
+                  AppListTitle(
+                    leading: Icon(
+                      Icons.language_outlined,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    title:
+                        AppLocalizations.of(context)!.settings__language_title,
+                    onPressed: () {
+                      onNavigate(context, RouteConstants.languageSetting);
+                    },
+                    trailing: BlocBuilder<LanguageCubit, Locale?>(
+                      builder: (context, locale) {
+                        return Row(
+                          children: <Widget>[
+                            ThemedText(
+                              UtilLanguage.getGlobalLanguageName(
+                                locale!.languageCode,
+                              ),
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                   buildThemingWidgets(context),
                 ],
               ),
@@ -164,7 +186,7 @@ class SettingPage extends StatelessWidget {
               onPressed: () => showDarkModeSetting(context),
               trailing: Row(
                 children: <Widget>[
-                  Text(
+                  ThemedText(
                     state.darkOption!.name.capitalize(),
                     style: Theme.of(context).textTheme.caption,
                   ),
@@ -181,7 +203,7 @@ class SettingPage extends StatelessWidget {
               onPressed: () => onNavigate(context, RouteConstants.fontSetting),
               trailing: Row(
                 children: <Widget>[
-                  Text(
+                  ThemedText(
                     state.font ?? '',
                     style: Theme.of(context).textTheme.caption,
                   ),

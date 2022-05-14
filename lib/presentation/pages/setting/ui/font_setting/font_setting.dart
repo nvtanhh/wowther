@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '/injector/injection.dart';
 import '../../../../common_widgets/common_widget.index.dart';
-import '../../../../shared_blocs/theme_cubit/theme_cubit.dart';
+import '../../../../shared_blocs/shared_bloc_index.dart';
 
 class FontSettingPage extends StatelessWidget {
   const FontSettingPage({Key? key}) : super(key: key);
@@ -24,7 +25,10 @@ class FontSettingPage extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 centerTitle: true,
-                title: Text('Font Setting'),
+                title: ThemedText(
+                  AppLocalizations.of(context)!.settings__theme_font,
+                  size: ThemedTextSize.large,
+                ),
                 pinned: true,
               ),
               SliverSafeArea(

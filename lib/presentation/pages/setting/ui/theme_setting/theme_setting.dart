@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../common/extensions/extensions.index.dart';
 import '../../../../../domain/entities/theme_entity.dart';
@@ -19,10 +20,8 @@ class ThemeSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonPage(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Theme'),
-        elevation: 0,
+      appBar: CommonAppBar(
+        title: AppLocalizations.of(context)!.settings__theme_color,
       ),
       body: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {

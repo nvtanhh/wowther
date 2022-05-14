@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'common_widget.index.dart';
+
 enum ButtonType { normal, outline, text }
 
 class AppButton extends StatelessWidget {
@@ -57,7 +59,7 @@ class AppButton extends StatelessWidget {
               mainAxisSize: mainAxisSize,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                ThemedText(
                   text,
                   style: Theme.of(context).textTheme.button!.copyWith(
                         color: Theme.of(context).primaryColor,
@@ -81,7 +83,7 @@ class AppButton extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              ThemedText(
                 text,
                 style: Theme.of(context).textTheme.button!.copyWith(
                       color: Theme.of(context).primaryColor,
@@ -102,7 +104,7 @@ class AppButton extends StatelessWidget {
               mainAxisSize: mainAxisSize,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                ThemedText(
                   text,
                   style: Theme.of(context).textTheme.button!.copyWith(
                         color: Theme.of(context).primaryColor,
@@ -120,7 +122,7 @@ class AppButton extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              ThemedText(
                 text,
                 style: Theme.of(context).textTheme.button!.copyWith(
                       color: Theme.of(context).primaryColor,
@@ -146,7 +148,7 @@ class AppButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                ThemedText(
                   text,
                   style: Theme.of(context).textTheme.button!.copyWith(
                         color: Colors.white,
@@ -170,7 +172,7 @@ class AppButton extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              ThemedText(
                 text,
                 style: Theme.of(context)
                     .textTheme

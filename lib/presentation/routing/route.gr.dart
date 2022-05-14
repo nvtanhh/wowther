@@ -21,6 +21,10 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SignInWrapper());
     },
+    LanguageSettingPageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const LanguageSettingPage());
+    },
     SettingWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SettingWrapper());
@@ -44,6 +48,7 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig('/#redirect',
             path: '/', redirectTo: '/sign-in', fullMatch: true),
         RouteConfig(SignInWrapperRoute.name, path: '/sign-in'),
+        RouteConfig(LanguageSettingPageRoute.name, path: '/setting/language'),
         RouteConfig(SettingWrapperRoute.name, path: '/setting'),
         RouteConfig(ThemeSettingPageRoute.name, path: '/setting/theme'),
         RouteConfig(FontSettingPageRoute.name, path: '/setting/font'),
@@ -57,6 +62,15 @@ class SignInWrapperRoute extends PageRouteInfo<void> {
   const SignInWrapperRoute() : super(SignInWrapperRoute.name, path: '/sign-in');
 
   static const String name = 'SignInWrapperRoute';
+}
+
+/// generated route for
+/// [LanguageSettingPage]
+class LanguageSettingPageRoute extends PageRouteInfo<void> {
+  const LanguageSettingPageRoute()
+      : super(LanguageSettingPageRoute.name, path: '/setting/language');
+
+  static const String name = 'LanguageSettingPageRoute';
 }
 
 /// generated route for

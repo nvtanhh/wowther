@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'common_widget.index.dart';
+
 class AppPickerItem extends StatelessWidget {
   final String title;
   final String? value;
@@ -66,7 +68,7 @@ class AppPickerItem extends StatelessWidget {
           children: [
             leadingWidget,
             Expanded(
-              child: Text(
+              child: ThemedText(
                 titlePicker,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

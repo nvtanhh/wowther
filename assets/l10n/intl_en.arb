@@ -1,0 +1,17 @@
+{
+  "global__close": "Close",
+  "global__apply": "Apply",
+  "auth_sign_in__with_facebook": "Continue with Facebook",
+  "auth_sign_in__with_google": "Continue with Google",
+  "auth_sign_in__anonymous": "Continue with anonymous account",
+  "settings__theme_color": "Theme color",
+  "settings__title": "Settings",
+  "settings__theme_dark_mode": "Dark mode",
+  "settings__theme_dark_mode_dynamic": "Dynamic",
+  "settings__theme_dark_mode_on": "On",
+  "settings__theme_dark_mode_off": "Off",
+  "settings__theme_font": "Font",
+  "settings__language_title": "Language",
+  "settings__language_change_language": "Change language",
+  "settings__language_search": "Search language"
+}

@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 part 'user_state.dart';
 
-@injectable
+@singleton
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(const UserState());
 

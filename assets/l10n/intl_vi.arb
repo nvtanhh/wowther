@@ -1,0 +1,17 @@
+{
+  "global__close": "Đóng",
+  "global__apply": "Áp dụng",
+  "auth_sign_in__with_facebook": "Đăng nhập với Facebook",
+  "auth_sign_in__with_google": "Đăng nhập với Google",
+  "auth_sign_in__anonymous": "Đăng nhập ẩn danh",
+  "settings__theme_color": "Màu chủ đạo",
+  "settings__title": "Cài đặt",
+  "settings__theme_dark_mode": "Giao diện tối",
+  "settings__theme_dark_mode_dynamic": "Tự động",
+  "settings__theme_dark_mode_on": "Luôn bật",
+  "settings__theme_dark_mode_off": "Luôn tắt",
+  "settings__theme_font": "Kiểu chữ",
+  "settings__language_title": "Ngôn ngữ",
+  "settings__language_change_language": "Đổi ngôn ngữ",
+  "settings__language_search": "Tìm kiếm ngôn ngữ"
+}

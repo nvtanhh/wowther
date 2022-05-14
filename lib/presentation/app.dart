@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '/injector/injection.dart';
 import 'routing/route.dart';
@@ -12,28 +14,51 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ThemeCubit>(
-      create: (_) => locator<ThemeCubit>(),
-      child: BlocProvider<UserCubit>(
-        create: (_) => locator<UserCubit>(),
-        child: BlocBuilder<ThemeCubit, ThemeState>(
-          builder: (context, theme) {
-            return BlocBuilder<UserCubit, UserState>(
-              builder: (context, userState) {
-                return MaterialApp.router(
-                  theme: theme.lightTheme,
-                  darkTheme: theme.darkTheme,
-                  routerDelegate: _appRouter.delegate(
-                    initialRoutes: userState.isLoggedIn
-                        ? [const TodoWrapperRoute()]
-                        : [const SettingWrapperRoute()],
-                  ),
-                  routeInformationParser:
-                      _appRouter.defaultRouteParser(includePrefixMatches: true),
-                );
-              },
-            );
-          },
+    return BlocProvider<UserCubit>(
+      create: (_) => locator<UserCubit>(),
+      child: BlocProvider(
+        create: (_) => locator<LanguageCubit>(),
+        child: BlocProvider<ThemeCubit>(
+          create: (_) => locator<ThemeCubit>(),
+          child: BlocBuilder<UserCubit, UserState>(
+            builder: (context, userState) {
+              return BlocBuilder<LanguageCubit, Locale?>(
+                builder: (context, locale) {
+                  return BlocBuilder<ThemeCubit, ThemeState>(
+                    builder: (context, theme) {
+                      return MaterialApp.router(
+                        debugShowCheckedModeBanner: false,
+                        // Localization
+                        localizationsDelegates: const [
+                          AppLocalizations.delegate,
+                          GlobalMaterialLocalizations.delegate,
+                          GlobalWidgetsLocalizations.delegate,
+                          GlobalCupertinoLocalizations.delegate,
+                        ],
+                        supportedLocales:
+                            locator<LanguageCubit>().supportedLocales,
+                        locale: locale,
+                        localeResolutionCallback:
+                            locator<LanguageCubit>().localeResolutionCallback,
+                        // Theme
+                        theme: theme.lightTheme,
+                        darkTheme: theme.darkTheme,
+                        // Route
+                        routerDelegate: _appRouter.delegate(
+                          initialRoutes: userState.isLoggedIn
+                              ? [const TodoWrapperRoute()]
+                              : [const SettingWrapperRoute()],
+                        ),
+                        routeInformationParser: _appRouter.defaultRouteParser(
+                          includePrefixMatches: true,
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

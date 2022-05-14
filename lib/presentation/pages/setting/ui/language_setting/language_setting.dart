@@ -1,119 +1,121 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-// class LanguageSetting extends StatefulWidget {
-//   const LanguageSetting({Key? key}) : super(key: key);
+import '../../../../../common/utils/utils.index.dart';
+import '../../../../../injector/injection.dart';
+import '../../../../common_widgets/common_widget.index.dart';
+import '../../../../common_widgets/fields/text_field.dart';
+import '../../../../shared_blocs/shared_bloc_index.dart';
 
-//   @override
-//   _LanguageSettingState createState() {
-//     return _LanguageSettingState();
-//   }
-// }
+class LanguageSettingPage extends StatefulWidget {
+  const LanguageSettingPage({Key? key}) : super(key: key);
 
-// class _LanguageSettingState extends State<LanguageSetting> {
-//   final textLanguageController = TextEditingController();
+  @override
+  State<LanguageSettingPage> createState() => _LanguageSettingPageState();
+}
 
-//   List<Locale> listLanguage = AppLanguage.supportLanguage;
-//   Locale languageSelected = AppBloc.languageCubit.state;
+class _LanguageSettingPageState extends State<LanguageSettingPage> {
+  final _textLanguageController = TextEditingController();
+  late List<Locale> supportedLocales;
 
-//   @override
-//   void initState() {
-//     super.initState();
-//   }
+  @override
+  void initState() {
+    super.initState();
+  }
 
-//   @override
-//   void dispose() {
-//     textLanguageController.dispose();
-//     super.dispose();
-//   }
+  @override
+  void didChangeDependencies() {
+    supportedLocales = locator<LanguageCubit>().supportedLocales;
+    super.didChangeDependencies();
+  }
 
-//   ///On filter language
-//   void onFilter(String text) {
-//     if (text.isEmpty) {
-//       setState(() {
-//         listLanguage = AppLanguage.supportLanguage;
-//       });
-//       return;
-//     }
-//     setState(() {
-//       listLanguage = listLanguage.where(((item) {
-//         return UtilLanguage.getGlobalLanguageName(item.languageCode)
-//             .toUpperCase()
-//             .contains(text.toUpperCase());
-//       })).toList();
-//     });
-//   }
+  void _onChangeLanguage(Locale locale) {
+    locator<LanguageCubit>().changeLanguage(locale);
+  }
 
-//   ///On change language
-//   void onChangeLanguage() {
-//     UtilOther.hiddenKeyboard(context);
-//     AppBloc.languageCubit.onUpdate(languageSelected);
-//   }
+  @override
+  void dispose() {
+    _textLanguageController.dispose();
+    super.dispose();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         centerTitle: true,
-//         elevation: 0,
-//         title: Text(
-//           Translate.of(context).translate('change_language'),
-//         ),
-//         actions: [
-//           AppButton(
-//             Translate.of(context).translate('apply'),
-//             onPressed: onChangeLanguage,
-//             type: ButtonType.text,
-//           ),
-//         ],
-//       ),
-//       body: SafeArea(
-//         child: Column(
-//           children: <Widget>[
-//             Padding(
-//               padding: const EdgeInsets.only(
-//                 left: 16,
-//                 right: 16,
-//                 top: 16,
-//                 bottom: 8,
-//               ),
-//               child: AppTextInput(
-//                 labelText: Translate.of(context).translate('language'),
-//                 hintText: Translate.of(context).translate('search'),
-//                 controller: textLanguageController,
-//                 maxLines: 1,
-//                 onChanged: onFilter,
-//               ),
-//             ),
-//             Expanded(
-//               child: ListView.builder(
-//                 itemBuilder: (context, index) {
-//                   Widget? trailing;
-//                   final item = listLanguage[index];
-//                   if (item == languageSelected) {
-//                     trailing = Icon(
-//                       Icons.check,
-//                       color: Theme.of(context).primaryColor,
-//                     );
-//                   }
-//                   return AppListTitle(
-//                     title: UtilLanguage.getGlobalLanguageName(
-//                       item.languageCode,
-//                     ),
-//                     trailing: trailing,
-//                     onPressed: () {
-//                       setState(() {
-//                         languageSelected = item;
-//                       });
-//                     },
-//                     border: item != listLanguage.last,
-//                   );
-//                 },
-//                 itemCount: listLanguage.length,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  void _filterLanguage(String text) {
+    if (text.isEmpty) {
+      setState(() {
+        supportedLocales = locator<LanguageCubit>().supportedLocales;
+      });
+      return;
+    }
+    setState(() {
+      supportedLocales = supportedLocales
+          .where(
+            (item) => UtilLanguage.getGlobalLanguageName(item.languageCode)
+                .toUpperCase()
+                .contains(text.toUpperCase()),
+          )
+          .toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CommonPage(
+      appBar: _buildAppBar(),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 16,
+              bottom: 8,
+            ),
+            child: AppTextField(
+              controller: _textLanguageController,
+              labelText: AppLocalizations.of(context)!.settings__language_title,
+              decoration: InputDecoration(
+                hintText:
+                    AppLocalizations.of(context)!.settings__language_search,
+              ),
+              onChanged: _filterLanguage,
+            ),
+          ),
+          Expanded(
+            child: BlocBuilder<LanguageCubit, Locale?>(
+              builder: (context, currentLocale) {
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    Widget? trailing;
+                    final locale = supportedLocales[index];
+                    if (locale == currentLocale!) {
+                      trailing = Icon(
+                        Icons.check,
+                        color: Theme.of(context).primaryColor,
+                      );
+                    }
+                    return AppListTitle(
+                      title: UtilLanguage.getGlobalLanguageName(
+                        locale.languageCode,
+                      ),
+                      trailing: trailing,
+                      onPressed: () => _onChangeLanguage(locale),
+                      border: locale != supportedLocales.last,
+                    );
+                  },
+                  itemCount: supportedLocales.length,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return CommonAppBar(
+      title: AppLocalizations.of(context)!.settings__language_change_language,
+    );
+  }
+}

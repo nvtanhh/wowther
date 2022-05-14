@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'common_widget.index.dart';
+
 enum ButtonType { normal, outline, text }
 
 class AppButton extends StatelessWidget {
@@ -24,7 +26,7 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildLoading(Color color) {
+    Widget _buildLoading(Color color) {
       if (!loading) return Container();
       return Row(
         children: [
@@ -57,14 +59,15 @@ class AppButton extends StatelessWidget {
               mainAxisSize: mainAxisSize,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                ThemedText(
                   text,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  type: ThemedTextType.button,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                buildLoading(Theme.of(context).primaryColor)
+                _buildLoading(Theme.of(context).primaryColor)
               ],
             ),
           );
@@ -81,14 +84,15 @@ class AppButton extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              ThemedText(
                 text,
-                style: Theme.of(context).textTheme.button!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                type: ThemedTextType.button,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              buildLoading(Theme.of(context).primaryColor)
+              _buildLoading(Theme.of(context).primaryColor)
             ],
           ),
         );
@@ -102,14 +106,15 @@ class AppButton extends StatelessWidget {
               mainAxisSize: mainAxisSize,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                ThemedText(
                   text,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  type: ThemedTextType.button,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                buildLoading(Theme.of(context).primaryColor)
+                _buildLoading(Theme.of(context).primaryColor)
               ],
             ),
           );
@@ -120,14 +125,15 @@ class AppButton extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              ThemedText(
                 text,
-                style: Theme.of(context).textTheme.button!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                type: ThemedTextType.button,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              buildLoading(Theme.of(context).primaryColor)
+              _buildLoading(Theme.of(context).primaryColor)
             ],
           ),
         );
@@ -146,14 +152,15 @@ class AppButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                ThemedText(
                   text,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  type: ThemedTextType.button,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                buildLoading(Colors.white)
+                _buildLoading(Colors.white)
               ],
             ),
           );
@@ -170,14 +177,15 @@ class AppButton extends StatelessWidget {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              ThemedText(
                 text,
-                style: Theme.of(context)
-                    .textTheme
-                    .button!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                type: ThemedTextType.button,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              buildLoading(Colors.white)
+              _buildLoading(Colors.white)
             ],
           ),
         );

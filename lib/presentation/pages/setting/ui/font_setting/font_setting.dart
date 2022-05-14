@@ -16,49 +16,30 @@ class FontSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonPage(
+      appBar: CommonAppBar(
+        title: AppLocalizations.of(context)!.settings__theme_font,
+      ),
       body: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
-          return CustomScrollView(
-            physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
-            ),
-            slivers: [
-              SliverAppBar(
-                centerTitle: true,
-                title: Text(
-                  AppLocalizations.of(context)!.settings__theme_font,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                pinned: true,
-              ),
-              SliverSafeArea(
-                top: false,
-                sliver: SliverPadding(
-                  padding: const EdgeInsets.only(top: 8),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        Widget? trailing;
-                        final item = state.supportedFonts![index];
-                        if (item == state.font) {
-                          trailing = Icon(
-                            Icons.check,
-                            color: Theme.of(context).primaryColor,
-                          );
-                        }
-                        return AppListTitle(
-                          title: item,
-                          trailing: trailing,
-                          border: item != state.supportedFonts!.last,
-                          onPressed: () => _onChange(item),
-                        );
-                      },
-                      childCount: state.supportedFonts?.length ?? 0,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          return ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              Widget? trailing;
+              final item = state.supportedFonts![index];
+              if (item == state.font) {
+                trailing = Icon(
+                  Icons.check,
+                  color: Theme.of(context).primaryColor,
+                );
+              }
+              return AppListTitle(
+                title: item,
+                trailing: trailing,
+                border: item != state.supportedFonts!.last,
+                onPressed: () => _onChange(item),
+              );
+            },
+            itemCount: state.supportedFonts?.length ?? 0,
           );
         },
       ),

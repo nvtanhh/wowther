@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../common/utils/utils.index.dart';
+import '../common_widget.index.dart';
 
 class AppTextField extends StatelessWidget {
   final String? labelText;
@@ -60,7 +61,7 @@ class AppTextField extends StatelessWidget {
       textCapitalization: textCapitalization,
       enabled: enabled,
       decoration: InputDecoration(
-        isDense: true,
+        isDense: decoration?.isDense ?? true,
         prefix: decoration?.prefix,
         prefixIcon: decoration?.prefixIcon,
         suffix: decoration?.suffix,
@@ -97,9 +98,10 @@ class AppTextField extends StatelessWidget {
         if (labelText != null)
           Padding(
             padding: AppSpacer.edgeInsetsBottom8,
-            child: Text(
+            child: ThemedText(
               labelText!,
-              style: Theme.of(context).textTheme.labelMedium,
+              type: ThemedTextType.labelLarge,
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
         textField,

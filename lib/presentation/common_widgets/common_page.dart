@@ -29,7 +29,8 @@ class CommonPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: onWillPop != null ? onWillPop! : () async => true,
       child: Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor:
+            backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
         appBar: appBar,
         body: SafeArea(
           child: Padding(

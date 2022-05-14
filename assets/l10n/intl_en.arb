@@ -1,6 +1,7 @@
 {
   "global__close": "Close",
   "global__apply": "Apply",
+  "global__search": "Search",
   "language_english": "English",
   "language_vietnamese": "Vietnamese",
   "auth_sign_in__with_facebook": "Continue with Facebook",

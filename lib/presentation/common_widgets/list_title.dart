@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../common/utils/utils.index.dart';
+import 'common_widget.index.dart';
+
 class AppListTitle extends StatelessWidget {
   final String title;
-  final String? subtitle;
   final Widget? leading;
+  final String? subtitle;
   final Widget? trailing;
   final VoidCallback? onPressed;
   final bool border;
@@ -21,17 +24,10 @@ class AppListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Border? borderWidget;
-    Widget subTitle = Container();
-    Widget leadingWidget = const SizedBox(width: 16);
-    if (leading != null) {
-      leadingWidget = Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: leading,
-      );
-    }
+    Widget subTitle = const SizedBox();
     if (subtitle != null) {
       subTitle = Padding(
-        padding: const EdgeInsets.only(top: 8),
+        padding: AppSpacer.edgeInsetsTop8,
         child: Text(
           subtitle!,
           style: Theme.of(context)
@@ -49,10 +45,13 @@ class AppListTitle extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: ColoredBox(
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Row(
           children: [
-            leadingWidget,
+            Padding(
+              padding: AppSpacer.edgeInsetsRight16,
+              child: leading ?? AppSpacer.emptyBox,
+            ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -66,12 +65,11 @@ class AppListTitle extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            ThemedText(
                               title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(fontWeight: FontWeight.bold),
+                              type: ThemedTextType.subTitle1,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             subTitle
                           ],
@@ -79,8 +77,8 @@ class AppListTitle extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: trailing ?? Container(),
+                      padding: AppSpacer.edgeInsetsLeft16,
+                      child: trailing ?? AppSpacer.emptyBox,
                     )
                   ],
                 ),

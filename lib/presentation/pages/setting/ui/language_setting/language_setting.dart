@@ -67,17 +67,14 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: 8,
+              top: 16.0,
             ),
             child: AppTextField(
               controller: _textLanguageController,
               labelText: AppLocalizations.of(context)!.settings__language_title,
               decoration: InputDecoration(
-                hintText:
-                    AppLocalizations.of(context)!.settings__language_search,
+                hintText: AppLocalizations.of(context)!.global__search,
+                isDense: false,
               ),
               onChanged: _filterLanguage,
             ),

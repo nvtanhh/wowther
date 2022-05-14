@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import 'common_widget.index.dart';
+
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Color? textIconColor;
@@ -36,13 +38,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: leading ?? _buildBackButton(context),
       title: titleWidget ??
-          Text(
+          ThemedText(
             title!,
-            style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: textIconColor,
-                ),
+            type: ThemedTextType.heading6,
+            style: const TextStyle(fontWeight: FontWeight.w500),
           ),
-      backgroundColor: backgroundColor,
+      backgroundColor:
+          backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
       centerTitle: true,
       elevation: 0,
     );

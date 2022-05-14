@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'common_widget.index.dart';
+
 enum TagType { status, chip, rateSmall }
 
 class AppTag extends StatelessWidget {
@@ -35,7 +37,7 @@ class AppTag extends StatelessWidget {
                 bottomRight: Radius.circular(4),
               ),
             ),
-            child: Text(
+            child: ThemedText(
               text,
               style: const TextStyle(
                 color: Colors.white,
@@ -57,7 +59,7 @@ class AppTag extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(2),
             ),
-            child: Text(
+            child: ThemedText(
               text,
               style: Theme.of(context)
                   .textTheme
@@ -92,7 +94,7 @@ class AppTag extends StatelessWidget {
                   )
                 else
                   const SizedBox(),
-                Text(
+                ThemedText(
                   text,
                   style: Theme.of(context)
                       .textTheme

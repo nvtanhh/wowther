@@ -20,7 +20,6 @@ class SettingPage extends StatelessWidget {
     locator<ThemeCubit>().onChangeTheme(darkOption: darkOption);
   }
 
-  ///On navigation
   void onNavigate(BuildContext context, String route) {
     context.router.pushNamed(route);
   }
@@ -34,15 +33,16 @@ class SettingPage extends StatelessWidget {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text(
-                AppLocalizations.of(context)!.settings__title,
-                style: Theme.of(context).textTheme.titleLarge,
+              title: ThemedText(
+                AppLocalizations.of(context)!.settings__theme_dark_mode,
+                type: ThemedTextType.titleMedium,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     RadioListTile<DarkModeOption>(
-                      title: Text(
+                      title: ThemedText(
                         AppLocalizations.of(context)!
                             .settings__theme_dark_mode_dynamic,
                       ),
@@ -53,7 +53,7 @@ class SettingPage extends StatelessWidget {
                           setState(() => darkOption = DarkModeOption.dynamic),
                     ),
                     RadioListTile<DarkModeOption>(
-                      title: Text(
+                      title: ThemedText(
                         AppLocalizations.of(context)!
                             .settings__theme_dark_mode_on,
                       ),
@@ -64,7 +64,7 @@ class SettingPage extends StatelessWidget {
                           setState(() => darkOption = DarkModeOption.on),
                     ),
                     RadioListTile<DarkModeOption>(
-                      title: Text(
+                      title: ThemedText(
                         AppLocalizations.of(context)!
                             .settings__theme_dark_mode_off,
                       ),
@@ -103,63 +103,47 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonPage(
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
-        slivers: [
-          SliverAppBar(
-            centerTitle: true,
-            title: Text(
-              AppLocalizations.of(context)!.settings__title,
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            pinned: true,
-          ),
-          SliverSafeArea(
-            top: false,
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const SizedBox(height: 8),
-                  AppListTitle(
-                    leading: Icon(
-                      Icons.language_outlined,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    title:
-                        AppLocalizations.of(context)!.settings__language_title,
-                    onPressed: () {
-                      onNavigate(context, RouteConstants.languageSetting);
-                    },
-                    trailing: BlocBuilder<LanguageCubit, Locale?>(
-                      builder: (context, locale) {
-                        return Row(
-                          children: <Widget>[
-                            Text(
-                              UtilLanguage.getGlobalLanguageName(
-                                locale!.languageCode,
-                                context,
-                              ),
-                              style: Theme.of(context).textTheme.caption,
-                            ),
-                            const Icon(Icons.keyboard_arrow_right),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  buildThemingWidgets(context),
-                ],
+      appBar: CommonAppBar(
+        title: AppLocalizations.of(context)!.settings__title,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppSpacer.sizedBoxH8,
+            AppListTitle(
+              leading: Icon(
+                Icons.language_outlined,
+                color: Theme.of(context).primaryColor,
+              ),
+              title: AppLocalizations.of(context)!.settings__language_title,
+              onPressed: () {
+                onNavigate(context, RouteConstants.languageSetting);
+              },
+              trailing: BlocBuilder<LanguageCubit, Locale?>(
+                builder: (context, locale) {
+                  return Row(
+                    children: <Widget>[
+                      ThemedText(
+                        UtilLanguage.getGlobalLanguageName(
+                          locale!.languageCode,
+                          context,
+                        ),
+                        type: ThemedTextType.caption,
+                      ),
+                      const Icon(Icons.keyboard_arrow_right),
+                    ],
+                  );
+                },
               ),
             ),
-          ),
-        ],
+            _buildThemingWidgets(context),
+          ],
+        ),
       ),
     );
   }
 
-  Widget buildThemingWidgets(BuildContext context) {
+  Widget _buildThemingWidgets(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return Column(
@@ -172,9 +156,9 @@ class SettingPage extends StatelessWidget {
               title: AppLocalizations.of(context)!.settings__theme_color,
               onPressed: () => onNavigate(context, RouteConstants.themeSetting),
               trailing: Container(
-                margin: const EdgeInsets.only(right: 8),
-                width: 16,
-                height: 16,
+                margin: AppSpacer.edgeInsetsRight8,
+                width: 16.0,
+                height: 16.0,
                 color: Theme.of(context).primaryColor,
               ),
             ),
@@ -187,9 +171,9 @@ class SettingPage extends StatelessWidget {
               onPressed: () => showDarkModeSetting(context),
               trailing: Row(
                 children: <Widget>[
-                  Text(
+                  ThemedText(
                     state.darkOption!.name.capitalize(),
-                    style: Theme.of(context).textTheme.caption,
+                    type: ThemedTextType.caption,
                   ),
                   const Icon(Icons.keyboard_arrow_right),
                 ],
@@ -204,9 +188,9 @@ class SettingPage extends StatelessWidget {
               onPressed: () => onNavigate(context, RouteConstants.fontSetting),
               trailing: Row(
                 children: <Widget>[
-                  Text(
+                  ThemedText(
                     state.font ?? '',
-                    style: Theme.of(context).textTheme.caption,
+                    type: ThemedTextType.caption,
                   ),
                   const Icon(Icons.keyboard_arrow_right),
                 ],

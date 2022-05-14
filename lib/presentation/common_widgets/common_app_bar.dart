@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'common_widget.index.dart';
-
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Color? textIconColor;
@@ -15,7 +13,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CommonAppBar({
     Key? key,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor,
     this.textIconColor = Colors.black,
     this.title = '',
     this.titleWidget,
@@ -38,9 +36,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: leading ?? _buildBackButton(context),
       title: titleWidget ??
-          ThemedText(
+          Text(
             title!,
-            size: ThemedTextSize.large,
+            style: Theme.of(context).textTheme.headline6!.copyWith(
+                  color: textIconColor,
+                ),
           ),
       backgroundColor: backgroundColor,
       centerTitle: true,
@@ -52,7 +52,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (!autoImplyLeading) return null;
     return IconButton(
       onPressed: () => context.router.pop(),
-      icon: const Icon(Icons.arrow_back),
+      icon: Icon(
+        Icons.arrow_back,
+        color: Theme.of(context).iconTheme.color,
+      ),
     );
   }
 }

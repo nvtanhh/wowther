@@ -10,7 +10,7 @@ class CommonPage extends StatelessWidget {
   final EdgeInsets padding;
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   const CommonPage({
     Key? key,
@@ -21,7 +21,7 @@ class CommonPage extends StatelessWidget {
     this.padding = AppSpacer.edgeInsetsHorizontal16,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor,
   }) : super(key: key);
 
   @override

@@ -1,8 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 
 class FirebaseService {
   static Future<FirebaseService> init() async {
-    await Firebase.initializeApp();
+    // await Firebase.initializeApp();
     return FirebaseService();
   }
 }

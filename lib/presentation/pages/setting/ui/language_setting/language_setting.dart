@@ -50,9 +50,10 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
     setState(() {
       supportedLocales = supportedLocales
           .where(
-            (item) => UtilLanguage.getGlobalLanguageName(item.languageCode)
-                .toUpperCase()
-                .contains(text.toUpperCase()),
+            (item) =>
+                UtilLanguage.getGlobalLanguageName(item.languageCode, context)
+                    .toUpperCase()
+                    .contains(text.toUpperCase()),
           )
           .toList();
     });
@@ -97,6 +98,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
                     return AppListTitle(
                       title: UtilLanguage.getGlobalLanguageName(
                         locale.languageCode,
+                        context,
                       ),
                       trailing: trailing,
                       onPressed: () => _onChangeLanguage(locale),

@@ -25,9 +25,9 @@ class FontSettingPage extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 centerTitle: true,
-                title: ThemedText(
+                title: Text(
                   AppLocalizations.of(context)!.settings__theme_font,
-                  size: ThemedTextSize.large,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 pinned: true,
               ),

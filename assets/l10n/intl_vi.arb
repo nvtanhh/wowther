@@ -1,6 +1,8 @@
 {
   "global__close": "Đóng",
   "global__apply": "Áp dụng",
+  "language_english": "Tiếng Anh",
+  "language_vietnamese": "Tiếng Việt",
   "auth_sign_in__with_facebook": "Đăng nhập với Facebook",
   "auth_sign_in__with_google": "Đăng nhập với Google",
   "auth_sign_in__anonymous": "Đăng nhập ẩn danh",

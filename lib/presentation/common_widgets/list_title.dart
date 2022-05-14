@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'common_widget.index.dart';
-
 class AppListTitle extends StatelessWidget {
   final String title;
   final String? subtitle;
@@ -34,7 +32,7 @@ class AppListTitle extends StatelessWidget {
     if (subtitle != null) {
       subTitle = Padding(
         padding: const EdgeInsets.only(top: 8),
-        child: ThemedText(
+        child: Text(
           subtitle!,
           style: Theme.of(context)
               .textTheme
@@ -68,7 +66,7 @@ class AppListTitle extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ThemedText(
+                            Text(
                               title,
                               style: Theme.of(context)
                                   .textTheme

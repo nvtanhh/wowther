@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../common/utils/utils.index.dart';
 import '/injector/injection.dart';
 import '../../../../common/constants/constants.index.dart';
 import '../../../../common/extensions/extensions.index.dart';
+import '../../../../common/utils/utils.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../common_widgets/common_widget.index.dart';
 import '../../../shared_blocs/shared_bloc_index.dart';
@@ -34,15 +34,15 @@ class SettingPage extends StatelessWidget {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: ThemedText(
+              title: Text(
                 AppLocalizations.of(context)!.settings__title,
-                size: ThemedTextSize.large,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     RadioListTile<DarkModeOption>(
-                      title: ThemedText(
+                      title: Text(
                         AppLocalizations.of(context)!
                             .settings__theme_dark_mode_dynamic,
                       ),
@@ -53,7 +53,7 @@ class SettingPage extends StatelessWidget {
                           setState(() => darkOption = DarkModeOption.dynamic),
                     ),
                     RadioListTile<DarkModeOption>(
-                      title: ThemedText(
+                      title: Text(
                         AppLocalizations.of(context)!
                             .settings__theme_dark_mode_on,
                       ),
@@ -64,7 +64,7 @@ class SettingPage extends StatelessWidget {
                           setState(() => darkOption = DarkModeOption.on),
                     ),
                     RadioListTile<DarkModeOption>(
-                      title: ThemedText(
+                      title: Text(
                         AppLocalizations.of(context)!
                             .settings__theme_dark_mode_off,
                       ),
@@ -110,9 +110,9 @@ class SettingPage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             centerTitle: true,
-            title: ThemedText(
+            title: Text(
               AppLocalizations.of(context)!.settings__title,
-              size: ThemedTextSize.large,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             pinned: true,
           ),
@@ -136,9 +136,10 @@ class SettingPage extends StatelessWidget {
                       builder: (context, locale) {
                         return Row(
                           children: <Widget>[
-                            ThemedText(
+                            Text(
                               UtilLanguage.getGlobalLanguageName(
                                 locale!.languageCode,
+                                context,
                               ),
                               style: Theme.of(context).textTheme.caption,
                             ),
@@ -168,7 +169,7 @@ class SettingPage extends StatelessWidget {
                 Icons.color_lens_outlined,
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Theme',
+              title: AppLocalizations.of(context)!.settings__theme_color,
               onPressed: () => onNavigate(context, RouteConstants.themeSetting),
               trailing: Container(
                 margin: const EdgeInsets.only(right: 8),
@@ -182,11 +183,11 @@ class SettingPage extends StatelessWidget {
                 Icons.nights_stay_outlined,
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Dark Mode',
+              title: AppLocalizations.of(context)!.settings__theme_dark_mode,
               onPressed: () => showDarkModeSetting(context),
               trailing: Row(
                 children: <Widget>[
-                  ThemedText(
+                  Text(
                     state.darkOption!.name.capitalize(),
                     style: Theme.of(context).textTheme.caption,
                   ),
@@ -199,11 +200,11 @@ class SettingPage extends StatelessWidget {
                 Icons.font_download_outlined,
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Font',
+              title: AppLocalizations.of(context)!.settings__theme_font,
               onPressed: () => onNavigate(context, RouteConstants.fontSetting),
               trailing: Row(
                 children: <Widget>[
-                  ThemedText(
+                  Text(
                     state.font ?? '',
                     style: Theme.of(context).textTheme.caption,
                   ),

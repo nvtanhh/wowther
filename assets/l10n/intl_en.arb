@@ -1,6 +1,8 @@
 {
   "global__close": "Close",
   "global__apply": "Apply",
+  "language_english": "English",
+  "language_vietnamese": "Vietnamese",
   "auth_sign_in__with_facebook": "Continue with Facebook",
   "auth_sign_in__with_google": "Continue with Google",
   "auth_sign_in__anonymous": "Continue with anonymous account",

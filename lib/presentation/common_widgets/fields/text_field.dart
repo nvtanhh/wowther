@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../common/utils/utils.index.dart';
-import '../common_widget.index.dart';
 
 class AppTextField extends StatelessWidget {
   final String? labelText;
@@ -98,9 +97,9 @@ class AppTextField extends StatelessWidget {
         if (labelText != null)
           Padding(
             padding: AppSpacer.edgeInsetsBottom8,
-            child: ThemedText(
+            child: Text(
               labelText!,
-              size: ThemedTextSize.large,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ),
         textField,

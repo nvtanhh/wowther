@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../common/theme/theme.index.dart';
 import '../../../../../common/utils/utils.index.dart';
 import '../../../../../injector/injection.dart';
-import '../../../../common_widgets/common_widget.index.dart';
-import '../../../../common_widgets/fields/text_field.dart';
 import '../../../../shared_blocs/shared_bloc_index.dart';
 
 class LanguageSettingPage extends StatefulWidget {

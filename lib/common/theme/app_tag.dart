@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'common_widget.index.dart';
+import 'text.dart';
 
 enum TagType { status, chip, rateSmall }
 

@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../common/extensions/extensions.index.dart';
+import '../../../../../common/theme/theme.index.dart';
 import '../../../../../domain/entities/theme_entity.dart';
 import '../../../../../injector/injection.dart';
-import '../../../../common_widgets/common_widget.index.dart';
 import '../../../../shared_blocs/shared_bloc_index.dart';
 
 class ThemeSettingPage extends StatelessWidget {

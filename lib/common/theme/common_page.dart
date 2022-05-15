@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../common/utils/utils.index.dart';
+import 'theme.index.dart';
 
 class CommonPage extends StatelessWidget {
   final Widget body;

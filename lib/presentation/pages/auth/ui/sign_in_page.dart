@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../common_widgets/common_widget.index.dart';
+import '../../../../common/theme/theme.index.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);

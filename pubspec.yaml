@@ -28,6 +28,7 @@ dependencies:
   path_provider: ^2.0.9
   auto_route: ^4.0.1
   logger: ^1.1.0
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:

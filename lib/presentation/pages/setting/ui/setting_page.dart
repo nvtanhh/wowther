@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../common/theme/theme.index.dart';
 import '/injector/injection.dart';
 import '../../../../common/constants/constants.index.dart';
 import '../../../../common/utils/utils.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
-import '../../../common_widgets/common_widget.index.dart';
 import '../../../shared_blocs/shared_bloc_index.dart';
 
 class SettingPage extends StatelessWidget {
@@ -110,10 +110,7 @@ class SettingPage extends StatelessWidget {
           children: [
             AppSpacer.sizedBoxH8,
             AppListTitle(
-              leading: Icon(
-                Icons.language_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
+              leading: AppIcon(AppIcons.language),
               title: AppLocalizations.of(context)!.settings__language_title,
               onPressed: () {
                 onNavigate(context, RouteConstants.languageSetting);
@@ -129,7 +126,10 @@ class SettingPage extends StatelessWidget {
                         ),
                         type: ThemedTextType.caption,
                       ),
-                      const Icon(Icons.keyboard_arrow_right),
+                      AppIcon(
+                        AppIcons.arrowRight,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                     ],
                   );
                 },
@@ -148,10 +148,7 @@ class SettingPage extends StatelessWidget {
         return Column(
           children: [
             AppListTitle(
-              leading: Icon(
-                Icons.color_lens_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
+              leading: AppIcon(AppIcons.color),
               title: AppLocalizations.of(context)!.settings__theme_color,
               onPressed: () => onNavigate(context, RouteConstants.themeSetting),
               trailing: Container(
@@ -162,10 +159,7 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             AppListTitle(
-              leading: Icon(
-                Icons.nights_stay_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
+              leading: AppIcon(AppIcons.darkMode),
               title: AppLocalizations.of(context)!.settings__theme_dark_mode,
               onPressed: () => _showDarkModeSetting(context),
               trailing: Row(
@@ -174,15 +168,15 @@ class SettingPage extends StatelessWidget {
                     state.darkOption!.toTranslationString(context),
                     type: ThemedTextType.caption,
                   ),
-                  const Icon(Icons.keyboard_arrow_right),
+                  AppIcon(
+                    AppIcons.arrowRight,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
                 ],
               ),
             ),
             AppListTitle(
-              leading: Icon(
-                Icons.font_download_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
+              leading: AppIcon(AppIcons.font),
               title: AppLocalizations.of(context)!.settings__theme_font,
               onPressed: () => onNavigate(context, RouteConstants.fontSetting),
               trailing: Row(
@@ -191,7 +185,10 @@ class SettingPage extends StatelessWidget {
                     state.font ?? '',
                     type: ThemedTextType.caption,
                   ),
-                  const Icon(Icons.keyboard_arrow_right),
+                  AppIcon(
+                    AppIcons.arrowRight,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
                 ],
               ),
               border: false,

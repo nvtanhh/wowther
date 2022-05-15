@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'common_widget.index.dart';
+import 'icons.dart';
+import 'text.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
@@ -54,8 +55,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (!autoImplyLeading) return null;
     return IconButton(
       onPressed: () => context.router.pop(),
-      icon: Icon(
-        Icons.arrow_back,
+      icon: AppIcon(
+        AppIcons.backIOS,
         color: Theme.of(context).iconTheme.color,
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../common/utils/utils.index.dart';
-import 'common_widget.index.dart';
+import 'spacer.dart';
+import 'text.dart';
 
 class AppListTitle extends StatelessWidget {
   final String title;

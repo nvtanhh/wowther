@@ -7,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '/injector/injection.dart';
 import '../../../../common/constants/constants.index.dart';
-import '../../../../common/extensions/extensions.index.dart';
 import '../../../../common/utils/utils.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../common_widgets/common_widget.index.dart';
@@ -24,7 +23,7 @@ class SettingPage extends StatelessWidget {
     context.router.pushNamed(route);
   }
 
-  Future<void> showDarkModeSetting(BuildContext context) async {
+  Future<void> _showDarkModeSetting(BuildContext context) async {
     DarkModeOption darkOption = locator<ThemeCubit>().state.darkOption!;
     showDialog<bool>(
       context: context,
@@ -168,11 +167,11 @@ class SettingPage extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               title: AppLocalizations.of(context)!.settings__theme_dark_mode,
-              onPressed: () => showDarkModeSetting(context),
+              onPressed: () => _showDarkModeSetting(context),
               trailing: Row(
                 children: <Widget>[
                   ThemedText(
-                    state.darkOption!.name.capitalize(),
+                    state.darkOption!.toTranslationString(context),
                     type: ThemedTextType.caption,
                   ),
                   const Icon(Icons.keyboard_arrow_right),

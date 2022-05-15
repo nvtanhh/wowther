@@ -9,8 +9,8 @@ class Logger {
     _logger.i(message);
   }
 
-  void logError(String message) {
-    _logger.e(message);
+  void logError(String message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.e(message, error, stackTrace);
   }
 
   void logWarning(String message) {

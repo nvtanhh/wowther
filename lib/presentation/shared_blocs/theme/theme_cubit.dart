@@ -64,8 +64,17 @@ class ThemeCubit extends Cubit<ThemeState> {
       state.copyWith(
         theme: defaultTheme,
         font: defaultFont,
-        lightTheme: lightTheme,
-        darkTheme: darkTheme,
+        lightTheme: _getThemeByDarkOption(
+          darkModeOption,
+          lightTheme: lightTheme,
+          darkTheme: darkTheme,
+        ),
+        darkTheme: _getThemeByDarkOption(
+          darkModeOption,
+          lightTheme: lightTheme,
+          darkTheme: darkTheme,
+          isDarkTheme: true,
+        ),
         darkOption: darkModeOption,
         supportedFonts: supportedFonts,
         supportedThemes: supportedThemes,

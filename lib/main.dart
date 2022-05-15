@@ -7,6 +7,17 @@ import 'common/utils/logger.dart';
 import 'injector/injection.dart';
 import 'presentation/app.dart';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
+  BlocOverrides.runZoned(
+    () {
+      runApp(TodoApp());
+    },
+    blocObserver: AppBlocObserver(),
+  );
+}
+
 class AppBlocObserver extends BlocObserver {
   final _logger = locator<Logger>();
 
@@ -14,8 +25,8 @@ class AppBlocObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     if (bloc is Cubit) {
       _logger.logInfo('CUBIT CHANGE: $bloc $change');
+      super.onChange(bloc, change);
     }
-    super.onChange(bloc, change);
   }
 
   @override
@@ -35,17 +46,4 @@ class AppBlocObserver extends BlocObserver {
     _logger.logInfo('BLOC TRANSITION: ${bloc.runtimeType} $transition');
     super.onTransition(bloc, transition);
   }
-}
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
-
-  await runZonedGuarded(
-    () async => BlocOverrides.runZoned(
-      () => runApp(TodoApp()),
-      blocObserver: AppBlocObserver(),
-    ),
-    (_, __) => () {},
-  );
 }

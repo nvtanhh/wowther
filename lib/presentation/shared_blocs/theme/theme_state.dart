@@ -1,11 +1,9 @@
 part of 'theme_cubit.dart';
 
 class ThemeState extends Equatable {
-  final ThemeColorEntity? theme;
+  final AppThemeDataEntity? theme;
   final ThemeData? lightTheme;
   final ThemeData? darkTheme;
-  final String? font;
-  final DarkModeOption? darkOption;
 
   final List<ThemeColorEntity>? supportedThemes;
   final List<String>? supportedFonts;
@@ -14,18 +12,16 @@ class ThemeState extends Equatable {
     this.theme,
     this.lightTheme,
     this.darkTheme,
-    this.font,
-    this.darkOption,
     this.supportedThemes,
     this.supportedFonts,
   });
 
+  DarkModeOption get darkOption => theme?.darkOption ?? DarkModeOption.dynamic;
+
   ThemeState copyWith({
-    ThemeColorEntity? theme,
+    AppThemeDataEntity? theme,
     ThemeData? lightTheme,
     ThemeData? darkTheme,
-    String? font,
-    DarkModeOption? darkOption,
     List<ThemeColorEntity>? supportedThemes,
     List<String>? supportedFonts,
   }) {
@@ -33,8 +29,6 @@ class ThemeState extends Equatable {
       theme: theme ?? this.theme,
       lightTheme: lightTheme ?? this.lightTheme,
       darkTheme: darkTheme ?? this.darkTheme,
-      font: font ?? this.font,
-      darkOption: darkOption ?? this.darkOption,
       supportedThemes: supportedThemes ?? this.supportedThemes,
       supportedFonts: supportedFonts ?? this.supportedFonts,
     );
@@ -45,8 +39,6 @@ class ThemeState extends Equatable {
         theme,
         lightTheme,
         darkTheme,
-        font,
-        darkOption,
         supportedThemes,
       ];
 }

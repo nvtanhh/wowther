@@ -26,7 +26,7 @@ class FontSettingPage extends StatelessWidget {
             itemBuilder: (context, index) {
               Widget? trailing;
               final item = state.supportedFonts![index];
-              if (item == state.font) {
+              if (item == state.theme!.font) {
                 trailing = Icon(
                   Icons.check,
                   color: Theme.of(context).primaryColor,

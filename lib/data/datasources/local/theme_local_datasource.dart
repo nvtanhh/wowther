@@ -5,10 +5,9 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/constants/constants.index.dart';
-import '../../../domain/entities/enums/theme_dark_option.dart';
-import '../../../domain/entities/theme_entity.dart';
+import '../../../domain/entities/app_theme_data.dart';
 import '../../../injector/injection.dart';
-import '../../models/theme_model.dart';
+import '../../models/app_theme_data_model.dart';
 
 @injectable
 class ThemeLocalDataSource {
@@ -48,51 +47,31 @@ class ThemeLocalDataSource {
     },
   ];
 
-  String? getStoredFont() {
-    return _preferencesStorage.getString(StorageConstants.font);
-  }
+  Map<String, dynamic> defaultColorTheme = {
+    "name": "default",
+    "primary": 'ff82B541',
+    "secondary": "ffff8a65",
+  };
 
-  void storeFont(String font) {
-    _preferencesStorage.setString(StorageConstants.font, font);
-  }
-
-  ThemeColorModel? getStoredTheme() {
+  Future<AppThemeDataModel?> getStoredAppThemeData() async {
     try {
-      final data = _preferencesStorage.getString(StorageConstants.themeColor);
+      final data = _preferencesStorage.getString(StorageConstants.theme);
       return data != null
-          ? ThemeColorModel.fromJson(jsonDecode(data) as Map<String, dynamic>)
+          ? AppThemeDataModel.fromJson(jsonDecode(data) as Map<String, dynamic>)
           : null;
     } catch (e) {
       locator<Logger>().e(e.toString());
-      _preferencesStorage.remove(StorageConstants.themeColor);
+      _preferencesStorage.remove(StorageConstants.theme);
       return null;
     }
   }
 
-  void storeThemeColor(ThemeColorEntity theme) {
+  void storeAppThemeData(AppThemeDataEntity theme) {
     _preferencesStorage.setString(
-      StorageConstants.themeColor,
-      jsonEncode((theme as ThemeColorModel).toJson()),
-    );
-  }
-
-  Future<DarkModeOption?> getStoredDarkModeOption() async {
-    try {
-      final data =
-          _preferencesStorage.getString(StorageConstants.darkModeOption);
-      if (data == null) return null;
-      return DarkModeOption.values.firstWhere((item) => item.name == data);
-    } catch (e) {
-      locator<Logger>().e(e.toString());
-      _preferencesStorage.remove(StorageConstants.darkModeOption);
-      return null;
-    }
-  }
-
-  void storeDarkModeOption(DarkModeOption darkModeOption) {
-    _preferencesStorage.setString(
-      StorageConstants.darkModeOption,
-      darkModeOption.name,
+      StorageConstants.theme,
+      jsonEncode(
+        AppThemeDataModel.fromEntity(theme).toJson(),
+      ),
     );
   }
 }

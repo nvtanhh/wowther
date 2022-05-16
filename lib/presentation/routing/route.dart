@@ -16,7 +16,7 @@ part 'route.gr.dart';
     // setting
     AutoRoute(page: LanguageSettingPage, path: RouteConstants.languageSetting),
     AutoRoute(page: SettingWrapper, path: RouteConstants.setting),
-    AutoRoute(page: ThemeSettingPage, path: RouteConstants.themeSetting),
+    AutoRoute(page: ThemeColorSettingPage, path: RouteConstants.themeSetting),
     AutoRoute(page: FontSettingPage, path: RouteConstants.fontSetting),
     // todo
     AutoRoute(page: TodoWrapper, path: RouteConstants.todo),

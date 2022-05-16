@@ -9,8 +9,8 @@ import '../../../../../domain/entities/theme_entity.dart';
 import '../../../../../injector/injection.dart';
 import '../../../../shared_blocs/shared_bloc_index.dart';
 
-class ThemeSettingPage extends StatelessWidget {
-  const ThemeSettingPage({Key? key}) : super(key: key);
+class ThemeColorSettingPage extends StatelessWidget {
+  const ThemeColorSettingPage({Key? key}) : super(key: key);
 
   void _onChange(ThemeColorEntity theme, {required BuildContext context}) {
     locator<ThemeCubit>().onChangeTheme(theme: theme);
@@ -31,7 +31,7 @@ class ThemeSettingPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 Widget trailing = const SizedBox();
                 final item = state.supportedThemes![index];
-                if (item.name == state.theme!.name) {
+                if (item.name == state.theme!.colorTheme.name) {
                   trailing = Icon(
                     Icons.check,
                     color: Theme.of(context).primaryColor,

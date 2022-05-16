@@ -29,9 +29,9 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SettingWrapper());
     },
-    ThemeSettingPageRoute.name: (routeData) {
+    ThemeColorSettingPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const ThemeSettingPage());
+          routeData: routeData, child: const ThemeColorSettingPage());
     },
     FontSettingPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
@@ -50,7 +50,7 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(SignInWrapperRoute.name, path: '/sign-in'),
         RouteConfig(LanguageSettingPageRoute.name, path: '/setting/language'),
         RouteConfig(SettingWrapperRoute.name, path: '/setting'),
-        RouteConfig(ThemeSettingPageRoute.name, path: '/setting/theme'),
+        RouteConfig(ThemeColorSettingPageRoute.name, path: '/setting/theme'),
         RouteConfig(FontSettingPageRoute.name, path: '/setting/font'),
         RouteConfig(TodoWrapperRoute.name, path: '/todo')
       ];
@@ -83,12 +83,12 @@ class SettingWrapperRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ThemeSettingPage]
-class ThemeSettingPageRoute extends PageRouteInfo<void> {
-  const ThemeSettingPageRoute()
-      : super(ThemeSettingPageRoute.name, path: '/setting/theme');
+/// [ThemeColorSettingPage]
+class ThemeColorSettingPageRoute extends PageRouteInfo<void> {
+  const ThemeColorSettingPageRoute()
+      : super(ThemeColorSettingPageRoute.name, path: '/setting/theme');
 
-  static const String name = 'ThemeSettingPageRoute';
+  static const String name = 'ThemeColorSettingPageRoute';
 }
 
 /// generated route for

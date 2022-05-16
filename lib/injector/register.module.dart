@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../presentation/routing/route.dart';
@@ -12,6 +13,9 @@ abstract class RegisterModule {
   @preResolve
   Future<SharedPreferences> get preferencesStorage =>
       SharedPreferences.getInstance();
+
+  @singleton
+  Logger get logger => Logger();
 
   @singleton
   AppRouter get appRouter => AppRouter();

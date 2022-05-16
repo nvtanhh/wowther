@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/constants/constants.index.dart';
-import '../../../common/utils/utils.index.dart';
 import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../domain/entities/theme_entity.dart';
 import '../../../injector/injection.dart';
@@ -63,7 +63,7 @@ class ThemeLocalDataSource {
           ? ThemeColorModel.fromJson(jsonDecode(data) as Map<String, dynamic>)
           : null;
     } catch (e) {
-      locator<Logger>().logError(e.toString());
+      locator<Logger>().e(e.toString());
       _preferencesStorage.remove(StorageConstants.themeColor);
       return null;
     }
@@ -83,7 +83,7 @@ class ThemeLocalDataSource {
       if (data == null) return null;
       return DarkModeOption.values.firstWhere((item) => item.name == data);
     } catch (e) {
-      locator<Logger>().logError(e.toString());
+      locator<Logger>().e(e.toString());
       _preferencesStorage.remove(StorageConstants.darkModeOption);
       return null;
     }

@@ -6,9 +6,9 @@
 
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:logger/logger.dart' as _i5;
 import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
-import '../common/utils/logger.dart' as _i5;
 import '../data/datasources/local/language_local_datasource.dart' as _i17;
 import '../data/datasources/local/theme_local_datasource.dart' as _i7;
 import '../data/repositories/language_repository_impl.dart' as _i19;
@@ -44,7 +44,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.singleton<_i3.AppRouter>(registerModule.appRouter);
   await gh.factoryAsync<_i4.FirebaseService>(() => registerModule.fireService,
       preResolve: true);
-  gh.singleton<_i5.Logger>(_i5.Logger());
+  gh.singleton<_i5.Logger>(registerModule.logger);
   await gh.factoryAsync<_i6.SharedPreferences>(
       () => registerModule.preferencesStorage,
       preResolve: true);

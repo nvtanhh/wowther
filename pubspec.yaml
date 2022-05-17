@@ -38,6 +38,7 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   injectable_generator: ^1.5.3
   auto_route_generator: ^4.0.0
+  mockito: ^5.2.0
 
 flutter:
   generate: true

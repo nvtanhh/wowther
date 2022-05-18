@@ -20,13 +20,13 @@ import '../../domain/usecases/langugae/get_stored_language_code.dart' as _i21;
 import '../../domain/usecases/langugae/get_supported_locales.dart' as _i22;
 import '../../domain/usecases/langugae/store_language_code.dart' as _i18;
 import '../../domain/usecases/theme/get_stored_theme_data.dart' as _i11;
-import '../../domain/usecases/theme/get_supported_fonts.dart' as _i12;
-import '../../domain/usecases/theme/get_supported_theme_colors.dart' as _i13;
+import '../../domain/usecases/theme/get_supported_color_themes.dart' as _i12;
+import '../../domain/usecases/theme/get_supported_fonts.dart' as _i13;
 import '../../domain/usecases/theme/store_app_theme.dart' as _i17;
 import '../../presentation/shared_blocs/language/language_cubit.dart' as _i23;
 import '../../presentation/shared_blocs/theme/theme_cubit.dart' as _i19;
 import '../../presentation/shared_blocs/user/user_cubit.dart' as _i10;
-import '../../services/services.index.dart' as _i4;
+import '../../services/firebase_service.dart' as _i4;
 import '../route/route.dart' as _i3;
 import 'register.module.dart' as _i24; // ignore_for_file: unnecessary_lambdas
 
@@ -48,12 +48,12 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i8.ThemeRepository>(
       () => _i9.ThemeRepositoryImpl(get<_i7.ThemeLocalDataSource>()));
   gh.singleton<_i10.UserCubit>(_i10.UserCubit());
-  gh.factory<_i11.GetStoredAppThemeData>(
-      () => _i11.GetStoredAppThemeData(get<_i8.ThemeRepository>()));
-  gh.factory<_i12.GetSupportedFonts>(
-      () => _i12.GetSupportedFonts(get<_i8.ThemeRepository>()));
-  gh.factory<_i13.GetSupportedThemeColors>(
-      () => _i13.GetSupportedThemeColors(get<_i8.ThemeRepository>()));
+  gh.factory<_i11.GetStoredOrDefaultAppThemeData>(
+      () => _i11.GetStoredOrDefaultAppThemeData(get<_i8.ThemeRepository>()));
+  gh.factory<_i12.GetSupportedColorThemes>(
+      () => _i12.GetSupportedColorThemes(get<_i8.ThemeRepository>()));
+  gh.factory<_i13.GetSupportedFonts>(
+      () => _i13.GetSupportedFonts(get<_i8.ThemeRepository>()));
   gh.factory<_i14.LanguageLocalDataSource>(
       () => _i14.LanguageLocalDataSource(get<_i6.SharedPreferences>()));
   gh.factory<_i15.LanguageRepository>(
@@ -63,9 +63,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i18.StoreLanguageCode>(
       () => _i18.StoreLanguageCode(get<_i15.LanguageRepository>()));
   gh.singleton<_i19.ThemeCubit>(_i19.ThemeCubit(
-      get<_i12.GetSupportedFonts>(),
-      get<_i13.GetSupportedThemeColors>(),
-      get<_i11.GetStoredAppThemeData>(),
+      get<_i13.GetSupportedFonts>(),
+      get<_i12.GetSupportedColorThemes>(),
+      get<_i11.GetStoredOrDefaultAppThemeData>(),
       get<_i17.StoreAppThemeData>()));
   gh.factory<_i20.GetDefaultLocale>(
       () => _i20.GetDefaultLocale(get<_i15.LanguageRepository>()));

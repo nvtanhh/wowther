@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/params/no_params.dart';
-import '../../../core/params/params.index.dart';
+import '../../../core/params/theme/store_app_theme_data_params.dart';
 import '../../../core/utils/utils.index.dart';
 import '../../../domain/entities/app_theme_data.dart';
 import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../domain/entities/theme_entity.dart';
 import '../../../domain/usecases/theme/get_stored_theme_data.dart';
 import '../../../domain/usecases/theme/get_supported_fonts.dart';
-import '../../../domain/usecases/theme/get_supported_theme_colors.dart';
+import '../../../domain/usecases/theme/get_supported_color_themes.dart';
 import '../../../domain/usecases/theme/store_app_theme.dart';
 
 part 'theme_state.dart';
@@ -20,8 +20,8 @@ part 'theme_state.dart';
 class ThemeCubit extends Cubit<ThemeState> {
   // usecases
   final GetSupportedFonts _getSupportedFonts;
-  final GetSupportedThemeColors _getSupportedThemes;
-  final GetStoredAppThemeData _getStoredAppThemeData;
+  final GetSupportedColorThemes _getSupportedThemes;
+  final GetStoredOrDefaultAppThemeData _getStoredAppThemeData;
   final StoreAppThemeData _storeTheme;
 
   ThemeCubit(

@@ -5,6 +5,6 @@ abstract class ThemeRepository {
   Future<List<String>> getSupportedFonts();
   Future<List<ColorTheme>> getSupportedThemeColors();
 
-  Future<AppThemeData> getStoredAppThemeData();
-  void storeAppThemeData(AppThemeData appThemeData);
+  Future<AppThemeData> getStoredOrDefaultAppThemeData();
+  Future<void> storeAppThemeData(AppThemeData appThemeData);
 }

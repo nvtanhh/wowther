@@ -20,7 +20,7 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeAppThemeDataEntity_0 extends _i1.Fake implements _i2.AppThemeData {}
+class _FakeAppThemeData_0 extends _i1.Fake implements _i2.AppThemeData {}
 
 /// A class which mocks [ThemeRepository].
 ///
@@ -42,13 +42,14 @@ class MockThemeRepository extends _i1.Mock implements _i3.ThemeRepository {
                   Future<List<_i5.ColorTheme>>.value(<_i5.ColorTheme>[]))
           as _i4.Future<List<_i5.ColorTheme>>);
   @override
-  _i4.Future<_i2.AppThemeData> getStoredAppThemeData() =>
-      (super.noSuchMethod(Invocation.method(#getStoredAppThemeData, []),
+  _i4.Future<_i2.AppThemeData> getStoredOrDefaultAppThemeData() => (super
+          .noSuchMethod(Invocation.method(#getStoredOrDefaultAppThemeData, []),
               returnValue:
-                  Future<_i2.AppThemeData>.value(_FakeAppThemeDataEntity_0()))
-          as _i4.Future<_i2.AppThemeData>);
+                  Future<_i2.AppThemeData>.value(_FakeAppThemeData_0()))
+      as _i4.Future<_i2.AppThemeData>);
   @override
-  void storeAppThemeData(_i2.AppThemeData? appThemeData) =>
-      super.noSuchMethod(Invocation.method(#storeAppThemeData, [appThemeData]),
-          returnValueForMissingStub: null);
+  _i4.Future<void> storeAppThemeData(_i2.AppThemeData? appThemeData) =>
+      (super.noSuchMethod(Invocation.method(#storeAppThemeData, [appThemeData]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }

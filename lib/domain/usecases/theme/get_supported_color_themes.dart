@@ -6,10 +6,10 @@ import '../../entities/theme_entity.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable
-class GetSupportedThemeColors implements UseCase<List<ColorTheme>, NoParams> {
+class GetSupportedColorThemes implements UseCase<List<ColorTheme>, NoParams> {
   final ThemeRepository _themeRepository;
 
-  GetSupportedThemeColors(this._themeRepository);
+  GetSupportedColorThemes(this._themeRepository);
 
   @override
   Future<List<ColorTheme>> call(NoParams noParams) async {

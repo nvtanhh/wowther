@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../config/injector/injection.dart';
-import '../../../../../config/theme/theme.index.dart';
+import '../../../../../config/theme/common_app_bar.dart';
+import '../../../../../config/theme/common_page.dart';
+import '../../../../../config/theme/fields/text_field.dart';
+import '../../../../../config/theme/list_title.dart';
 import '../../../../../core/utils/language.dart';
-import '../../../../shared_blocs/shared_bloc_index.dart';
+import '../../../../shared_blocs/language/language_cubit.dart';
 
 class LanguageSettingPage extends StatefulWidget {
   const LanguageSettingPage({Key? key}) : super(key: key);

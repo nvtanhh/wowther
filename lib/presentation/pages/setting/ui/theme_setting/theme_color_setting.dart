@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../config/injector/injection.dart';
-import '../../../../../config/theme/theme.index.dart';
+import '../../../../../config/theme/common_app_bar.dart';
+import '../../../../../config/theme/common_page.dart';
+import '../../../../../config/theme/list_title.dart';
 import '../../../../../core/extensions/extensions.index.dart';
 import '../../../../../domain/entities/theme_entity.dart';
-import '../../../../shared_blocs/shared_bloc_index.dart';
+import '../../../../shared_blocs/theme/theme_cubit.dart';
 
 class ThemeColorSettingPage extends StatelessWidget {
   const ThemeColorSettingPage({Key? key}) : super(key: key);

@@ -9,7 +9,7 @@ analyzer:
     todo: ignore
   exclude:
     - ./**.g.dart
-    - lib/injector/injection.config.dart
+    - lib/config/injector/injection.config.dart
 linter:
   rules:
     - always_declare_return_types

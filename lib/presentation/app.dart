@@ -5,7 +5,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../config/injector/injection.dart';
 import '../config/route/route.dart';
-import 'shared_blocs/shared_bloc_index.dart';
+import 'shared_blocs/language/language_cubit.dart';
+import 'shared_blocs/theme/theme_cubit.dart';
+import 'shared_blocs/user/user_cubit.dart';
 
 class TodoApp extends StatelessWidget {
   TodoApp({Key? key}) : super(key: key);

@@ -6,11 +6,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../config/injector/injection.dart';
-import '../../../../config/theme/theme.index.dart';
+import '../../../../config/theme/button.dart';
+import '../../../../config/theme/common_app_bar.dart';
+import '../../../../config/theme/common_page.dart';
+import '../../../../config/theme/icons.dart';
+import '../../../../config/theme/list_title.dart';
+import '../../../../config/theme/spacer.dart';
+import '../../../../config/theme/text.dart';
 import '../../../../core/constants/constants.index.dart';
 import '../../../../core/utils/utils.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
-import '../../../shared_blocs/shared_bloc_index.dart';
+import '../../../shared_blocs/language/language_cubit.dart';
+import '../../../shared_blocs/theme/theme_cubit.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);

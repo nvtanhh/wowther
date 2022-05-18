@@ -26,7 +26,7 @@ class ThemeRepositoryImpl implements ThemeRepository {
   }
 
   @override
-  Future<AppThemeDataModel> getStoredAppThemeData() async {
+  Future<AppThemeDataModel> getStoredOrDefaultAppThemeData() async {
     final storedTheme = await _localDatasource.getStoredAppThemeData();
     return storedTheme ?? _getDefaultAppThemeData();
   }
@@ -40,7 +40,7 @@ class ThemeRepositoryImpl implements ThemeRepository {
   }
 
   @override
-  void storeAppThemeData(AppThemeData theme) {
+  Future<void> storeAppThemeData(AppThemeData theme) async {
     _localDatasource.storeAppThemeData(theme);
   }
 }

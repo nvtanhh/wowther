@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../core/params/params.index.dart';
+import '../../../core/params/theme/store_app_theme_data_params.dart';
 import '../../../core/usecases/usecase.dart';
 import '../../repositories/theme_repository.dart';
 

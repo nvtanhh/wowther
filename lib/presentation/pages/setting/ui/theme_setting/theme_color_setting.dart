@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../common/extensions/extensions.index.dart';
-import '../../../../../common/theme/theme.index.dart';
+import '../../../../../config/injector/injection.dart';
+import '../../../../../config/theme/theme.index.dart';
+import '../../../../../core/extensions/extensions.index.dart';
 import '../../../../../domain/entities/theme_entity.dart';
-import '../../../../../injector/injection.dart';
 import '../../../../shared_blocs/shared_bloc_index.dart';
 
 class ThemeColorSettingPage extends StatelessWidget {
   const ThemeColorSettingPage({Key? key}) : super(key: key);
 
-  void _onChange(ThemeColorEntity theme, {required BuildContext context}) {
+  void _onChange(ColorTheme theme, {required BuildContext context}) {
     locator<ThemeCubit>().onChangeTheme(theme: theme);
     context.router.pop();
   }

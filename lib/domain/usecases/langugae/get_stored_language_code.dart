@@ -1,14 +1,17 @@
 import 'package:injectable/injectable.dart';
 
+import '../../../core/params/no_params.dart';
+import '../../../core/usecases/usecase.dart';
 import '../../repositories/language_repository.dart';
 
 @injectable
-class GetStoredLanguageCode {
+class GetStoredLanguageCode implements UseCase<String?, NoParams> {
   final LanguageRepository _languageRepository;
 
   GetStoredLanguageCode(this._languageRepository);
 
-  Future<String?> call() async {
+  @override
+  Future<String?> call(NoParams params) async {
     return _languageRepository.getStoredLanguageCode();
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../common/utils/utils.index.dart';
+import '../../../core/params/no_params.dart';
+import '../../../core/params/params.index.dart';
+import '../../../core/utils/utils.index.dart';
 import '../../../domain/entities/app_theme_data.dart';
 import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../domain/entities/theme_entity.dart';
@@ -32,9 +34,9 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   Future<void> init() async {
-    final supportedFonts = await _getSupportedFonts.call();
-    final supportedThemes = await _getSupportedThemes.call();
-    final appTheme = await _getStoredAppThemeData.call();
+    final supportedFonts = await _getSupportedFonts(NoParams());
+    final supportedThemes = await _getSupportedThemes(NoParams());
+    final appTheme = await _getStoredAppThemeData(NoParams());
     final lightTheme = ThemeUtils.getThemeData(
       theme: appTheme.colorTheme,
       brightness: Brightness.light,
@@ -66,7 +68,7 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   Future<void> onChangeTheme({
-    ThemeColorEntity? theme,
+    ColorTheme? theme,
     String? font,
     DarkModeOption? darkOption,
   }) async {
@@ -85,13 +87,13 @@ class ThemeCubit extends Cubit<ThemeState> {
       font: font,
     );
 
-    final newTheme = AppThemeDataEntity(
+    final newTheme = AppThemeData(
       colorTheme: theme,
       font: font,
       darkOption: darkOption,
     );
 
-    _storeTheme.call(newTheme);
+    _storeTheme(StoreAppThemeDataParams(theme: newTheme));
 
     emit(
       state.copyWith(

@@ -1,3 +1,4 @@
+import 'package:flutter_resources/core/params/params.index.dart';
 import 'package:flutter_resources/domain/usecases/theme/get_supported_fonts.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -20,7 +21,7 @@ void main() {
           .thenAnswer((_) => Future.value(supportedFonts));
 
       // act
-      final result = await usecase.call();
+      final result = await usecase.call(NoParams());
 
       // assert
       expect(result, supportedFonts);

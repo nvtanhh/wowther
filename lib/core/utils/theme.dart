@@ -4,7 +4,7 @@ import '../../domain/entities/theme_entity.dart';
 
 class ThemeUtils {
   static ThemeData getThemeData({
-    required ThemeColorEntity theme,
+    required ColorTheme theme,
     required Brightness brightness,
     String? font,
   }) {

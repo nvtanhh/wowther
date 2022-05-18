@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import '/injector/injection.dart';
-import 'routing/route.dart';
+import '../config/injector/injection.dart';
+import '../config/route/route.dart';
 import 'shared_blocs/shared_bloc_index.dart';
 
 class TodoApp extends StatelessWidget {

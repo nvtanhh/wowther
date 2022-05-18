@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
+import '../../../config/injector/injection.dart';
+import '../../../core/params/language/store_language_code_params.dart';
+import '../../../core/params/no_params.dart';
 import '../../../domain/usecases/langugae/get_default_locale.dart';
 import '../../../domain/usecases/langugae/get_stored_language_code.dart';
 import '../../../domain/usecases/langugae/get_supported_locales.dart';
 import '../../../domain/usecases/langugae/store_language_code.dart';
-import '../../../injector/injection.dart';
 
 @singleton
 class LanguageCubit extends Cubit<Locale?> {
@@ -36,10 +38,10 @@ class LanguageCubit extends Cubit<Locale?> {
       supportedLocales.map((locale) => locale.languageCode).toList();
 
   Future<void> _init() async {
-    _defaultLocale = await _getDefaultLocale.call();
+    _defaultLocale = await _getDefaultLocale(NoParams());
     emit(defaultLocale);
-    final storedLanguageCode = await _getStoredLanguageCode.call();
-    _supportedLocales = await _getSupportedLocales.call();
+    final storedLanguageCode = await _getStoredLanguageCode(NoParams());
+    _supportedLocales = await _getSupportedLocales(NoParams());
     if (storedLanguageCode != null) {
       final storedLocale = supportedLocales.firstWhere(
         (locale) => locale.languageCode == storedLanguageCode,
@@ -51,7 +53,7 @@ class LanguageCubit extends Cubit<Locale?> {
 
   void changeLanguage(Locale locale) {
     emit(locale);
-    _storeLanguageCode.call(locale.languageCode);
+    _storeLanguageCode(StoreLanguageCodeParams(locale.languageCode));
   }
 
   Locale? localeResolutionCallback(

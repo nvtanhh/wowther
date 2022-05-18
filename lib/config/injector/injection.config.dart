@@ -9,25 +9,25 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i5;
 import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
-import '../data/datasources/local/language_local_datasource.dart' as _i14;
-import '../data/datasources/local/theme_local_datasource.dart' as _i7;
-import '../data/repositories/language_repository_impl.dart' as _i16;
-import '../data/repositories/theme_repository_impl.dart' as _i9;
-import '../domain/repositories/language_repository.dart' as _i15;
-import '../domain/repositories/theme_repository.dart' as _i8;
-import '../domain/usecases/langugae/get_default_locale.dart' as _i20;
-import '../domain/usecases/langugae/get_stored_language_code.dart' as _i21;
-import '../domain/usecases/langugae/get_supported_locales.dart' as _i22;
-import '../domain/usecases/langugae/store_language_code.dart' as _i18;
-import '../domain/usecases/theme/get_stored_theme_data.dart' as _i11;
-import '../domain/usecases/theme/get_supported_fonts.dart' as _i12;
-import '../domain/usecases/theme/get_supported_theme_colors.dart' as _i13;
-import '../domain/usecases/theme/store_app_theme.dart' as _i17;
-import '../presentation/routing/route.dart' as _i3;
-import '../presentation/shared_blocs/language/language_cubit.dart' as _i23;
-import '../presentation/shared_blocs/theme/theme_cubit.dart' as _i19;
-import '../presentation/shared_blocs/user/user_cubit.dart' as _i10;
-import '../services/services.index.dart' as _i4;
+import '../../data/datasources/local/language_local_datasource.dart' as _i14;
+import '../../data/datasources/local/theme_local_datasource.dart' as _i7;
+import '../../data/repositories/language_repository_impl.dart' as _i16;
+import '../../data/repositories/theme_repository_impl.dart' as _i9;
+import '../../domain/repositories/language_repository.dart' as _i15;
+import '../../domain/repositories/theme_repository.dart' as _i8;
+import '../../domain/usecases/langugae/get_default_locale.dart' as _i20;
+import '../../domain/usecases/langugae/get_stored_language_code.dart' as _i21;
+import '../../domain/usecases/langugae/get_supported_locales.dart' as _i22;
+import '../../domain/usecases/langugae/store_language_code.dart' as _i18;
+import '../../domain/usecases/theme/get_stored_theme_data.dart' as _i11;
+import '../../domain/usecases/theme/get_supported_fonts.dart' as _i12;
+import '../../domain/usecases/theme/get_supported_theme_colors.dart' as _i13;
+import '../../domain/usecases/theme/store_app_theme.dart' as _i17;
+import '../../presentation/shared_blocs/language/language_cubit.dart' as _i23;
+import '../../presentation/shared_blocs/theme/theme_cubit.dart' as _i19;
+import '../../presentation/shared_blocs/user/user_cubit.dart' as _i10;
+import '../../services/services.index.dart' as _i4;
+import '../route/route.dart' as _i3;
 import 'register.module.dart' as _i24; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars

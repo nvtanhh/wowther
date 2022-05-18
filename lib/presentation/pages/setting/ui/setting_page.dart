@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../common/theme/theme.index.dart';
-import '/injector/injection.dart';
-import '../../../../common/constants/constants.index.dart';
-import '../../../../common/utils/utils.index.dart';
+import '../../../../config/injector/injection.dart';
+import '../../../../config/theme/theme.index.dart';
+import '../../../../core/constants/constants.index.dart';
+import '../../../../core/utils/utils.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../shared_blocs/shared_bloc_index.dart';
 

@@ -19,9 +19,9 @@ class ThemeRepositoryImpl implements ThemeRepository {
   }
 
   @override
-  Future<List<ThemeColorModel>> getSupportedThemeColors() async {
+  Future<List<ColorThemeModel>> getSupportedThemeColors() async {
     return _localDatasource.supportedThemes
-        .map((item) => ThemeColorModel.fromJson(item))
+        .map((item) => ColorThemeModel.fromJson(item))
         .toList();
   }
 
@@ -33,14 +33,14 @@ class ThemeRepositoryImpl implements ThemeRepository {
 
   AppThemeDataModel _getDefaultAppThemeData() {
     return AppThemeDataModel(
-      colorTheme: ThemeColorModel.fromJson(_localDatasource.defaultColorTheme),
+      colorTheme: ColorThemeModel.fromJson(_localDatasource.defaultColorTheme),
       font: _localDatasource.defaultFont,
       darkOption: DarkModeOption.dynamic,
     );
   }
 
   @override
-  void storeAppThemeData(AppThemeDataEntity theme) {
+  void storeAppThemeData(AppThemeData theme) {
     _localDatasource.storeAppThemeData(theme);
   }
 }

@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/constants/constants.index.dart';
-import '../pages/auth/auth_index.dart';
-import '../pages/setting/setting_index.dart';
-import '../pages/setting/ui/language_setting/language_setting.dart';
-import '../pages/todo/todo_index.dart';
+import '../../core/constants/constants.index.dart';
+import '../../presentation/pages/auth/auth_index.dart';
+import '../../presentation/pages/setting/setting_index.dart';
+import '../../presentation/pages/todo/todo_index.dart';
 
 part 'route.gr.dart';
 

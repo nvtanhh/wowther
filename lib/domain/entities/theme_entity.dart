@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class ThemeColorEntity extends Equatable {
+class ColorTheme extends Equatable {
   final String name;
   final Color primary;
   final Color secondary;
 
-  const ThemeColorEntity({
+  const ColorTheme({
     required this.name,
     required this.primary,
     required this.secondary,

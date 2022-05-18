@@ -1,11 +1,11 @@
 part of 'theme_cubit.dart';
 
 class ThemeState extends Equatable {
-  final AppThemeDataEntity? theme;
+  final AppThemeData? theme;
   final ThemeData? lightTheme;
   final ThemeData? darkTheme;
 
-  final List<ThemeColorEntity>? supportedThemes;
+  final List<ColorTheme>? supportedThemes;
   final List<String>? supportedFonts;
 
   const ThemeState({
@@ -19,10 +19,10 @@ class ThemeState extends Equatable {
   DarkModeOption get darkOption => theme?.darkOption ?? DarkModeOption.dynamic;
 
   ThemeState copyWith({
-    AppThemeDataEntity? theme,
+    AppThemeData? theme,
     ThemeData? lightTheme,
     ThemeData? darkTheme,
-    List<ThemeColorEntity>? supportedThemes,
+    List<ColorTheme>? supportedThemes,
     List<String>? supportedFonts,
   }) {
     return ThemeState(

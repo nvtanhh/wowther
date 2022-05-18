@@ -2,8 +2,8 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../presentation/routing/route.dart';
-import '../services/services.index.dart';
+import '../../services/services.index.dart';
+import '../route/route.dart';
 
 @module
 abstract class RegisterModule {

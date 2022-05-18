@@ -4,9 +4,9 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../common/constants/constants.index.dart';
+import '../../../config/injector/injection.dart';
+import '../../../core/constants/constants.index.dart';
 import '../../../domain/entities/app_theme_data.dart';
-import '../../../injector/injection.dart';
 import '../../models/app_theme_data_model.dart';
 
 @injectable
@@ -66,7 +66,7 @@ class ThemeLocalDataSource {
     }
   }
 
-  void storeAppThemeData(AppThemeDataEntity theme) {
+  void storeAppThemeData(AppThemeData theme) {
     _preferencesStorage.setString(
       StorageConstants.theme,
       jsonEncode(

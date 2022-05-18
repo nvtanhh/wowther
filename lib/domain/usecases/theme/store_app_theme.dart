@@ -1,15 +1,17 @@
 import 'package:injectable/injectable.dart';
 
-import '../../entities/app_theme_data.dart';
+import '../../../core/params/params.index.dart';
+import '../../../core/usecases/usecase.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable
-class StoreAppThemeData {
+class StoreAppThemeData implements UseCase<void, StoreAppThemeDataParams> {
   final ThemeRepository _themeRepository;
 
   StoreAppThemeData(this._themeRepository);
 
-  Future<void> call(AppThemeDataEntity theme) async {
-    return _themeRepository.storeAppThemeData(theme);
+  @override
+  Future<void> call(StoreAppThemeDataParams params) async {
+    return _themeRepository.storeAppThemeData(params.theme);
   }
 }

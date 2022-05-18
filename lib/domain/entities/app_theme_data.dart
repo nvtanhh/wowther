@@ -3,12 +3,12 @@ import 'package:equatable/equatable.dart';
 import 'enums/theme_dark_option.dart';
 import 'theme_entity.dart';
 
-class AppThemeDataEntity extends Equatable {
-  final ThemeColorEntity colorTheme;
+class AppThemeData extends Equatable {
+  final ColorTheme colorTheme;
   final String font;
   final DarkModeOption darkOption;
 
-  const AppThemeDataEntity({
+  const AppThemeData({
     required this.colorTheme,
     required this.font,
     required this.darkOption,

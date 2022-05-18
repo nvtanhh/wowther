@@ -3,8 +3,8 @@ import '../entities/theme_entity.dart';
 
 abstract class ThemeRepository {
   Future<List<String>> getSupportedFonts();
-  Future<List<ThemeColorEntity>> getSupportedThemeColors();
+  Future<List<ColorTheme>> getSupportedThemeColors();
 
-  Future<AppThemeDataEntity> getStoredAppThemeData();
-  void storeAppThemeData(AppThemeDataEntity appThemeData);
+  Future<AppThemeData> getStoredAppThemeData();
+  void storeAppThemeData(AppThemeData appThemeData);
 }

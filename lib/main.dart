@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc_observer.dart';
-import 'injector/injection.dart';
+import 'config/injector/injection.dart';
 import 'presentation/app.dart';
 
 Future<void> main() async {

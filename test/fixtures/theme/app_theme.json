@@ -1,0 +1,9 @@
+{
+  "colorTheme": {
+    "name": "orange",
+    "primary": "ffff9800",
+    "secondary": "ffff9800"
+  },
+  "font": "Open Sans",
+  "darkOption": "dynamic"
+}

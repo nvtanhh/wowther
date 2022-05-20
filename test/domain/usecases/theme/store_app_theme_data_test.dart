@@ -29,19 +29,18 @@ void main() {
   );
 
   test(
-    "should store the app theme data to local storage",
+    "should call the repository.storeAppThemeData funciton",
     () async {
       // arrange
       when(
         repository.storeAppThemeData(any),
-      ).thenAnswer((_) => Future.value(themeData));
+      ).thenAnswer((_) => Future.value());
 
       // act
-      final result =
-          await usecase.call(StoreAppThemeDataParams(theme: themeData));
+      await usecase.call(StoreAppThemeDataParams(theme: themeData));
 
       // assert
-      expect(result, supportedFonts);
+      verify(repository.storeAppThemeData(any)).called(1);
     },
   );
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resources/core/params/no_params.dart';
 import 'package:flutter_resources/domain/entities/theme_entity.dart';
 import 'package:flutter_resources/domain/usecases/theme/get_supported_color_themes.dart';
-import 'package:flutter_resources/domain/usecases/theme/get_supported_fonts.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

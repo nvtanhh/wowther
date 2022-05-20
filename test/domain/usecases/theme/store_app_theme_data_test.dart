@@ -29,7 +29,7 @@ void main() {
   );
 
   test(
-    "should call the repository.storeAppThemeData funciton",
+    "should make sure the method repository.storeAppThemeData is called",
     () async {
       // arrange
       when(

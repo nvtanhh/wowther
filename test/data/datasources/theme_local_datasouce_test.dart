@@ -9,6 +9,7 @@ import 'package:flutter_resources/domain/entities/enums/theme_dark_option.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../fixtures/fixture_reader.dart';
 import '../../helpers/test_helpers.mocks.dart';
 
 void main() {
@@ -54,18 +55,12 @@ void main() {
     'should return stored app theme data if it was stored',
     // arrange
     () async {
-      const theme = AppThemeDataModel(
-        colorTheme: ColorThemeModel(
-          name: 'orange',
-          primary: Color(0xffff9800),
-          secondary: Color(0xffff9800),
-        ),
-        font: 'Open Sans',
-        darkOption: DarkModeOption.dynamic,
+      final theme = AppThemeDataModel.fromJson(
+        jsonDecode(fixture('theme/app_theme.json')) as Map<String, dynamic>,
       );
       when(
         mockSharedPreferences.getString(StorageConstants.theme),
-      ).thenReturn(jsonEncode(theme.toJson()));
+      ).thenReturn(fixture('theme/app_theme.json'));
 
       // act
       final result = await dataSource.getStoredOrDefaultAppThemeData();

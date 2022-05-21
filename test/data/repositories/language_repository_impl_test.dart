@@ -30,21 +30,47 @@ void main() {
     expect(result, supportedLocales);
   });
 
-  test(
-    "should return the stored or default locale",
-    () async {
-      const Locale locale = Locale('vi', 'VN');
-      // arrange
-      when(mockLocalDataSource.getStoredOrDefaultLocale())
-          .thenAnswer((_) => Future.value(locale));
+  group('get stored or default locale', () {
+    test(
+      "should return the stored if it was stored",
+      () async {
+        const Locale locale = Locale('vi', 'VN');
+        // arrange
+        when(mockLocalDataSource.getStoredLanguageCode())
+            .thenAnswer((_) => Future.value(locale.languageCode));
+        when(mockLocalDataSource.getSupportedLocales()).thenAnswer(
+            (_) => Future.value([locale, const Locale('en', 'US')]));
 
-      // act
-      final result = await repository.getStoredOrDefaultLocale();
+        // act
+        final result = await repository.getStoredOrDefaultLocale();
 
-      // assert
-      expect(result, locale);
-    },
-  );
+        // assert
+        expect(result, locale);
+      },
+    );
+
+    test(
+      "should return the default locale if it was not stored. The default locale is the first one in the list of supported locales",
+      () async {
+        const Locale defaultLocale = Locale('en', 'US');
+        // arrange
+        when(mockLocalDataSource.getStoredLanguageCode())
+            .thenAnswer((_) => Future.value());
+        when(mockLocalDataSource.getSupportedLocales()).thenAnswer(
+          (_) => Future.value([
+            defaultLocale,
+            const Locale('vi', 'VN'),
+          ]),
+        );
+
+        // act
+        final result = await repository.getStoredOrDefaultLocale();
+
+        // assert
+        expect(result, defaultLocale);
+      },
+    );
+  });
 
   test(
     "should store the language code",

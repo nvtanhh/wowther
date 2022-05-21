@@ -28,8 +28,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
 
   @override
   void didChangeDependencies() {
-    context.read<LanguageCubit>().loadSupportLocales();
-    supportedLocales = locator<LanguageCubit>().supportedLocales;
+    supportedLocales = context.read<LanguageCubit>().state.supportedLocales;
     super.didChangeDependencies();
   }
 
@@ -46,7 +45,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
   void _filterLanguage(String text) {
     if (text.isEmpty) {
       setState(() {
-        supportedLocales = locator<LanguageCubit>().supportedLocales;
+        supportedLocales = locator<LanguageCubit>().state.supportedLocales;
       });
       return;
     }
@@ -83,13 +82,13 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
             ),
           ),
           Expanded(
-            child: BlocBuilder<LanguageCubit, Locale?>(
-              builder: (context, currentLocale) {
+            child: BlocBuilder<LanguageCubit, LanguageState>(
+              builder: (context, state) {
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     Widget? trailing;
                     final locale = supportedLocales[index];
-                    if (locale == currentLocale!) {
+                    if (locale == state.locale) {
                       trailing = Icon(
                         Icons.check,
                         color: Theme.of(context).primaryColor,

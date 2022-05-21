@@ -13,7 +13,15 @@ class LanguageRepositoryImpl extends LanguageRepository {
 
   @override
   Future<Locale> getStoredOrDefaultLocale() async {
-    return _localDatasource.getStoredOrDefaultLocale();
+    final storedLanguageCode = await _localDatasource.getStoredLanguageCode();
+    final supportedLocales = await _localDatasource.getSupportedLocales();
+    if (storedLanguageCode != null) {
+      return supportedLocales.firstWhere(
+        (locale) => locale.languageCode == storedLanguageCode,
+        orElse: () => supportedLocales.first,
+      );
+    }
+    return (await _localDatasource.getSupportedLocales()).first;
   }
 
   @override

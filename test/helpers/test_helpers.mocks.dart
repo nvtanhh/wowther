@@ -6,22 +6,23 @@ import 'dart:async' as _i6;
 import 'dart:ui' as _i4;
 
 import 'package:flutter_resources/data/datasources/language/language_local_datasource.dart'
-    as _i13;
+    as _i14;
 import 'package:flutter_resources/data/datasources/theme/theme_local_datasource.dart'
-    as _i9;
+    as _i10;
 import 'package:flutter_resources/data/models/app_theme_data_model.dart' as _i3;
-import 'package:flutter_resources/data/models/theme_model.dart' as _i10;
+import 'package:flutter_resources/data/models/theme_model.dart' as _i11;
 import 'package:flutter_resources/data/repositories/language_repository_impl.dart'
-    as _i12;
+    as _i13;
 import 'package:flutter_resources/data/repositories/theme_repository_impl.dart'
-    as _i8;
+    as _i9;
 import 'package:flutter_resources/domain/entities/app_theme_data.dart' as _i2;
-import 'package:flutter_resources/domain/entities/theme_entity.dart' as _i7;
+import 'package:flutter_resources/domain/entities/theme_entity.dart' as _i8;
 import 'package:flutter_resources/domain/repositories/language_repository.dart'
-    as _i11;
+    as _i12;
 import 'package:flutter_resources/domain/repositories/theme_repository.dart'
-    as _i5;
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:shared_preferences/shared_preferences.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -40,10 +41,82 @@ class _FakeAppThemeDataModel_1 extends _i1.Fake
 
 class _FakeLocale_2 extends _i1.Fake implements _i4.Locale {}
 
+/// A class which mocks [SharedPreferences].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreferences extends _i1.Mock implements _i5.SharedPreferences {
+  MockSharedPreferences() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Set<String> getKeys() => (super.noSuchMethod(Invocation.method(#getKeys, []),
+      returnValue: <String>{}) as Set<String>);
+  @override
+  Object? get(String? key) =>
+      (super.noSuchMethod(Invocation.method(#get, [key])) as Object?);
+  @override
+  bool? getBool(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getBool, [key])) as bool?);
+  @override
+  int? getInt(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getInt, [key])) as int?);
+  @override
+  double? getDouble(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getDouble, [key])) as double?);
+  @override
+  String? getString(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getString, [key])) as String?);
+  @override
+  bool containsKey(String? key) =>
+      (super.noSuchMethod(Invocation.method(#containsKey, [key]),
+          returnValue: false) as bool);
+  @override
+  List<String>? getStringList(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getStringList, [key]))
+          as List<String>?);
+  @override
+  _i6.Future<bool> setBool(String? key, bool? value) =>
+      (super.noSuchMethod(Invocation.method(#setBool, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setInt(String? key, int? value) =>
+      (super.noSuchMethod(Invocation.method(#setInt, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setDouble(String? key, double? value) =>
+      (super.noSuchMethod(Invocation.method(#setDouble, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setString(String? key, String? value) =>
+      (super.noSuchMethod(Invocation.method(#setString, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setStringList(String? key, List<String>? value) =>
+      (super.noSuchMethod(Invocation.method(#setStringList, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> remove(String? key) =>
+      (super.noSuchMethod(Invocation.method(#remove, [key]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> commit() =>
+      (super.noSuchMethod(Invocation.method(#commit, []),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
+      returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> reload() =>
+      (super.noSuchMethod(Invocation.method(#reload, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+}
+
 /// A class which mocks [ThemeRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockThemeRepository extends _i1.Mock implements _i5.ThemeRepository {
+class MockThemeRepository extends _i1.Mock implements _i7.ThemeRepository {
   MockThemeRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -54,11 +127,11 @@ class MockThemeRepository extends _i1.Mock implements _i5.ThemeRepository {
               returnValue: Future<List<String>>.value(<String>[]))
           as _i6.Future<List<String>>);
   @override
-  _i6.Future<List<_i7.ColorTheme>> getSupportedColorThemes() =>
+  _i6.Future<List<_i8.ColorTheme>> getSupportedColorThemes() =>
       (super.noSuchMethod(Invocation.method(#getSupportedColorThemes, []),
               returnValue:
-                  Future<List<_i7.ColorTheme>>.value(<_i7.ColorTheme>[]))
-          as _i6.Future<List<_i7.ColorTheme>>);
+                  Future<List<_i8.ColorTheme>>.value(<_i8.ColorTheme>[]))
+          as _i6.Future<List<_i8.ColorTheme>>);
   @override
   _i6.Future<_i2.AppThemeData> getStoredOrDefaultAppThemeData() => (super
           .noSuchMethod(Invocation.method(#getStoredOrDefaultAppThemeData, []),
@@ -76,7 +149,7 @@ class MockThemeRepository extends _i1.Mock implements _i5.ThemeRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockThemeRepositoryImpl extends _i1.Mock
-    implements _i8.ThemeRepositoryImpl {
+    implements _i9.ThemeRepositoryImpl {
   MockThemeRepositoryImpl() {
     _i1.throwOnMissingStub(this);
   }
@@ -87,11 +160,11 @@ class MockThemeRepositoryImpl extends _i1.Mock
               returnValue: Future<List<String>>.value(<String>[]))
           as _i6.Future<List<String>>);
   @override
-  _i6.Future<List<_i7.ColorTheme>> getSupportedColorThemes() =>
+  _i6.Future<List<_i8.ColorTheme>> getSupportedColorThemes() =>
       (super.noSuchMethod(Invocation.method(#getSupportedColorThemes, []),
               returnValue:
-                  Future<List<_i7.ColorTheme>>.value(<_i7.ColorTheme>[]))
-          as _i6.Future<List<_i7.ColorTheme>>);
+                  Future<List<_i8.ColorTheme>>.value(<_i8.ColorTheme>[]))
+          as _i6.Future<List<_i8.ColorTheme>>);
   @override
   _i6.Future<_i2.AppThemeData> getStoredOrDefaultAppThemeData() => (super
           .noSuchMethod(Invocation.method(#getStoredOrDefaultAppThemeData, []),
@@ -109,7 +182,7 @@ class MockThemeRepositoryImpl extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockThemeLocalDataSource extends _i1.Mock
-    implements _i9.ThemeLocalDataSource {
+    implements _i10.ThemeLocalDataSource {
   MockThemeLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -131,18 +204,18 @@ class MockThemeLocalDataSource extends _i1.Mock
               returnValue: Future<List<String>>.value(<String>[]))
           as _i6.Future<List<String>>);
   @override
-  _i6.Future<List<_i10.ColorThemeModel>> getSupportedColorThemes() =>
+  _i6.Future<List<_i11.ColorThemeModel>> getSupportedColorThemes() =>
       (super.noSuchMethod(Invocation.method(#getSupportedColorThemes, []),
-              returnValue: Future<List<_i10.ColorThemeModel>>.value(
-                  <_i10.ColorThemeModel>[]))
-          as _i6.Future<List<_i10.ColorThemeModel>>);
+              returnValue: Future<List<_i11.ColorThemeModel>>.value(
+                  <_i11.ColorThemeModel>[]))
+          as _i6.Future<List<_i11.ColorThemeModel>>);
 }
 
 /// A class which mocks [LanguageRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLanguageRepository extends _i1.Mock
-    implements _i11.LanguageRepository {
+    implements _i12.LanguageRepository {
   MockLanguageRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -168,7 +241,7 @@ class MockLanguageRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLanguageRepositoryImpl extends _i1.Mock
-    implements _i12.LanguageRepositoryImpl {
+    implements _i13.LanguageRepositoryImpl {
   MockLanguageRepositoryImpl() {
     _i1.throwOnMissingStub(this);
   }
@@ -194,24 +267,23 @@ class MockLanguageRepositoryImpl extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLanguageLocalDataSource extends _i1.Mock
-    implements _i13.LanguageLocalDataSource {
+    implements _i14.LanguageLocalDataSource {
   MockLanguageLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i4.Locale> getStoredOrDefaultLocale() =>
-      (super.noSuchMethod(Invocation.method(#getStoredOrDefaultLocale, []),
-              returnValue: Future<_i4.Locale>.value(_FakeLocale_2()))
-          as _i6.Future<_i4.Locale>);
+  _i6.Future<List<_i4.Locale>> getSupportedLocales() =>
+      (super.noSuchMethod(Invocation.method(#getSupportedLocales, []),
+              returnValue: Future<List<_i4.Locale>>.value(<_i4.Locale>[]))
+          as _i6.Future<List<_i4.Locale>>);
+  @override
+  _i6.Future<String?> getStoredLanguageCode() =>
+      (super.noSuchMethod(Invocation.method(#getStoredLanguageCode, []),
+          returnValue: Future<String?>.value()) as _i6.Future<String?>);
   @override
   _i6.Future<void> storeLocale(_i4.Locale? locale) =>
       (super.noSuchMethod(Invocation.method(#storeLocale, [locale]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<List<_i4.Locale>> getSupportedLocales() =>
-      (super.noSuchMethod(Invocation.method(#getSupportedLocales, []),
-              returnValue: Future<List<_i4.Locale>>.value(<_i4.Locale>[]))
-          as _i6.Future<List<_i4.Locale>>);
 }

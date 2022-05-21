@@ -34,16 +34,21 @@ class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
 
   @override
   Future<AppThemeDataModel> getStoredOrDefaultAppThemeData() async {
-    // try {
-    //   final data = _preferencesStorage.getString(StorageConstants.theme);
-    //   return data != null
-    //       ? AppThemeDataModel.fromJson(jsonDecode(data) as Map<String, dynamic>)
-    //       : null;
-    // } catch (e) {
-    //   locator<Logger>().e(e.toString());
-    //   _preferencesStorage.remove(StorageConstants.theme);
-    // }
-    throw UnimplementedError();
+    final storedData = _preferencesStorage.getString(StorageConstants.theme);
+    if (storedData != null) {
+      return AppThemeDataModel.fromJson(
+        jsonDecode(storedData) as Map<String, dynamic>,
+      );
+    }
+    // return default theme
+    final font = AppConstants.supportedFonts.first;
+    final colorTheme =
+        ColorThemeModel.fromJson(AppConstants.supportedColorThemes.first);
+    return AppThemeDataModel(
+      font: font,
+      colorTheme: colorTheme,
+      darkOption: DarkModeOption.dynamic,
+    );
   }
 
   @override
@@ -64,8 +69,7 @@ class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
   }
 
   @override
-  Future<List<String>> getSupportedFonts() {
-    // TODO: implement getSupportedFonts
-    throw UnimplementedError();
+  Future<List<String>> getSupportedFonts() async {
+    return AppConstants.supportedFonts;
   }
 }

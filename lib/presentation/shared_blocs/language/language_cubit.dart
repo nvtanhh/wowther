@@ -1,9 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 
-import '../../../config/injector/injection.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/params/language/store_language_code_params.dart';
 import '../../../core/params/no_params.dart';
@@ -11,7 +10,10 @@ import '../../../domain/usecases/langugae/get_stored_or_default_locale.dart';
 import '../../../domain/usecases/langugae/get_supported_locales.dart';
 import '../../../domain/usecases/langugae/store_locale.dart';
 
-class LanguageCubit extends Cubit<Locale?> {
+part 'language_state.dart';
+
+@singleton
+class LanguageCubit extends Cubit<LanguageState> {
   final GetStoredOrDefaultLocale _getStoredOrDefaultLocale;
   final GetSupportedLocales _getSupportedLocales;
   final StoreLocale _storeLocale;
@@ -20,32 +22,18 @@ class LanguageCubit extends Cubit<Locale?> {
     this._getStoredOrDefaultLocale,
     this._getSupportedLocales,
     this._storeLocale,
-  ) : super(null) {
+  ) : super(LanguageState.initial()) {
     _init();
   }
 
-  Locale? _defaultLocale;
-  List<Locale>? _supportedLocales;
-
-  Locale get defaultLocale => _defaultLocale ?? supportedLocales.first;
-  List<Locale> get supportedLocales =>
-      _supportedLocales ?? AppConstants.supportedLocales;
-
-  List<String> get supportedLanguages =>
-      supportedLocales.map((locale) => locale.languageCode).toList();
-
   Future<void> _init() async {
-    _defaultLocale = await _getStoredOrDefaultLocale(NoParams());
-    emit(defaultLocale);
-  }
-
-  Future<void> loadSupportLocales() async {
-    _supportedLocales = await _getSupportedLocales(NoParams());
-    emit(defaultLocale);
+    final locale = await _getStoredOrDefaultLocale(NoParams());
+    final supportedLocales = await _getSupportedLocales(NoParams());
+    emit(state.copyWith(locale: locale, supportedLocales: supportedLocales));
   }
 
   void changeLanguage(Locale locale) {
-    emit(locale);
+    emit(state.copyWith(locale: locale));
     _storeLocale(StoreLocaleParams(locale));
   }
 
@@ -55,22 +43,15 @@ class LanguageCubit extends Cubit<Locale?> {
   ) {
     // if no deviceLocale -> use english
     if (deviceLocale == null) {
-      emit(defaultLocale);
-      return state;
+      return state.locale;
     }
     // initialize locale from device
-    if (supportedLanguages.contains(deviceLocale.languageCode) &&
-        state == null) {
-      final supportedMatchedLocale = supportedLocales.firstWhere(
+    if (state.supportedLocales.contains(deviceLocale)) {
+      final matchedLocale = supportedLocales.firstWhere(
         (Locale locale) => locale.languageCode == deviceLocale.languageCode,
       );
-      emit(supportedMatchedLocale);
-    } else if (state == null) {
-      locator<Logger>().i(
-        'Locale ${deviceLocale.languageCode} not supported, defaulting to en',
-      );
-      emit(defaultLocale);
+      emit(state.copyWith(locale: matchedLocale));
     }
-    return state;
+    return state.locale;
   }
 }

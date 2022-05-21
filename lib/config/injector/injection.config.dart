@@ -23,11 +23,12 @@ import '../../domain/usecases/theme/get_stored_theme_data.dart' as _i11;
 import '../../domain/usecases/theme/get_supported_color_themes.dart' as _i12;
 import '../../domain/usecases/theme/get_supported_fonts.dart' as _i13;
 import '../../domain/usecases/theme/store_app_theme.dart' as _i17;
+import '../../presentation/shared_blocs/language/language_cubit.dart' as _i22;
 import '../../presentation/shared_blocs/theme/theme_cubit.dart' as _i19;
 import '../../presentation/shared_blocs/user/user_cubit.dart' as _i10;
 import '../../services/firebase_service.dart' as _i4;
 import '../route/route.dart' as _i3;
-import 'register.module.dart' as _i22; // ignore_for_file: unnecessary_lambdas
+import 'register.module.dart' as _i23; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -70,7 +71,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i20.GetStoredOrDefaultLocale(get<_i15.LanguageRepository>()));
   gh.factory<_i21.GetSupportedLocales>(
       () => _i21.GetSupportedLocales(get<_i15.LanguageRepository>()));
+  gh.singleton<_i22.LanguageCubit>(_i22.LanguageCubit(
+      get<_i20.GetStoredOrDefaultLocale>(),
+      get<_i21.GetSupportedLocales>(),
+      get<_i18.StoreLocale>()));
   return get;
 }
 
-class _$RegisterModule extends _i22.RegisterModule {}
+class _$RegisterModule extends _i23.RegisterModule {}

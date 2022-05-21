@@ -24,8 +24,8 @@ class TodoApp extends StatelessWidget {
           create: (_) => locator<ThemeCubit>(),
           child: BlocBuilder<UserCubit, UserState>(
             builder: (context, userState) {
-              return BlocBuilder<LanguageCubit, Locale?>(
-                builder: (context, locale) {
+              return BlocBuilder<LanguageCubit, LanguageState>(
+                builder: (context, languageState) {
                   return BlocBuilder<ThemeCubit, ThemeState>(
                     builder: (context, theme) {
                       return MaterialApp.router(
@@ -37,9 +37,8 @@ class TodoApp extends StatelessWidget {
                           GlobalWidgetsLocalizations.delegate,
                           GlobalCupertinoLocalizations.delegate,
                         ],
-                        supportedLocales:
-                            locator<LanguageCubit>().supportedLocales,
-                        locale: locale,
+                        supportedLocales: languageState.supportedLocales,
+                        locale: languageState.locale,
                         localeResolutionCallback:
                             locator<LanguageCubit>().localeResolutionCallback,
                         // Theme

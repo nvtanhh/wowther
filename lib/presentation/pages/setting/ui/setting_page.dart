@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../config/injector/injection.dart';
 import '../../../../config/theme/button.dart';
 import '../../../../config/theme/common_app_bar.dart';
 import '../../../../config/theme/common_page.dart';
@@ -23,7 +22,7 @@ class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
 
   void _applyDarkMode(BuildContext context, DarkModeOption darkOption) {
-    locator<ThemeCubit>().onChangeTheme(darkOption: darkOption);
+    context.read<ThemeCubit>().onChangeTheme(darkOption: darkOption);
   }
 
   void onNavigate(BuildContext context, String route) {
@@ -31,7 +30,7 @@ class SettingPage extends StatelessWidget {
   }
 
   Future<void> _showDarkModeSetting(BuildContext context) async {
-    DarkModeOption darkOption = locator<ThemeCubit>().state.darkOption;
+    DarkModeOption darkOption = context.read<ThemeCubit>().state.darkOption;
     showDialog<bool>(
       context: context,
       barrierDismissible: true,
@@ -121,13 +120,13 @@ class SettingPage extends StatelessWidget {
               title: AppLocalizations.of(context)!.settings__language_title,
               onPressed: () =>
                   onNavigate(context, RouteConstants.languageSetting),
-              trailing: BlocBuilder<LanguageCubit, Locale?>(
-                builder: (context, locale) {
+              trailing: BlocBuilder<LanguageCubit, LanguageState>(
+                builder: (context, languageState) {
                   return Row(
                     children: <Widget>[
                       ThemedText(
                         UtilLanguage.getGlobalLanguageName(
-                          locale!.languageCode,
+                          languageState.locale.languageCode,
                           context,
                         ),
                         type: ThemedTextType.caption,

@@ -11,7 +11,7 @@ class LanguageState extends Equatable {
 
   factory LanguageState.initial() => LanguageState(
         locale: AppConstants.supportedLocales.first,
-        supportedLocales: const [],
+        supportedLocales: AppConstants.supportedLocales,
       );
 
   LanguageState copyWith({

@@ -29,9 +29,7 @@ class ThemeCubit extends Cubit<ThemeState> {
     this._getSupportedThemes,
     this._getStoredAppThemeData,
     this._storeTheme,
-  ) : super(const ThemeState()) {
-    init();
-  }
+  ) : super(const ThemeState());
 
   Future<void> init() async {
     final supportedFonts = await _getSupportedFonts(NoParams());
@@ -68,27 +66,27 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   Future<void> onChangeTheme({
-    ColorTheme? theme,
+    ColorTheme? colorTheme,
     String? font,
     DarkModeOption? darkOption,
   }) async {
-    theme ??= state.theme!.colorTheme;
+    colorTheme ??= state.theme!.colorTheme;
     font ??= state.theme!.font;
     darkOption ??= state.theme!.darkOption;
 
     final lightTheme = ThemeUtils.getThemeData(
-      theme: theme,
+      theme: colorTheme,
       brightness: Brightness.light,
       font: font,
     );
     final darkTheme = ThemeUtils.getThemeData(
-      theme: theme,
+      theme: colorTheme,
       brightness: Brightness.dark,
       font: font,
     );
 
     final newTheme = AppThemeData(
-      colorTheme: theme,
+      colorTheme: colorTheme,
       font: font,
       darkOption: darkOption,
     );

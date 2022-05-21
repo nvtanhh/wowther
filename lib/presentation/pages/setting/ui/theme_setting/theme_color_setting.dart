@@ -15,7 +15,7 @@ class ThemeColorSettingPage extends StatelessWidget {
   const ThemeColorSettingPage({Key? key}) : super(key: key);
 
   void _onChange(ColorTheme theme, {required BuildContext context}) {
-    locator<ThemeCubit>().onChangeTheme(theme: theme);
+    locator<ThemeCubit>().onChangeTheme(colorTheme: theme);
     context.router.pop();
   }
 
@@ -32,7 +32,7 @@ class ThemeColorSettingPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               itemBuilder: (context, index) {
                 Widget trailing = const SizedBox();
-                final item = state.supportedThemes![index];
+                final item = state.supportedColorThemes![index];
                 if (item.name == state.theme!.colorTheme.name) {
                   trailing = Icon(
                     Icons.check,
@@ -49,10 +49,10 @@ class ThemeColorSettingPage extends StatelessWidget {
                   ),
                   trailing: trailing,
                   onPressed: () => _onChange(item, context: context),
-                  border: item != state.supportedThemes!.last,
+                  border: item != state.supportedColorThemes!.last,
                 );
               },
-              itemCount: state.supportedThemes?.length ?? 0,
+              itemCount: state.supportedColorThemes?.length ?? 0,
             ),
           );
         },

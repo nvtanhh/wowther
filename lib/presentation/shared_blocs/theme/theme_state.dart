@@ -5,14 +5,14 @@ class ThemeState extends Equatable {
   final ThemeData? lightTheme;
   final ThemeData? darkTheme;
 
-  final List<ColorTheme>? supportedThemes;
+  final List<ColorTheme>? supportedColorThemes;
   final List<String>? supportedFonts;
 
   const ThemeState({
     this.theme,
     this.lightTheme,
     this.darkTheme,
-    this.supportedThemes,
+    this.supportedColorThemes,
     this.supportedFonts,
   });
 
@@ -29,7 +29,7 @@ class ThemeState extends Equatable {
       theme: theme ?? this.theme,
       lightTheme: lightTheme ?? this.lightTheme,
       darkTheme: darkTheme ?? this.darkTheme,
-      supportedThemes: supportedThemes ?? this.supportedThemes,
+      supportedColorThemes: supportedThemes ?? this.supportedColorThemes,
       supportedFonts: supportedFonts ?? this.supportedFonts,
     );
   }
@@ -39,6 +39,6 @@ class ThemeState extends Equatable {
         theme,
         lightTheme,
         darkTheme,
-        supportedThemes,
+        supportedColorThemes,
       ];
 }

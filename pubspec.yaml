@@ -33,7 +33,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  bloc_test: ^9.0.3
   build_runner: ^2.1.10
   flutter_lints: ^2.0.1
   injectable_generator: ^1.5.3

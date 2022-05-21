@@ -22,11 +22,9 @@ class LanguageCubit extends Cubit<LanguageState> {
     this._getStoredOrDefaultLocale,
     this._getSupportedLocales,
     this._storeLocale,
-  ) : super(LanguageState.initial()) {
-    _init();
-  }
+  ) : super(LanguageState.initial());
 
-  Future<void> _init() async {
+  Future<void> init() async {
     final locale = await _getStoredOrDefaultLocale(NoParams());
     final supportedLocales = await _getSupportedLocales(NoParams());
     emit(state.copyWith(locale: locale, supportedLocales: supportedLocales));

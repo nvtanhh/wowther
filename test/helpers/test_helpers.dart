@@ -4,6 +4,13 @@ import 'package:flutter_resources/data/repositories/language_repository_impl.dar
 import 'package:flutter_resources/data/repositories/theme_repository_impl.dart';
 import 'package:flutter_resources/domain/repositories/language_repository.dart';
 import 'package:flutter_resources/domain/repositories/theme_repository.dart';
+import 'package:flutter_resources/domain/usecases/langugae/get_stored_or_default_locale.dart';
+import 'package:flutter_resources/domain/usecases/langugae/get_supported_locales.dart';
+import 'package:flutter_resources/domain/usecases/langugae/store_locale.dart';
+import 'package:flutter_resources/domain/usecases/theme/get_stored_theme_data.dart';
+import 'package:flutter_resources/domain/usecases/theme/get_supported_color_themes.dart';
+import 'package:flutter_resources/domain/usecases/theme/get_supported_fonts.dart';
+import 'package:flutter_resources/domain/usecases/theme/store_app_theme.dart';
 import 'package:mockito/annotations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,9 +21,16 @@ import 'package:shared_preferences/shared_preferences.dart';
   ThemeRepository,
   ThemeRepositoryImpl,
   ThemeLocalDataSource,
+  GetSupportedFonts,
+  GetSupportedColorThemes,
+  GetStoredOrDefaultAppThemeData,
+  StoreAppThemeData,
   // Language
   LanguageRepository,
   LanguageRepositoryImpl,
   LanguageLocalDataSource,
+  GetStoredOrDefaultLocale,
+  GetSupportedLocales,
+  StoreLocale,
 ])
 void main() {}

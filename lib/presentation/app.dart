@@ -19,9 +19,9 @@ class TodoApp extends StatelessWidget {
     return BlocProvider<UserCubit>(
       create: (_) => locator<UserCubit>(),
       child: BlocProvider(
-        create: (_) => locator<LanguageCubit>(),
+        create: (_) => locator<LanguageCubit>()..init(),
         child: BlocProvider<ThemeCubit>(
-          create: (_) => locator<ThemeCubit>(),
+          create: (_) => locator<ThemeCubit>()..init(),
           child: BlocBuilder<UserCubit, UserState>(
             builder: (context, userState) {
               return BlocBuilder<LanguageCubit, LanguageState>(

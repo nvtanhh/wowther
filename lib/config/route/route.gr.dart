@@ -17,6 +17,10 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AppContainerRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const AppContainer());
+    },
     SignInWrapperRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SignInWrapper());
@@ -45,15 +49,22 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig('/#redirect',
-            path: '/', redirectTo: '/sign-in', fullMatch: true),
+        RouteConfig(AppContainerRoute.name, path: '/'),
         RouteConfig(SignInWrapperRoute.name, path: '/sign-in'),
         RouteConfig(LanguageSettingPageRoute.name, path: '/setting/language'),
         RouteConfig(SettingWrapperRoute.name, path: '/setting'),
         RouteConfig(ThemeColorSettingPageRoute.name, path: '/setting/theme'),
         RouteConfig(FontSettingPageRoute.name, path: '/setting/font'),
-        RouteConfig(TodoWrapperRoute.name, path: '/todo')
+        RouteConfig(TodoWrapperRoute.name, path: '/weather')
       ];
+}
+
+/// generated route for
+/// [AppContainer]
+class AppContainerRoute extends PageRouteInfo<void> {
+  const AppContainerRoute() : super(AppContainerRoute.name, path: '/');
+
+  static const String name = 'AppContainerRoute';
 }
 
 /// generated route for
@@ -103,7 +114,7 @@ class FontSettingPageRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [TodoWrapper]
 class TodoWrapperRoute extends PageRouteInfo<void> {
-  const TodoWrapperRoute() : super(TodoWrapperRoute.name, path: '/todo');
+  const TodoWrapperRoute() : super(TodoWrapperRoute.name, path: '/weather');
 
   static const String name = 'TodoWrapperRoute';
 }

@@ -39,7 +39,7 @@ void main() {
         when(mockLocalDataSource.getStoredLanguageCode())
             .thenAnswer((_) => Future.value(locale.languageCode));
         when(mockLocalDataSource.getSupportedLocales()).thenAnswer(
-            (_) => Future.value([locale, const Locale('en', 'US')]));
+            (_) => Future.value([locale, const Locale('en', 'US')]),);
 
         // act
         final result = await repository.getStoredOrDefaultLocale();

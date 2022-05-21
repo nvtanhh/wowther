@@ -16,5 +16,6 @@
   "settings__theme_font": "Font",
   "settings__language_title": "Language",
   "settings__language_change_language": "Change language",
-  "settings__language_search": "Search language"
+  "settings__language_search": "Search language",
+  "weather__title": "Weather"
 }

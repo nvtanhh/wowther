@@ -29,7 +29,7 @@ class ThemeState extends Equatable {
       theme: theme ?? this.theme,
       lightTheme: lightTheme ?? this.lightTheme,
       darkTheme: darkTheme ?? this.darkTheme,
-      supportedColorThemes: supportedThemes ?? this.supportedColorThemes,
+      supportedColorThemes: supportedThemes ?? supportedColorThemes,
       supportedFonts: supportedFonts ?? this.supportedFonts,
     );
   }

@@ -109,6 +109,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonPage(
       appBar: CommonAppBar(
+        autoImplyLeading: false,
         title: AppLocalizations.of(context)!.settings__title,
       ),
       body: SingleChildScrollView(

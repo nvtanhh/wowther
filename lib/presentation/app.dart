@@ -47,8 +47,8 @@ class TodoApp extends StatelessWidget {
                         // Route
                         routerDelegate: _appRouter.delegate(
                           initialRoutes: userState.isLoggedIn
-                              ? [const TodoWrapperRoute()]
-                              : [const SettingWrapperRoute()],
+                              ? [const AppContainerRoute()]
+                              : [const SignInWrapperRoute()],
                         ),
                         routeInformationParser: _appRouter.defaultRouteParser(
                           includePrefixMatches: true,

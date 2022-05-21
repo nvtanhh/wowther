@@ -79,6 +79,10 @@ class AppIcons {
       const AppIconData(nativeIcon: Icons.color_lens_outlined);
   static AppIconData font =
       const AppIconData(nativeIcon: Icons.font_download_outlined);
+  static AppIconData weather =
+      const AppIconData(nativeIcon: Icons.cloud_outlined);
+  static AppIconData setting =
+      const AppIconData(nativeIcon: Icons.settings_outlined);
 }
 
 class AppIconData {

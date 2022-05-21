@@ -7,5 +7,5 @@ class UserState extends Equatable {
   List<Object> get props => [];
 
   // TODO - remove latter
-  bool get isLoggedIn => false;
+  bool get isLoggedIn => true;
 }

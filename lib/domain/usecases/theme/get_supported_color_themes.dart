@@ -13,6 +13,6 @@ class GetSupportedColorThemes implements UseCase<List<ColorTheme>, NoParams> {
 
   @override
   Future<List<ColorTheme>> call(NoParams noParams) async {
-    return _themeRepository.getSupportedThemeColors();
+    return _themeRepository.getSupportedColorThemes();
   }
 }

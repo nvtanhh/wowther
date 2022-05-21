@@ -5,13 +5,13 @@ import '../../../core/usecases/usecase.dart';
 import '../../repositories/language_repository.dart';
 
 @injectable
-class StoreLanguageCode implements UseCase<void, StoreLanguageCodeParams> {
+class StoreLocale implements UseCase<void, StoreLocaleParams> {
   final LanguageRepository _languageRepository;
 
-  StoreLanguageCode(this._languageRepository);
+  StoreLocale(this._languageRepository);
 
   @override
-  Future<void> call(StoreLanguageCodeParams params) async {
-    return _languageRepository.storeLanguageCode(params.languageCode);
+  Future<void> call(StoreLocaleParams params) async {
+    return _languageRepository.storeLocale(params.locale);
   }
 }

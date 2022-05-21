@@ -28,6 +28,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
 
   @override
   void didChangeDependencies() {
+    context.read<LanguageCubit>().loadSupportLocales();
     supportedLocales = locator<LanguageCubit>().supportedLocales;
     super.didChangeDependencies();
   }

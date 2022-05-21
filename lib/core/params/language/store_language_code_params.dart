@@ -1,5 +1,7 @@
-class StoreLanguageCodeParams {
-  final String languageCode;
+import 'package:flutter/material.dart';
 
-  StoreLanguageCodeParams(this.languageCode);
+class StoreLocaleParams {
+  final Locale locale;
+
+  StoreLocaleParams(this.locale);
 }

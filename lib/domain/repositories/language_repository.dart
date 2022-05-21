@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 abstract class LanguageRepository {
-  Future<Locale> getDefaultLocale();
+  Future<Locale> getStoredOrDefaultLocale();
   Future<List<Locale>> getSupportedLocales();
-  Future<String?> getStoredLanguageCode();
-  Future<void> storeLanguageCode(String languageCode);
+  // Future<String?> getStoredLanguageCode();
+  Future<void> storeLocale(Locale locale);
 }

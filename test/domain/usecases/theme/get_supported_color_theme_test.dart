@@ -33,7 +33,7 @@ void main() {
     "should return supported color themes from the repository",
     () async {
       // arrange
-      when(repository.getSupportedThemeColors())
+      when(repository.getSupportedColorThemes())
           .thenAnswer((_) => Future.value(colorThemes));
 
       // act

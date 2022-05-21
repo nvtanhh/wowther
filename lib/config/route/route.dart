@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants/constants.index.dart';
+import '../../core/constants/route_constants.dart';
 import '../../presentation/pages/auth/ui/sign_in_wrapper.dart';
 import '../../presentation/pages/setting/ui/font_setting/font_setting.dart';
 import '../../presentation/pages/setting/ui/language_setting/language_setting.dart';

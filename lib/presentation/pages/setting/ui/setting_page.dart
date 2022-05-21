@@ -13,7 +13,7 @@ import '../../../../config/theme/icons.dart';
 import '../../../../config/theme/list_title.dart';
 import '../../../../config/theme/spacer.dart';
 import '../../../../config/theme/text.dart';
-import '../../../../core/constants/constants.index.dart';
+import '../../../../core/constants/route_constants.dart';
 import '../../../../core/utils/utils.index.dart';
 import '../../../../domain/entities/enums/theme_dark_option.dart';
 import '../../../shared_blocs/language/language_cubit.dart';
@@ -119,9 +119,8 @@ class SettingPage extends StatelessWidget {
             AppListTitle(
               leading: AppIcon(AppIcons.language),
               title: AppLocalizations.of(context)!.settings__language_title,
-              onPressed: () {
-                onNavigate(context, RouteConstants.languageSetting);
-              },
+              onPressed: () =>
+                  onNavigate(context, RouteConstants.languageSetting),
               trailing: BlocBuilder<LanguageCubit, Locale?>(
                 builder: (context, locale) {
                   return Row(

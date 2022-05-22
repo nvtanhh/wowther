@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/params/no_params.dart';
 import '../../../core/usecases/usecase.dart';
-import '../../entities/theme_entity.dart';
+import '../../entities/color_theme.dart';
 import '../../repositories/theme_repository.dart';
 
 @injectable

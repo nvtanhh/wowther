@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resources/core/params/no_params.dart';
 import 'package:flutter_resources/domain/entities/app_theme_data.dart';
 import 'package:flutter_resources/domain/entities/enums/theme_dark_option.dart';
-import 'package:flutter_resources/domain/entities/theme_entity.dart';
+import 'package:flutter_resources/domain/entities/color_theme.dart';
 import 'package:flutter_resources/presentation/shared_blocs/theme/theme_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

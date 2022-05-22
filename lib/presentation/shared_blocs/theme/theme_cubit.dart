@@ -8,7 +8,7 @@ import '../../../core/params/theme/store_app_theme_data_params.dart';
 import '../../../core/utils/utils.index.dart';
 import '../../../domain/entities/app_theme_data.dart';
 import '../../../domain/entities/enums/theme_dark_option.dart';
-import '../../../domain/entities/theme_entity.dart';
+import '../../../domain/entities/color_theme.dart';
 import '../../../domain/usecases/theme/get_stored_theme_data.dart';
 import '../../../domain/usecases/theme/get_supported_color_themes.dart';
 import '../../../domain/usecases/theme/get_supported_fonts.dart';

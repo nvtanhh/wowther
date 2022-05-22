@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import 'enums/theme_dark_option.dart';
-import 'theme_entity.dart';
+import 'color_theme.dart';
 
 class AppThemeData extends Equatable {
   final ColorTheme colorTheme;

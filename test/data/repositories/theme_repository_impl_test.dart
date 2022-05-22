@@ -4,7 +4,7 @@ import 'package:flutter_resources/data/models/theme_model.dart';
 import 'package:flutter_resources/data/repositories/theme_repository_impl.dart';
 import 'package:flutter_resources/domain/entities/app_theme_data.dart';
 import 'package:flutter_resources/domain/entities/enums/theme_dark_option.dart';
-import 'package:flutter_resources/domain/entities/theme_entity.dart';
+import 'package:flutter_resources/domain/entities/color_theme.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resources/data/models/theme_model.dart';
-import 'package:flutter_resources/domain/entities/theme_entity.dart';
+import 'package:flutter_resources/domain/entities/color_theme.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

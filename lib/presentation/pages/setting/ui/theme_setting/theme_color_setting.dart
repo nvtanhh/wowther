@@ -8,7 +8,7 @@ import '../../../../../config/theme/common_app_bar.dart';
 import '../../../../../config/theme/common_page.dart';
 import '../../../../../config/theme/list_title.dart';
 import '../../../../../core/extensions/extensions.index.dart';
-import '../../../../../domain/entities/theme_entity.dart';
+import '../../../../../domain/entities/color_theme.dart';
 import '../../../../shared_blocs/theme/theme_cubit.dart';
 
 class ThemeColorSettingPage extends StatelessWidget {

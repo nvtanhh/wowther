@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/app_theme_data.dart';
-import '../../domain/entities/theme_entity.dart';
+import '../../domain/entities/color_theme.dart';
 import '../../domain/repositories/theme_repository.dart';
 import '../datasources/theme/theme_local_datasource.dart';
 

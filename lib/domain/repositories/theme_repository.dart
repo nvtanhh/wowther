@@ -1,5 +1,5 @@
 import '../entities/app_theme_data.dart';
-import '../entities/theme_entity.dart';
+import '../entities/color_theme.dart';
 
 abstract class ThemeRepository {
   Future<List<String>> getSupportedFonts();

@@ -21,7 +21,7 @@ import 'package:flutter_resources/data/repositories/language_repository_impl.dar
 import 'package:flutter_resources/data/repositories/theme_repository_impl.dart'
     as _i9;
 import 'package:flutter_resources/domain/entities/app_theme_data.dart' as _i2;
-import 'package:flutter_resources/domain/entities/theme_entity.dart' as _i8;
+import 'package:flutter_resources/domain/entities/color_theme.dart' as _i8;
 import 'package:flutter_resources/domain/repositories/language_repository.dart'
     as _i18;
 import 'package:flutter_resources/domain/repositories/theme_repository.dart'

@@ -1,5 +1,5 @@
 import '../../core/utils/utils.index.dart';
-import '../../domain/entities/theme_entity.dart';
+import '../../domain/entities/color_theme.dart';
 
 class ColorThemeModel extends ColorTheme {
   const ColorThemeModel({

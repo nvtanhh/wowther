@@ -4,6 +4,7 @@ import 'package:flutter_resources/data/repositories/language_repository_impl.dar
 import 'package:flutter_resources/data/repositories/theme_repository_impl.dart';
 import 'package:flutter_resources/domain/repositories/language_repository.dart';
 import 'package:flutter_resources/domain/repositories/theme_repository.dart';
+import 'package:flutter_resources/domain/repositories/weather_repository.dart';
 import 'package:flutter_resources/domain/usecases/langugae/get_stored_or_default_locale.dart';
 import 'package:flutter_resources/domain/usecases/langugae/get_supported_locales.dart';
 import 'package:flutter_resources/domain/usecases/langugae/store_locale.dart';
@@ -32,5 +33,7 @@ import 'package:shared_preferences/shared_preferences.dart';
   GetStoredOrDefaultLocale,
   GetSupportedLocales,
   StoreLocale,
+  // Weather
+  WeatherRepository,
 ])
 void main() {}

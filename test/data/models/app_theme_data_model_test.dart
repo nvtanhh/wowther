@@ -21,19 +21,19 @@ void main() {
   );
 
   test(
-    "should be a subclass of AppThemeData",
+    'should be a subclass of AppThemeData',
     () {
       expect(appThemeDataModel, isA<AppThemeData>());
     },
   );
 
-  group(' ', () {
+  group('Serializable ', () {
     test(
-      "should return a valid AppThemeDataModel when from json ",
+      'should return a valid AppThemeDataModel when from json ',
       () async {
         // arrange
-        final Map<String, dynamic> json =
-            jsonDecode(fixture('theme/app_theme.json')) as Map<String, dynamic>;
+        final json =
+            jsonDecode(fixture('app_theme.json')) as Map<String, dynamic>;
         // act
         final result = AppThemeDataModel.fromJson(json);
 
@@ -41,32 +41,27 @@ void main() {
         expect(result, appThemeDataModel);
       },
     );
-  });
-
-  group('toJson', () {
     test(
-      "should return the JSON map ",
+      'should return the JSON map',
       () async {
         // act
         final result = appThemeDataModel.toJson();
 
         final expectedJson = {
-          "colorTheme": {
-            "name": "orange",
-            "primary": "ffff9800",
-            "secondary": "ffff9800"
+          'colorTheme': {
+            'name': 'orange',
+            'primary': 'ffff9800',
+            'secondary': 'ffff9800'
           },
-          "font": "Open Sans",
-          "darkOption": "dynamic"
+          "font": 'Open Sans',
+          'darkOption': 'dynamic'
         };
 
         // assert
         expect(result, expectedJson);
       },
     );
-  });
 
-  group('from json <=> to Json', () {
     test(
       "should return valid model when fromJson with toJson",
       () async {

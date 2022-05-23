@@ -23,6 +23,7 @@ void main() {
       description: 'scattered clouds',
       iconCode: '03d',
       temperature: 10,
+      tempFeelLike: 10,
       humidity: 50,
       pressure: 1030,
       windSpeed: 4,

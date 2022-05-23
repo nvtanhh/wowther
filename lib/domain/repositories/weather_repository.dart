@@ -1,5 +1,6 @@
 import '../entities/weather.dart';
 
 abstract class WeatherRepository {
-  Future<Weather> getWeather(String city);
+  Future<Weather?> getCachedWeather();
+  Future<Weather> getWeather(String cityName);
 }

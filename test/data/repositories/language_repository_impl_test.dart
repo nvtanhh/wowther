@@ -30,7 +30,7 @@ void main() {
     expect(result, supportedLocales);
   });
 
-  group('get stored or default locale', () {
+  group('getStoredOrDefaultLocale', () {
     test(
       "should return the stored if it was stored",
       () async {
@@ -39,7 +39,8 @@ void main() {
         when(mockLocalDataSource.getStoredLanguageCode())
             .thenAnswer((_) => Future.value(locale.languageCode));
         when(mockLocalDataSource.getSupportedLocales()).thenAnswer(
-            (_) => Future.value([locale, const Locale('en', 'US')]),);
+          (_) => Future.value([locale, const Locale('en', 'US')]),
+        );
 
         // act
         final result = await repository.getStoredOrDefaultLocale();

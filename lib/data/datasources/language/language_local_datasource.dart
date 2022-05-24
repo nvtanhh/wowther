@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/storage_constants.dart';
 
-abstract class LanguageLocalDataSource {
+abstract class LanguageLocalDatasource {
   /// return supported languages
   Future<List<Locale>> getSupportedLocales();
 
@@ -18,8 +18,8 @@ abstract class LanguageLocalDataSource {
   Future<void> storeLocale(Locale locale);
 }
 
-@Injectable(as: LanguageLocalDataSource)
-class LanguageLocalDataSourceImpl implements LanguageLocalDataSource {
+@Injectable(as: LanguageLocalDatasource)
+class LanguageLocalDataSourceImpl implements LanguageLocalDatasource {
   final SharedPreferences _sharedPreferences;
   LanguageLocalDataSourceImpl(this._sharedPreferences);
 

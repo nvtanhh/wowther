@@ -15,7 +15,7 @@ void main() {
     usecase = GetCachedWeather(mockWeatherRepository);
   });
 
-  group('get cached weather', () {
+  group('getGetCachedWeather', () {
     const weather = Weather(
       cityName: 'London',
       main: 'Clouds',

@@ -1,6 +1,6 @@
 import '../../models/weather_model.dart';
 
-abstract class WeatherRemoteDataSource {
+abstract class WeatherRemoteDatasource {
   /// Get [WeatherModel] from API by city name.
   Future<WeatherModel> getWeather(String cityName);
 }

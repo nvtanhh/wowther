@@ -7,7 +7,7 @@ import '../datasources/theme/theme_local_datasource.dart';
 
 @Injectable(as: ThemeRepository)
 class ThemeRepositoryImpl implements ThemeRepository {
-  final ThemeLocalDataSource _localDatasource;
+  final ThemeLocalDatasource _localDatasource;
 
   ThemeRepositoryImpl(this._localDatasource);
 

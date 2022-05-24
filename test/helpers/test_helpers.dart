@@ -1,5 +1,7 @@
 import 'package:flutter_resources/data/datasources/language/language_local_datasource.dart';
 import 'package:flutter_resources/data/datasources/theme/theme_local_datasource.dart';
+import 'package:flutter_resources/data/datasources/weather/weather_local_datasource.dart';
+import 'package:flutter_resources/data/datasources/weather/weather_remote_datasource.dart';
 import 'package:flutter_resources/data/repositories/language_repository_impl.dart';
 import 'package:flutter_resources/data/repositories/theme_repository_impl.dart';
 import 'package:flutter_resources/domain/repositories/language_repository.dart';
@@ -20,20 +22,20 @@ import 'package:shared_preferences/shared_preferences.dart';
   SharedPreferences,
   // Theme
   ThemeRepository,
-  ThemeRepositoryImpl,
-  ThemeLocalDataSource,
+  ThemeLocalDatasource,
   GetSupportedFonts,
   GetSupportedColorThemes,
   GetStoredOrDefaultAppThemeData,
   StoreAppThemeData,
   // Language
   LanguageRepository,
-  LanguageRepositoryImpl,
-  LanguageLocalDataSource,
+  LanguageLocalDatasource,
   GetStoredOrDefaultLocale,
   GetSupportedLocales,
   StoreLocale,
   // Weather
   WeatherRepository,
+  WeatherRemoteDatasource,
+  WeatherLocalDatasource,
 ])
 void main() {}

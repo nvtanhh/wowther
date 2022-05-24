@@ -28,7 +28,7 @@ void main() {
 
   group('Serializable', () {
     test(
-      "should return a valid WeatherModel] when fromJson",
+      "should return a valid WeatherModel when fromJson",
       () {
         // arrange
         final json =

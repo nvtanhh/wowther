@@ -7,7 +7,7 @@ import '../datasources/language/language_local_datasource.dart';
 
 @Injectable(as: LanguageRepository)
 class LanguageRepositoryImpl extends LanguageRepository {
-  final LanguageLocalDataSource _localDatasource;
+  final LanguageLocalDatasource _localDatasource;
 
   LanguageRepositoryImpl(this._localDatasource);
 

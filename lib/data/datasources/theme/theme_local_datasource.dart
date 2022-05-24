@@ -10,7 +10,7 @@ import '../../../domain/entities/enums/theme_dark_option.dart';
 import '../../models/app_theme_data_model.dart';
 import '../../models/theme_model.dart';
 
-abstract class ThemeLocalDataSource {
+abstract class ThemeLocalDatasource {
   /// Gets the cached [AppThemeData] which was saved the last time if it was stored.
   /// Otherwise, returns the default [AppThemeData]
   ///
@@ -25,8 +25,8 @@ abstract class ThemeLocalDataSource {
   Future<List<ColorThemeModel>> getSupportedColorThemes();
 }
 
-@Injectable(as: ThemeLocalDataSource)
-class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
+@Injectable(as: ThemeLocalDatasource)
+class ThemeLocalDataSourceImpl implements ThemeLocalDatasource {
   final SharedPreferences _preferencesStorage;
   ThemeLocalDataSourceImpl(this._preferencesStorage);
 

@@ -1,7 +1,5 @@
 import 'package:flutter_resources/data/models/weather_model.dart';
 import 'package:flutter_resources/data/repositories/weather_repository_impl.dart';
-import 'package:flutter_resources/domain/entities/weather.dart';
-import 'package:flutter_resources/domain/repositories/weather_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -19,22 +17,23 @@ void main() {
         WeatherRepositoryImpl(mockRemoteDatasource, mockLocalDataSource);
   });
 
+  const weather = WeatherModel(
+    cityName: 'London',
+    main: 'Clouds',
+    description: 'scattered clouds',
+    iconCode: '03d',
+    temperature: 10,
+    tempFeelLike: 10,
+    humidity: 50,
+    pressure: 1030,
+    windSpeed: 4,
+  );
+
   group('getStoredWeather', () {
     test(
       "should return a cached weather if it stored previously",
       () async {
         // arrange
-        const weather = WeatherModel(
-          cityName: 'London',
-          main: 'Clouds',
-          description: 'scattered clouds',
-          iconCode: '03d',
-          temperature: 10,
-          tempFeelLike: 10,
-          humidity: 50,
-          pressure: 1030,
-          windSpeed: 4,
-        );
         when(mockLocalDataSource.getWeather())
             .thenAnswer((_) => Future.value(weather));
 
@@ -63,20 +62,10 @@ void main() {
   });
 
   test(
-    'should return a weather from remote datasource',
+    'should return a weather from remote datasource && should store it locally',
     () async {
       // arrange
-      const weather = WeatherModel(
-        cityName: 'London',
-        main: 'Clouds',
-        description: 'scattered clouds',
-        iconCode: '03d',
-        temperature: 10,
-        tempFeelLike: 10,
-        humidity: 50,
-        pressure: 1030,
-        windSpeed: 4,
-      );
+
       when(mockRemoteDatasource.getWeather(any))
           .thenAnswer((_) => Future.value(weather));
 
@@ -85,6 +74,7 @@ void main() {
 
       // assert
       expect(result, weather);
+      verify(mockLocalDataSource.cacheWeather(any)).called(1);
     },
   );
 }

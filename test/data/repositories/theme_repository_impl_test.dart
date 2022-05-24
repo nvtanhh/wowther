@@ -12,10 +12,10 @@ import '../../helpers/test_helpers.mocks.dart';
 
 void main() {
   late ThemeRepositoryImpl repository;
-  late MockThemeLocalDataSource mockLocalDataSource;
+  late MockThemeLocalDatasource mockLocalDataSource;
 
   setUp(() {
-    mockLocalDataSource = MockThemeLocalDataSource();
+    mockLocalDataSource = MockThemeLocalDatasource();
     repository = ThemeRepositoryImpl(mockLocalDataSource);
   });
 

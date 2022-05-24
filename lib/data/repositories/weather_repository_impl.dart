@@ -1,5 +1,8 @@
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 
+import '../../config/injector/injection.dart';
+import '../../core/exceptions/exceptions.index.dart';
 import '../../domain/entities/weather.dart';
 import '../../domain/repositories/weather_repository.dart';
 import '../datasources/weather/weather_local_datasource.dart';
@@ -21,7 +24,14 @@ class WeatherRepositoryImpl extends WeatherRepository {
   }
 
   @override
-  Future<Weather> getWeather(String cityName) {
-    return remoteDatasource.getWeather(cityName);
+  Future<Weather> getWeather(String cityName) async {
+    try {
+      final weather = await remoteDatasource.getWeather(cityName);
+      localDatasource.cacheWeather(weather);
+      return weather;
+    } on ServerException catch (e, stackTrace) {
+      locator<Logger>().e('ServerException', e, stackTrace);
+      rethrow;
+    }
   }
 }

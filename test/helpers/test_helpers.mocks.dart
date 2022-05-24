@@ -2,50 +2,56 @@
 // in flutter_resources/test/helpers/test_helpers.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i8;
-import 'dart:ui' as _i4;
+import 'dart:async' as _i10;
+import 'dart:convert' as _i12;
+import 'dart:typed_data' as _i13;
+import 'dart:ui' as _i6;
 
 import 'package:flutter_resources/core/params/language/store_language_code_params.dart'
-    as _i24;
-import 'package:flutter_resources/core/params/no_params.dart' as _i14;
+    as _i30;
+import 'package:flutter_resources/core/params/no_params.dart' as _i20;
 import 'package:flutter_resources/core/params/theme/store_app_theme_data_params.dart'
-    as _i18;
+    as _i24;
 import 'package:flutter_resources/data/datasources/language/language_local_datasource.dart'
-    as _i20;
-import 'package:flutter_resources/data/datasources/theme/theme_local_datasource.dart'
-    as _i11;
-import 'package:flutter_resources/data/datasources/weather/weather_local_datasource.dart'
-    as _i27;
-import 'package:flutter_resources/data/datasources/weather/weather_remote_datasource.dart'
     as _i26;
-import 'package:flutter_resources/data/models/app_theme_data_model.dart' as _i3;
-import 'package:flutter_resources/data/models/theme_model.dart' as _i12;
-import 'package:flutter_resources/data/models/weather_model.dart' as _i6;
-import 'package:flutter_resources/domain/entities/app_theme_data.dart' as _i2;
-import 'package:flutter_resources/domain/entities/color_theme.dart' as _i10;
-import 'package:flutter_resources/domain/entities/weather.dart' as _i5;
-import 'package:flutter_resources/domain/repositories/language_repository.dart'
-    as _i19;
-import 'package:flutter_resources/domain/repositories/theme_repository.dart'
-    as _i9;
-import 'package:flutter_resources/domain/repositories/weather_repository.dart'
-    as _i25;
-import 'package:flutter_resources/domain/usecases/langugae/get_stored_or_default_locale.dart'
-    as _i21;
-import 'package:flutter_resources/domain/usecases/langugae/get_supported_locales.dart'
-    as _i22;
-import 'package:flutter_resources/domain/usecases/langugae/store_locale.dart'
-    as _i23;
-import 'package:flutter_resources/domain/usecases/theme/get_stored_theme_data.dart'
-    as _i16;
-import 'package:flutter_resources/domain/usecases/theme/get_supported_color_themes.dart'
-    as _i15;
-import 'package:flutter_resources/domain/usecases/theme/get_supported_fonts.dart'
-    as _i13;
-import 'package:flutter_resources/domain/usecases/theme/store_app_theme.dart'
+import 'package:flutter_resources/data/datasources/theme/theme_local_datasource.dart'
     as _i17;
+import 'package:flutter_resources/data/datasources/weather/weather_local_datasource.dart'
+    as _i33;
+import 'package:flutter_resources/data/datasources/weather/weather_remote_datasource.dart'
+    as _i32;
+import 'package:flutter_resources/data/models/app_theme_data_model.dart' as _i5;
+import 'package:flutter_resources/data/models/theme_model.dart' as _i18;
+import 'package:flutter_resources/data/models/weather_model.dart' as _i8;
+import 'package:flutter_resources/domain/entities/app_theme_data.dart' as _i4;
+import 'package:flutter_resources/domain/entities/color_theme.dart' as _i16;
+import 'package:flutter_resources/domain/entities/weather.dart' as _i7;
+import 'package:flutter_resources/domain/repositories/language_repository.dart'
+    as _i25;
+import 'package:flutter_resources/domain/repositories/theme_repository.dart'
+    as _i15;
+import 'package:flutter_resources/domain/repositories/weather_repository.dart'
+    as _i31;
+import 'package:flutter_resources/domain/usecases/langugae/get_stored_or_default_locale.dart'
+    as _i27;
+import 'package:flutter_resources/domain/usecases/langugae/get_supported_locales.dart'
+    as _i28;
+import 'package:flutter_resources/domain/usecases/langugae/store_locale.dart'
+    as _i29;
+import 'package:flutter_resources/domain/usecases/theme/get_stored_theme_data.dart'
+    as _i22;
+import 'package:flutter_resources/domain/usecases/theme/get_supported_color_themes.dart'
+    as _i21;
+import 'package:flutter_resources/domain/usecases/theme/get_supported_fonts.dart'
+    as _i19;
+import 'package:flutter_resources/domain/usecases/theme/store_app_theme.dart'
+    as _i23;
+import 'package:http/http.dart' as _i11;
+import 'package:http/src/base_request.dart' as _i14;
+import 'package:http/src/response.dart' as _i2;
+import 'package:http/src/streamed_response.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/shared_preferences.dart' as _i7;
+import 'package:shared_preferences/shared_preferences.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -57,21 +63,26 @@ import 'package:shared_preferences/shared_preferences.dart' as _i7;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeAppThemeData_0 extends _i1.Fake implements _i2.AppThemeData {}
+class _FakeResponse_0 extends _i1.Fake implements _i2.Response {}
 
-class _FakeAppThemeDataModel_1 extends _i1.Fake
-    implements _i3.AppThemeDataModel {}
+class _FakeStreamedResponse_1 extends _i1.Fake implements _i3.StreamedResponse {
+}
 
-class _FakeLocale_2 extends _i1.Fake implements _i4.Locale {}
+class _FakeAppThemeData_2 extends _i1.Fake implements _i4.AppThemeData {}
 
-class _FakeWeather_3 extends _i1.Fake implements _i5.Weather {}
+class _FakeAppThemeDataModel_3 extends _i1.Fake
+    implements _i5.AppThemeDataModel {}
 
-class _FakeWeatherModel_4 extends _i1.Fake implements _i6.WeatherModel {}
+class _FakeLocale_4 extends _i1.Fake implements _i6.Locale {}
+
+class _FakeWeather_5 extends _i1.Fake implements _i7.Weather {}
+
+class _FakeWeatherModel_6 extends _i1.Fake implements _i8.WeatherModel {}
 
 /// A class which mocks [SharedPreferences].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i7.SharedPreferences {
+class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
   MockSharedPreferences() {
     _i1.throwOnMissingStub(this);
   }
@@ -103,318 +114,408 @@ class MockSharedPreferences extends _i1.Mock implements _i7.SharedPreferences {
       (super.noSuchMethod(Invocation.method(#getStringList, [key]))
           as List<String>?);
   @override
-  _i8.Future<bool> setBool(String? key, bool? value) =>
+  _i10.Future<bool> setBool(String? key, bool? value) =>
       (super.noSuchMethod(Invocation.method(#setBool, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> setInt(String? key, int? value) =>
+  _i10.Future<bool> setInt(String? key, int? value) =>
       (super.noSuchMethod(Invocation.method(#setInt, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> setDouble(String? key, double? value) =>
+  _i10.Future<bool> setDouble(String? key, double? value) =>
       (super.noSuchMethod(Invocation.method(#setDouble, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> setString(String? key, String? value) =>
+  _i10.Future<bool> setString(String? key, String? value) =>
       (super.noSuchMethod(Invocation.method(#setString, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> setStringList(String? key, List<String>? value) =>
+  _i10.Future<bool> setStringList(String? key, List<String>? value) =>
       (super.noSuchMethod(Invocation.method(#setStringList, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> remove(String? key) =>
+  _i10.Future<bool> remove(String? key) =>
       (super.noSuchMethod(Invocation.method(#remove, [key]),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> commit() =>
+  _i10.Future<bool> commit() =>
       (super.noSuchMethod(Invocation.method(#commit, []),
-          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<bool> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
-      returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
+  _i10.Future<bool> clear() =>
+      (super.noSuchMethod(Invocation.method(#clear, []),
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  _i8.Future<void> reload() =>
-      (super.noSuchMethod(Invocation.method(#reload, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+  _i10.Future<void> reload() => (super.noSuchMethod(
+      Invocation.method(#reload, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
+}
+
+/// A class which mocks [Client].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockClient extends _i1.Mock implements _i11.Client {
+  MockClient() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i10.Future<_i2.Response> head(Uri? url, {Map<String, String>? headers}) =>
+      (super.noSuchMethod(Invocation.method(#head, [url], {#headers: headers}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse_0()))
+          as _i10.Future<_i2.Response>);
+  @override
+  _i10.Future<_i2.Response> get(Uri? url, {Map<String, String>? headers}) =>
+      (super.noSuchMethod(Invocation.method(#get, [url], {#headers: headers}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse_0()))
+          as _i10.Future<_i2.Response>);
+  @override
+  _i10.Future<_i2.Response> post(Uri? url,
+          {Map<String, String>? headers,
+          Object? body,
+          _i12.Encoding? encoding}) =>
+      (super.noSuchMethod(
+              Invocation.method(#post, [url],
+                  {#headers: headers, #body: body, #encoding: encoding}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse_0()))
+          as _i10.Future<_i2.Response>);
+  @override
+  _i10.Future<_i2.Response> put(Uri? url,
+          {Map<String, String>? headers,
+          Object? body,
+          _i12.Encoding? encoding}) =>
+      (super.noSuchMethod(
+              Invocation.method(#put, [url],
+                  {#headers: headers, #body: body, #encoding: encoding}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse_0()))
+          as _i10.Future<_i2.Response>);
+  @override
+  _i10.Future<_i2.Response> patch(Uri? url,
+          {Map<String, String>? headers,
+          Object? body,
+          _i12.Encoding? encoding}) =>
+      (super.noSuchMethod(
+              Invocation.method(#patch, [url],
+                  {#headers: headers, #body: body, #encoding: encoding}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse_0()))
+          as _i10.Future<_i2.Response>);
+  @override
+  _i10.Future<_i2.Response> delete(Uri? url,
+          {Map<String, String>? headers,
+          Object? body,
+          _i12.Encoding? encoding}) =>
+      (super.noSuchMethod(
+              Invocation.method(#delete, [url],
+                  {#headers: headers, #body: body, #encoding: encoding}),
+              returnValue: Future<_i2.Response>.value(_FakeResponse_0()))
+          as _i10.Future<_i2.Response>);
+  @override
+  _i10.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
+      (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
+          returnValue: Future<String>.value('')) as _i10.Future<String>);
+  @override
+  _i10.Future<_i13.Uint8List> readBytes(Uri? url,
+          {Map<String, String>? headers}) =>
+      (super.noSuchMethod(
+              Invocation.method(#readBytes, [url], {#headers: headers}),
+              returnValue: Future<_i13.Uint8List>.value(_i13.Uint8List(0)))
+          as _i10.Future<_i13.Uint8List>);
+  @override
+  _i10.Future<_i3.StreamedResponse> send(_i14.BaseRequest? request) =>
+      (super.noSuchMethod(Invocation.method(#send, [request]),
+              returnValue:
+                  Future<_i3.StreamedResponse>.value(_FakeStreamedResponse_1()))
+          as _i10.Future<_i3.StreamedResponse>);
+  @override
+  void close() => super.noSuchMethod(Invocation.method(#close, []),
+      returnValueForMissingStub: null);
 }
 
 /// A class which mocks [ThemeRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockThemeRepository extends _i1.Mock implements _i9.ThemeRepository {
+class MockThemeRepository extends _i1.Mock implements _i15.ThemeRepository {
   MockThemeRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<List<String>> getSupportedFonts() =>
+  _i10.Future<List<String>> getSupportedFonts() =>
       (super.noSuchMethod(Invocation.method(#getSupportedFonts, []),
               returnValue: Future<List<String>>.value(<String>[]))
-          as _i8.Future<List<String>>);
+          as _i10.Future<List<String>>);
   @override
-  _i8.Future<List<_i10.ColorTheme>> getSupportedColorThemes() =>
+  _i10.Future<List<_i16.ColorTheme>> getSupportedColorThemes() =>
       (super.noSuchMethod(Invocation.method(#getSupportedColorThemes, []),
               returnValue:
-                  Future<List<_i10.ColorTheme>>.value(<_i10.ColorTheme>[]))
-          as _i8.Future<List<_i10.ColorTheme>>);
+                  Future<List<_i16.ColorTheme>>.value(<_i16.ColorTheme>[]))
+          as _i10.Future<List<_i16.ColorTheme>>);
   @override
-  _i8.Future<_i2.AppThemeData> getStoredOrDefaultAppThemeData() => (super
+  _i10.Future<_i4.AppThemeData> getStoredOrDefaultAppThemeData() => (super
           .noSuchMethod(Invocation.method(#getStoredOrDefaultAppThemeData, []),
               returnValue:
-                  Future<_i2.AppThemeData>.value(_FakeAppThemeData_0()))
-      as _i8.Future<_i2.AppThemeData>);
+                  Future<_i4.AppThemeData>.value(_FakeAppThemeData_2()))
+      as _i10.Future<_i4.AppThemeData>);
   @override
-  _i8.Future<void> storeAppThemeData(_i2.AppThemeData? appThemeData) =>
+  _i10.Future<void> storeAppThemeData(_i4.AppThemeData? appThemeData) =>
       (super.noSuchMethod(Invocation.method(#storeAppThemeData, [appThemeData]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i10.Future<void>);
 }
 
-/// A class which mocks [ThemeLocalDataSource].
+/// A class which mocks [ThemeLocalDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockThemeLocalDataSource extends _i1.Mock
-    implements _i11.ThemeLocalDatasource {
-  MockThemeLocalDataSource() {
+class MockThemeLocalDatasource extends _i1.Mock
+    implements _i17.ThemeLocalDatasource {
+  MockThemeLocalDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i3.AppThemeDataModel> getStoredOrDefaultAppThemeData() => (super
+  _i10.Future<_i5.AppThemeDataModel> getStoredOrDefaultAppThemeData() => (super
           .noSuchMethod(Invocation.method(#getStoredOrDefaultAppThemeData, []),
-              returnValue: Future<_i3.AppThemeDataModel>.value(
-                  _FakeAppThemeDataModel_1()))
-      as _i8.Future<_i3.AppThemeDataModel>);
+              returnValue: Future<_i5.AppThemeDataModel>.value(
+                  _FakeAppThemeDataModel_3()))
+      as _i10.Future<_i5.AppThemeDataModel>);
   @override
-  _i8.Future<void> storeAppThemeData(_i2.AppThemeData? theme) =>
+  _i10.Future<void> storeAppThemeData(_i4.AppThemeData? theme) =>
       (super.noSuchMethod(Invocation.method(#storeAppThemeData, [theme]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i10.Future<void>);
   @override
-  _i8.Future<List<String>> getSupportedFonts() =>
+  _i10.Future<List<String>> getSupportedFonts() =>
       (super.noSuchMethod(Invocation.method(#getSupportedFonts, []),
               returnValue: Future<List<String>>.value(<String>[]))
-          as _i8.Future<List<String>>);
+          as _i10.Future<List<String>>);
   @override
-  _i8.Future<List<_i12.ColorThemeModel>> getSupportedColorThemes() =>
+  _i10.Future<List<_i18.ColorThemeModel>> getSupportedColorThemes() =>
       (super.noSuchMethod(Invocation.method(#getSupportedColorThemes, []),
-              returnValue: Future<List<_i12.ColorThemeModel>>.value(
-                  <_i12.ColorThemeModel>[]))
-          as _i8.Future<List<_i12.ColorThemeModel>>);
+              returnValue: Future<List<_i18.ColorThemeModel>>.value(
+                  <_i18.ColorThemeModel>[]))
+          as _i10.Future<List<_i18.ColorThemeModel>>);
 }
 
 /// A class which mocks [GetSupportedFonts].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetSupportedFonts extends _i1.Mock implements _i13.GetSupportedFonts {
+class MockGetSupportedFonts extends _i1.Mock implements _i19.GetSupportedFonts {
   MockGetSupportedFonts() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<List<String>> call(_i14.NoParams? noParams) =>
+  _i10.Future<List<String>> call(_i20.NoParams? noParams) =>
       (super.noSuchMethod(Invocation.method(#call, [noParams]),
               returnValue: Future<List<String>>.value(<String>[]))
-          as _i8.Future<List<String>>);
+          as _i10.Future<List<String>>);
 }
 
 /// A class which mocks [GetSupportedColorThemes].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetSupportedColorThemes extends _i1.Mock
-    implements _i15.GetSupportedColorThemes {
+    implements _i21.GetSupportedColorThemes {
   MockGetSupportedColorThemes() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<List<_i10.ColorTheme>> call(_i14.NoParams? noParams) =>
+  _i10.Future<List<_i16.ColorTheme>> call(_i20.NoParams? noParams) =>
       (super.noSuchMethod(Invocation.method(#call, [noParams]),
               returnValue:
-                  Future<List<_i10.ColorTheme>>.value(<_i10.ColorTheme>[]))
-          as _i8.Future<List<_i10.ColorTheme>>);
+                  Future<List<_i16.ColorTheme>>.value(<_i16.ColorTheme>[]))
+          as _i10.Future<List<_i16.ColorTheme>>);
 }
 
 /// A class which mocks [GetStoredOrDefaultAppThemeData].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetStoredOrDefaultAppThemeData extends _i1.Mock
-    implements _i16.GetStoredOrDefaultAppThemeData {
+    implements _i22.GetStoredOrDefaultAppThemeData {
   MockGetStoredOrDefaultAppThemeData() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i2.AppThemeData> call(_i14.NoParams? noParams) =>
+  _i10.Future<_i4.AppThemeData> call(_i20.NoParams? noParams) =>
       (super.noSuchMethod(Invocation.method(#call, [noParams]),
               returnValue:
-                  Future<_i2.AppThemeData>.value(_FakeAppThemeData_0()))
-          as _i8.Future<_i2.AppThemeData>);
+                  Future<_i4.AppThemeData>.value(_FakeAppThemeData_2()))
+          as _i10.Future<_i4.AppThemeData>);
 }
 
 /// A class which mocks [StoreAppThemeData].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStoreAppThemeData extends _i1.Mock implements _i17.StoreAppThemeData {
+class MockStoreAppThemeData extends _i1.Mock implements _i23.StoreAppThemeData {
   MockStoreAppThemeData() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<void> call(_i18.StoreAppThemeDataParams? params) =>
+  _i10.Future<void> call(_i24.StoreAppThemeDataParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i10.Future<void>);
 }
 
 /// A class which mocks [LanguageRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLanguageRepository extends _i1.Mock
-    implements _i19.LanguageRepository {
+    implements _i25.LanguageRepository {
   MockLanguageRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i4.Locale> getStoredOrDefaultLocale() =>
+  _i10.Future<_i6.Locale> getStoredOrDefaultLocale() =>
       (super.noSuchMethod(Invocation.method(#getStoredOrDefaultLocale, []),
-              returnValue: Future<_i4.Locale>.value(_FakeLocale_2()))
-          as _i8.Future<_i4.Locale>);
+              returnValue: Future<_i6.Locale>.value(_FakeLocale_4()))
+          as _i10.Future<_i6.Locale>);
   @override
-  _i8.Future<List<_i4.Locale>> getSupportedLocales() =>
+  _i10.Future<List<_i6.Locale>> getSupportedLocales() =>
       (super.noSuchMethod(Invocation.method(#getSupportedLocales, []),
-              returnValue: Future<List<_i4.Locale>>.value(<_i4.Locale>[]))
-          as _i8.Future<List<_i4.Locale>>);
+              returnValue: Future<List<_i6.Locale>>.value(<_i6.Locale>[]))
+          as _i10.Future<List<_i6.Locale>>);
   @override
-  _i8.Future<void> storeLocale(_i4.Locale? locale) =>
-      (super.noSuchMethod(Invocation.method(#storeLocale, [locale]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+  _i10.Future<void> storeLocale(_i6.Locale? locale) => (super.noSuchMethod(
+      Invocation.method(#storeLocale, [locale]),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
 }
 
-/// A class which mocks [LanguageLocalDataSource].
+/// A class which mocks [LanguageLocalDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLanguageLocalDataSource extends _i1.Mock
-    implements _i20.LanguageLocalDatasource {
-  MockLanguageLocalDataSource() {
+class MockLanguageLocalDatasource extends _i1.Mock
+    implements _i26.LanguageLocalDatasource {
+  MockLanguageLocalDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<List<_i4.Locale>> getSupportedLocales() =>
+  _i10.Future<List<_i6.Locale>> getSupportedLocales() =>
       (super.noSuchMethod(Invocation.method(#getSupportedLocales, []),
-              returnValue: Future<List<_i4.Locale>>.value(<_i4.Locale>[]))
-          as _i8.Future<List<_i4.Locale>>);
+              returnValue: Future<List<_i6.Locale>>.value(<_i6.Locale>[]))
+          as _i10.Future<List<_i6.Locale>>);
   @override
-  _i8.Future<String?> getStoredLanguageCode() =>
+  _i10.Future<String?> getStoredLanguageCode() =>
       (super.noSuchMethod(Invocation.method(#getStoredLanguageCode, []),
-          returnValue: Future<String?>.value()) as _i8.Future<String?>);
+          returnValue: Future<String?>.value()) as _i10.Future<String?>);
   @override
-  _i8.Future<void> storeLocale(_i4.Locale? locale) =>
-      (super.noSuchMethod(Invocation.method(#storeLocale, [locale]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+  _i10.Future<void> storeLocale(_i6.Locale? locale) => (super.noSuchMethod(
+      Invocation.method(#storeLocale, [locale]),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
 }
 
 /// A class which mocks [GetStoredOrDefaultLocale].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetStoredOrDefaultLocale extends _i1.Mock
-    implements _i21.GetStoredOrDefaultLocale {
+    implements _i27.GetStoredOrDefaultLocale {
   MockGetStoredOrDefaultLocale() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i4.Locale> call(_i14.NoParams? params) =>
+  _i10.Future<_i6.Locale> call(_i20.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i4.Locale>.value(_FakeLocale_2()))
-          as _i8.Future<_i4.Locale>);
+              returnValue: Future<_i6.Locale>.value(_FakeLocale_4()))
+          as _i10.Future<_i6.Locale>);
 }
 
 /// A class which mocks [GetSupportedLocales].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetSupportedLocales extends _i1.Mock
-    implements _i22.GetSupportedLocales {
+    implements _i28.GetSupportedLocales {
   MockGetSupportedLocales() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<List<_i4.Locale>> call(_i14.NoParams? params) =>
+  _i10.Future<List<_i6.Locale>> call(_i20.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<List<_i4.Locale>>.value(<_i4.Locale>[]))
-          as _i8.Future<List<_i4.Locale>>);
+              returnValue: Future<List<_i6.Locale>>.value(<_i6.Locale>[]))
+          as _i10.Future<List<_i6.Locale>>);
 }
 
 /// A class which mocks [StoreLocale].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStoreLocale extends _i1.Mock implements _i23.StoreLocale {
+class MockStoreLocale extends _i1.Mock implements _i29.StoreLocale {
   MockStoreLocale() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<void> call(_i24.StoreLocaleParams? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i8.Future<void>);
+  _i10.Future<void> call(_i30.StoreLocaleParams? params) => (super.noSuchMethod(
+      Invocation.method(#call, [params]),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
 }
 
 /// A class which mocks [WeatherRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWeatherRepository extends _i1.Mock implements _i25.WeatherRepository {
+class MockWeatherRepository extends _i1.Mock implements _i31.WeatherRepository {
   MockWeatherRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i5.Weather?> getCachedWeather() => (super.noSuchMethod(
+  _i10.Future<_i7.Weather?> getCachedWeather() => (super.noSuchMethod(
       Invocation.method(#getCachedWeather, []),
-      returnValue: Future<_i5.Weather?>.value()) as _i8.Future<_i5.Weather?>);
+      returnValue: Future<_i7.Weather?>.value()) as _i10.Future<_i7.Weather?>);
   @override
-  _i8.Future<_i5.Weather> getWeather(String? cityName) =>
+  _i10.Future<_i7.Weather> getWeather(String? cityName) =>
       (super.noSuchMethod(Invocation.method(#getWeather, [cityName]),
-              returnValue: Future<_i5.Weather>.value(_FakeWeather_3()))
-          as _i8.Future<_i5.Weather>);
+              returnValue: Future<_i7.Weather>.value(_FakeWeather_5()))
+          as _i10.Future<_i7.Weather>);
 }
 
 /// A class which mocks [WeatherRemoteDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockWeatherRemoteDatasource extends _i1.Mock
-    implements _i26.WeatherRemoteDatasource {
+    implements _i32.WeatherRemoteDatasource {
   MockWeatherRemoteDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i6.WeatherModel> getWeather(String? cityName) =>
+  _i10.Future<_i8.WeatherModel> getWeather(String? cityName) =>
       (super.noSuchMethod(Invocation.method(#getWeather, [cityName]),
               returnValue:
-                  Future<_i6.WeatherModel>.value(_FakeWeatherModel_4()))
-          as _i8.Future<_i6.WeatherModel>);
+                  Future<_i8.WeatherModel>.value(_FakeWeatherModel_6()))
+          as _i10.Future<_i8.WeatherModel>);
 }
 
 /// A class which mocks [WeatherLocalDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockWeatherLocalDatasource extends _i1.Mock
-    implements _i27.WeatherLocalDatasource {
+    implements _i33.WeatherLocalDatasource {
   MockWeatherLocalDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i6.WeatherModel?> getWeather() =>
+  _i10.Future<_i8.WeatherModel?> getWeather() =>
       (super.noSuchMethod(Invocation.method(#getWeather, []),
-              returnValue: Future<_i6.WeatherModel?>.value())
-          as _i8.Future<_i6.WeatherModel?>);
+              returnValue: Future<_i8.WeatherModel?>.value())
+          as _i10.Future<_i8.WeatherModel?>);
+  @override
+  _i10.Future<void> cacheWeather(_i8.WeatherModel? weather) =>
+      (super.noSuchMethod(Invocation.method(#cacheWeather, [weather]),
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i10.Future<void>);
 }

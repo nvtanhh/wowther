@@ -7,10 +7,10 @@ import '../../helpers/test_helpers.mocks.dart';
 
 void main() {
   late LanguageRepositoryImpl repository;
-  late MockLanguageLocalDataSource mockLocalDataSource;
+  late MockLanguageLocalDatasource mockLocalDataSource;
 
   setUp(() {
-    mockLocalDataSource = MockLanguageLocalDataSource();
+    mockLocalDataSource = MockLanguageLocalDatasource();
     repository = LanguageRepositoryImpl(mockLocalDataSource);
   });
 

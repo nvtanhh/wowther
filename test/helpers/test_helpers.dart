@@ -12,6 +12,10 @@ import 'package:flutter_resources/domain/usecases/theme/get_stored_theme_data.da
 import 'package:flutter_resources/domain/usecases/theme/get_supported_color_themes.dart';
 import 'package:flutter_resources/domain/usecases/theme/get_supported_fonts.dart';
 import 'package:flutter_resources/domain/usecases/theme/store_app_theme.dart';
+import 'package:flutter_resources/domain/usecases/weather/get_cached_weather.dart';
+import 'package:flutter_resources/domain/usecases/weather/get_weather_by_city_name.dart';
+import 'package:flutter_resources/domain/usecases/weather/get_weather_by_location.dart';
+import 'package:flutter_resources/services/geolocation_service.dart';
 import 'package:http/http.dart';
 import 'package:mockito/annotations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,5 +41,9 @@ import 'package:shared_preferences/shared_preferences.dart';
   WeatherRepository,
   WeatherRemoteDatasource,
   WeatherLocalDatasource,
+  GetCachedWeather,
+  GetWeatherByCityName,
+  GetWeatherByLocation,
+  GeolocatorService,
 ])
 void main() {}

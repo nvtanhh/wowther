@@ -1,5 +1,10 @@
-class GetWeatherByCityNameParams {
+import 'package:equatable/equatable.dart';
+
+class GetWeatherByCityNameParams extends Equatable {
   final String cityName;
 
-  GetWeatherByCityNameParams(this.cityName);
+  const GetWeatherByCityNameParams(this.cityName);
+
+  @override
+  List<Object?> get props => [cityName];
 }

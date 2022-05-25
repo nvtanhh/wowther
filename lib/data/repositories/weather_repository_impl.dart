@@ -24,9 +24,21 @@ class WeatherRepositoryImpl extends WeatherRepository {
   }
 
   @override
-  Future<Weather> getWeather(String cityName) async {
+  Future<Weather> getWeatherByCityName(String cityName) async {
     try {
-      final weather = await remoteDatasource.getWeather(cityName);
+      final weather = await remoteDatasource.getWeatherByCityName(cityName);
+      localDatasource.cacheWeather(weather);
+      return weather;
+    } on ServerException catch (e, stackTrace) {
+      locator<Logger>().e('ServerException', e, stackTrace);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Weather> getWeatherByLocation(double lat, double lon) async {
+    try {
+      final weather = await remoteDatasource.getWeatherByLocation(lat, lon);
       localDatasource.cacheWeather(weather);
       return weather;
     } on ServerException catch (e, stackTrace) {

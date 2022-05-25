@@ -10,7 +10,10 @@ import '../../models/weather_model.dart';
 
 abstract class WeatherRemoteDatasource {
   /// Get [WeatherModel] from API by city name.
-  Future<WeatherModel> getWeather(String cityName);
+  Future<WeatherModel> getWeatherByCityName(String cityName);
+
+  /// Get [WeatherModel] from API by location.
+  Future<WeatherModel> getWeatherByLocation(double lat, double lon);
 }
 
 @Injectable(as: WeatherRemoteDatasource)
@@ -20,10 +23,30 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
   WeatherRemoteDatasourceImpl(this.client);
 
   @override
-  Future<WeatherModel> getWeather(String cityName) async {
+  Future<WeatherModel> getWeatherByCityName(String cityName) async {
     final response = await client.get(
       Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?q=$cityName,${Platform.localeName}&appid=${AppConfig.kApiKey}',
+      ),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return WeatherModel.fromJson(
+        jsonDecode(response.body) as Map<String, dynamic>,
+      );
+    } else {
+      throw ServerException(code: response.statusCode, message: response.body);
+    }
+  }
+
+  @override
+  Future<WeatherModel> getWeatherByLocation(double lat, double lon) async {
+    final response = await client.get(
+      Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=lat={$lat}&lon={$lon},${Platform.localeName}&appid=${AppConfig.kApiKey}',
       ),
       headers: {
         'Content-Type': 'application/json',

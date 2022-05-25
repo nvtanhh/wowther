@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/storage_constants.dart';
@@ -13,6 +14,7 @@ abstract class WeatherLocalDatasource {
   Future<void> cacheWeather(WeatherModel weather);
 }
 
+@Injectable(as: WeatherLocalDatasource)
 class WeatherLocalDatasourceImpl implements WeatherLocalDatasource {
   final SharedPreferences _preferencesStorage;
 

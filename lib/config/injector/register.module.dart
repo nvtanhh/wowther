@@ -1,9 +1,7 @@
-import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 import '../../services/firebase_service.dart';
 import '../route/route.dart';

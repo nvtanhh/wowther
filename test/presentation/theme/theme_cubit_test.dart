@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resources/core/params/no_params.dart';
 import 'package:flutter_resources/domain/entities/app_theme_data.dart';
 import 'package:flutter_resources/domain/entities/enums/theme_dark_option.dart';
 import 'package:flutter_resources/domain/entities/color_theme.dart';
@@ -53,11 +52,11 @@ void main() {
     "should init stored or default value when init",
     () async {
       // arrange
-      when(mockGetSupportedFonts(NoParams()))
+      when(mockGetSupportedFonts(any))
           .thenAnswer((_) => Future.value(supportedFonts));
-      when(mockGetSupportedColorThemes(NoParams()))
+      when(mockGetSupportedColorThemes(any))
           .thenAnswer((_) => Future.value(supportedColorThemes));
-      when(mockGetStoredOrDefaultAppThemeData(NoParams()))
+      when(mockGetStoredOrDefaultAppThemeData(any))
           .thenAnswer((_) => Future.value(themeData));
 
       // act

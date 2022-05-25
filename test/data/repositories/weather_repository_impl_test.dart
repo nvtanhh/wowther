@@ -61,20 +61,42 @@ void main() {
     );
   });
 
-  test(
-    'should return a weather from remote datasource && should store it locally',
-    () async {
-      // arrange
+  group('getWeatherByCityName', () {
+    test(
+      'should return a weather from remote datasource && should store it locally',
+      () async {
+        // arrange
 
-      when(mockRemoteDatasource.getWeather(any))
-          .thenAnswer((_) => Future.value(weather));
+        when(mockRemoteDatasource.getWeatherByCityName(any))
+            .thenAnswer((_) => Future.value(weather));
 
-      // act
-      final result = await repository.getWeather('London');
+        // act
+        final result = await repository.getWeatherByCityName('London');
 
-      // assert
-      expect(result, weather);
-      verify(mockLocalDataSource.cacheWeather(any)).called(1);
-    },
-  );
+        // assert
+        expect(result, weather);
+        verify(mockLocalDataSource.cacheWeather(any)).called(1);
+      },
+    );
+  });
+
+  group('getWeatherByLocation', () {
+    test(
+      'should return a weather from remote datasource && should store it locally',
+      () async {
+        // arrange
+
+        when(mockRemoteDatasource.getWeatherByLocation(any, any))
+            .thenAnswer((_) => Future.value(weather));
+
+        // act
+        final result =
+            await repository.getWeatherByLocation(51.5285582, -0.2416811);
+
+        // assert
+        expect(result, weather);
+        verify(mockLocalDataSource.cacheWeather(any)).called(1);
+      },
+    );
+  });
 }

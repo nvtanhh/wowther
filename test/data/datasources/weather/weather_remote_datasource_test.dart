@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter_resources/config/app_config.dart';
 import 'package:flutter_resources/core/exceptions/exceptions.index.dart';
 import 'package:flutter_resources/data/datasources/weather/weather_remote_datasource.dart';
 import 'package:flutter_resources/data/models/weather_model.dart';
@@ -30,37 +27,15 @@ void main() {
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
-  group('getWeather', () {
-    const String cityName = 'London';
-
-    test(
-      'should perform a GET request on a URL with number being the endpoint and with application/json header',
-      () async {
-        // arrange
-        setUpMockHttpClientSuccess200();
-        // act
-        datasource.getWeather(cityName);
-        // assert
-        verify(
-          mockClient.get(
-            Uri.parse(
-              'https://api.openweathermap.org/data/2.5/weather?q=$cityName,${Platform.localeName}&appid=${AppConfig.kApiKey}',
-            ),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          ),
-        );
-      },
-    );
-
+  group('getWeatherByLocation', () {
     test(
       'should return WeatherModel when the response code is 200 (success)',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final result = await datasource.getWeather(cityName);
+        final result =
+            await datasource.getWeatherByLocation(51.5285582, -0.2416811);
         // assert
         expect(result, isA<WeatherModel>());
       },
@@ -72,7 +47,38 @@ void main() {
         // arrange
         setUpMockHttpClientFailure404();
         // act
-        final call = datasource.getWeather;
+        final call = datasource.getWeatherByLocation;
+        // assert
+        expect(
+          () => call(51.5285582, -0.2416811),
+          throwsA(isA<ServerException>()),
+        );
+      },
+    );
+  });
+
+  group('getWeatherByCityName', () {
+    const String cityName = 'London';
+
+    test(
+      'should return WeatherModel when the response code is 200 (success)',
+      () async {
+        // arrange
+        setUpMockHttpClientSuccess200();
+        // act
+        final result = await datasource.getWeatherByCityName(cityName);
+        // assert
+        expect(result, isA<WeatherModel>());
+      },
+    );
+
+    test(
+      'should throw a ServerException when the response code is 404 or other',
+      () async {
+        // arrange
+        setUpMockHttpClientFailure404();
+        // act
+        final call = datasource.getWeatherByCityName;
         // assert
         expect(() => call(cityName), throwsA(isA<ServerException>()));
       },

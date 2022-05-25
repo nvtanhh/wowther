@@ -14,6 +14,6 @@ class GetWeatherByCityName
 
   @override
   Future<Weather> call(GetWeatherByCityNameParams params) {
-    return repository.getWeather(params.cityName);
+    return repository.getWeatherByCityName(params.cityName);
   }
 }

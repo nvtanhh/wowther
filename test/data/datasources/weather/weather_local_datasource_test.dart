@@ -20,7 +20,8 @@ void main() {
 
   group('getWeather', () {
     final weatherModel = WeatherModel.fromJson(
-        jsonDecode(fixture('weather.json')) as Map<String, dynamic>);
+      jsonDecode(fixture('weather.json')) as Map<String, dynamic>,
+    );
     test(
       "should return a cached weather if it stored previously",
       () async {
@@ -53,7 +54,8 @@ void main() {
 
   group('should call SharedPreferences to cache the data', () {
     final weatherModel = WeatherModel.fromJson(
-        jsonDecode(fixture('weather.json')) as Map<String, dynamic>);
+      jsonDecode(fixture('weather.json')) as Map<String, dynamic>,
+    );
     test(
       "should call SharedPreferences to cache the data",
       () async {

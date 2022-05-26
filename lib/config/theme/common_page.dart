@@ -11,6 +11,7 @@ class CommonPage extends StatelessWidget {
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Color? backgroundColor;
+  final String? backgroundImage;
 
   const CommonPage({
     Key? key,
@@ -22,6 +23,7 @@ class CommonPage extends StatelessWidget {
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.backgroundColor,
+    this.backgroundImage,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,15 @@ class CommonPage extends StatelessWidget {
             backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
         appBar: appBar,
         body: SafeArea(
-          child: Padding(
+          child: Container(
+            decoration: backgroundImage == null
+                ? null
+                : BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(backgroundImage!),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
             padding: padding,
             child: body,
           ),

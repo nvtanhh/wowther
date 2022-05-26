@@ -7,7 +7,9 @@ abstract class WeatherEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class WeatherInitialEvent extends WeatherEvent {}
+class WeatherInitialEvent extends WeatherEvent {
+  const WeatherInitialEvent();
+}
 
 class GetWeatherByCityNameEvent extends WeatherEvent {
   final String cityName;

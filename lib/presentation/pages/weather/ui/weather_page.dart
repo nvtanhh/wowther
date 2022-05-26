@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../config/theme/common_page.dart';
+import '../bloc/weather_bloc.dart';
 
 class WeatherPage extends StatelessWidget {
   const WeatherPage({Key? key}) : super(key: key);
@@ -10,13 +12,17 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonPage(
-      backgroundImage: 'assets/images/world-map.png',
-      body: Column(
-        children: [
-          _buildAppBar(context),
-          _buildCurrentWeather(),
-          _buildWeatherForecastByHours(),
-        ],
+      backgroundImage: 'assets/images/world-map-bg.png',
+      body: BlocBuilder<WeatherBloc, WeatherState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              _buildAppBar(context),
+              _buildCurrentWeather(),
+              _buildWeatherForecastByHours(),
+            ],
+          );
+        },
       ),
     );
   }

@@ -1,9 +1,27 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
+
+import '../config/injector/injection.dart';
 
 @singleton
 class GeolocatorService {
+  final defaultPosition = Position(
+    latitude: 10.762622,
+    longitude: 106.660172,
+    timestamp: DateTime.fromMillisecondsSinceEpoch(500),
+    altitude: 5.0,
+    accuracy: 0.0,
+    heading: 0.0,
+    speed: 0.0,
+    speedAccuracy: 0.0,
+  );
   Future<Position> getCurrentPosition() async {
-    return Geolocator.getCurrentPosition();
+    try {
+      return await Geolocator.getCurrentPosition();
+    } catch (e) {
+      locator<Logger>().e(e.toString());
+      return defaultPosition;
+    }
   }
 }

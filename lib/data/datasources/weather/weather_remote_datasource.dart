@@ -26,7 +26,7 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
   Future<WeatherModel> getWeatherByCityName(String cityName) async {
     final response = await client.get(
       Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$cityName,${Platform.localeName}&appid=${AppConfig.kApiKey}',
+        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&lang=${Platform.localeName}&appid=${AppConfig.kApiKey}',
       ),
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
   Future<WeatherModel> getWeatherByLocation(double lat, double lon) async {
     final response = await client.get(
       Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=lat={$lat}&lon={$lon},${Platform.localeName}&appid=${AppConfig.kApiKey}',
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&lang=${Platform.localeName}&appid=${AppConfig.kApiKey}',
       ),
       headers: {
         'Content-Type': 'application/json',

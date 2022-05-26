@@ -22,13 +22,14 @@ part 'weather_state.dart';
 ///   b. Load weather by current location
 ///
 /// 2. Load weather by city name (search)
+
+@lazySingleton
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetCachedWeather getCachedWeather;
   final GetWeatherByCityName getWeatherByCityName;
   final GetWeatherByLocation getWeatherByLocation;
   final GeolocatorService geolocatorService;
 
-  @lazySingleton
   WeatherBloc(
     this.getCachedWeather,
     this.getWeatherByCityName,

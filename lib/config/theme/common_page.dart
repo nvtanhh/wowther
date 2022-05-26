@@ -41,7 +41,7 @@ class CommonPage extends StatelessWidget {
                 : BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(backgroundImage!),
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.cover,
                     ),
                   ),
             padding: padding,

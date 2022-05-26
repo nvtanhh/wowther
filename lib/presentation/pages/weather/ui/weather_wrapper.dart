@@ -11,7 +11,8 @@ class TodoWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => locator<WeatherBloc>(),
+      create: (context) =>
+          locator<WeatherBloc>()..add(const WeatherInitialEvent()),
       child: const WeatherPage(),
     );
   }

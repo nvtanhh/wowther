@@ -21,8 +21,8 @@ import '../../domain/repositories/language_repository.dart' as _i24;
 import '../../domain/repositories/theme_repository.dart' as _i10;
 import '../../domain/repositories/weather_repository.dart' as _i15;
 import '../../domain/usecases/langugae/get_stored_or_default_locale.dart'
-    as _i29;
-import '../../domain/usecases/langugae/get_supported_locales.dart' as _i30;
+    as _i30;
+import '../../domain/usecases/langugae/get_supported_locales.dart' as _i31;
 import '../../domain/usecases/langugae/store_locale.dart' as _i27;
 import '../../domain/usecases/theme/get_stored_theme_data.dart' as _i18;
 import '../../domain/usecases/theme/get_supported_color_themes.dart' as _i19;
@@ -31,13 +31,14 @@ import '../../domain/usecases/theme/store_app_theme.dart' as _i26;
 import '../../domain/usecases/weather/get_cached_weather.dart' as _i17;
 import '../../domain/usecases/weather/get_weather_by_city_name.dart' as _i21;
 import '../../domain/usecases/weather/get_weather_by_location.dart' as _i22;
-import '../../presentation/shared_blocs/language/language_cubit.dart' as _i31;
+import '../../presentation/pages/weather/bloc/weather_bloc.dart' as _i29;
+import '../../presentation/shared_blocs/language/language_cubit.dart' as _i32;
 import '../../presentation/shared_blocs/theme/theme_cubit.dart' as _i28;
 import '../../presentation/shared_blocs/user/user_cubit.dart' as _i12;
 import '../../services/firebase_service.dart' as _i5;
 import '../../services/geolocation_service.dart' as _i6;
 import '../route/route.dart' as _i3;
-import 'register.module.dart' as _i32; // ignore_for_file: unnecessary_lambdas
+import 'register.module.dart' as _i33; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -90,15 +91,20 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i19.GetSupportedColorThemes>(),
       get<_i18.GetStoredOrDefaultAppThemeData>(),
       get<_i26.StoreAppThemeData>()));
-  gh.factory<_i29.GetStoredOrDefaultLocale>(
-      () => _i29.GetStoredOrDefaultLocale(get<_i24.LanguageRepository>()));
-  gh.factory<_i30.GetSupportedLocales>(
-      () => _i30.GetSupportedLocales(get<_i24.LanguageRepository>()));
-  gh.singleton<_i31.LanguageCubit>(_i31.LanguageCubit(
-      get<_i29.GetStoredOrDefaultLocale>(),
-      get<_i30.GetSupportedLocales>(),
+  gh.lazySingleton<_i29.WeatherBloc>(() => _i29.WeatherBloc(
+      get<_i17.GetCachedWeather>(),
+      get<_i21.GetWeatherByCityName>(),
+      get<_i22.GetWeatherByLocation>(),
+      get<_i6.GeolocatorService>()));
+  gh.factory<_i30.GetStoredOrDefaultLocale>(
+      () => _i30.GetStoredOrDefaultLocale(get<_i24.LanguageRepository>()));
+  gh.factory<_i31.GetSupportedLocales>(
+      () => _i31.GetSupportedLocales(get<_i24.LanguageRepository>()));
+  gh.singleton<_i32.LanguageCubit>(_i32.LanguageCubit(
+      get<_i30.GetStoredOrDefaultLocale>(),
+      get<_i31.GetSupportedLocales>(),
       get<_i27.StoreLocale>()));
   return get;
 }
 
-class _$RegisterModule extends _i32.RegisterModule {}
+class _$RegisterModule extends _i33.RegisterModule {}

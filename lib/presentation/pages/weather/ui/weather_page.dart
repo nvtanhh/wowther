@@ -137,6 +137,7 @@ class WeatherPage extends StatelessWidget {
         padding: AppSpacer.edgeInsetsAll16,
         borderRadius: AppSpacer.radius16,
         child: GridView.count(
+          physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
           childAspectRatio: 2,
           mainAxisSpacing: 8,

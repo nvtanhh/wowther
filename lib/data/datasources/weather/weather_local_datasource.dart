@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../config/injector/injection.dart';
 import '../../../core/constants/storage_constants.dart';
 import '../../models/weather_model.dart';
 
@@ -22,11 +24,19 @@ class WeatherLocalDatasourceImpl implements WeatherLocalDatasource {
 
   @override
   Future<WeatherModel?> getWeather() async {
-    final storedData = _preferencesStorage.getString(StorageConstants.weather);
-    if (storedData == null) return null;
-    return WeatherModel.fromJson(
-      jsonDecode(storedData) as Map<String, dynamic>,
-    );
+    try {
+      final storedData =
+          _preferencesStorage.getString(StorageConstants.weather);
+      if (storedData == null) return null;
+      return WeatherModel.fromJson(
+        jsonDecode(storedData) as Map<String, dynamic>,
+      );
+    } catch (e, stackTrace) {
+      locator<Logger>()
+          .e('WeatherLocalDatasourceImpl - getWeather', e, stackTrace);
+      _preferencesStorage.remove(StorageConstants.weather);
+      return null;
+    }
   }
 
   @override

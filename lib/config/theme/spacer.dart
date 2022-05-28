@@ -4,6 +4,7 @@ class AppSpacer {
   static const BorderRadius radius4 = BorderRadius.all(Radius.circular(4.0));
   static const BorderRadius radius6 = BorderRadius.all(Radius.circular(6.0));
   static const BorderRadius radius8 = BorderRadius.all(Radius.circular(8.0));
+  static const BorderRadius radius16 = BorderRadius.all(Radius.circular(16.0));
   static const BorderRadius radius24 = BorderRadius.all(Radius.circular(24.0));
 
   static const double space4 = 4.0;

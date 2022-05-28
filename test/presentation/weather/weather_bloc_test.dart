@@ -43,6 +43,7 @@ void main() {
   });
   const weather = Weather(
     cityName: 'London',
+    country: 'VN',
     main: 'Clouds',
     description: 'scattered clouds',
     iconCode: '03d',
@@ -69,11 +70,11 @@ void main() {
             .thenAnswer((_) => Future.value(weather));
         return weatherBloc;
       },
-      act: (_) => weatherBloc.add(WeatherInitialEvent()),
+      act: (_) => weatherBloc.add(const WeatherInitialEvent()),
       expect: () => const [
-        WeatherLoaded(weather),
+        WeatherLoaded(weather: weather),
         WeatherRefreshing(),
-        WeatherLoaded(weather),
+        WeatherLoaded(weather: weather),
       ],
     );
     blocTest(
@@ -86,10 +87,10 @@ void main() {
             .thenAnswer((_) => Future.value(weather));
         return weatherBloc;
       },
-      act: (_) => weatherBloc.add(WeatherInitialEvent()),
+      act: (_) => weatherBloc.add(const WeatherInitialEvent()),
       expect: () => const [
         WeatherLoading(),
-        WeatherLoaded(weather),
+        WeatherLoaded(weather: weather),
       ],
     );
   });
@@ -105,7 +106,7 @@ void main() {
       act: (_) => weatherBloc.add(const GetWeatherByCityNameEvent('London')),
       expect: () => const [
         WeatherRefreshing(),
-        WeatherLoaded(weather),
+        WeatherLoaded(weather: weather),
       ],
     );
   });

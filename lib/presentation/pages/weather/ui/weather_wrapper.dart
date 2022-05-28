@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/injector/injection.dart';
 import '../bloc/weather_bloc.dart';
 import 'weather_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoWrapper extends StatelessWidget {
   const TodoWrapper({Key? key}) : super(key: key);
@@ -11,8 +12,12 @@ class TodoWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          locator<WeatherBloc>()..add(const WeatherInitialEvent()),
+      create: (_) => locator<WeatherBloc>()
+        ..add(
+          WeatherInitialEvent(
+            language: AppLocalizations.of(context)!.localeName,
+          ),
+        ),
       child: const WeatherPage(),
     );
   }

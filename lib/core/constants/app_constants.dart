@@ -20,23 +20,18 @@ class AppConstants {
   static const List<Map<String, dynamic>> supportedColorThemes = [
     {
       "name": "default",
-      "primary": 'ff82B541',
-      "secondary": "ffff8a65",
+      "primary": 'ffec6e4c',
+      "secondary": "ffa54d35",
     },
     {
-      "name": "orange",
-      "primary": 'fff4a261',
-      "secondary": "ff2A9D8F",
+      "name": "green",
+      "primary": 'ff82B541',
+      "secondary": "ffff8a65",
     },
     {
       "name": "blue",
       "primary": 'ff077ef0',
       "secondary": "ff5B876C",
-    },
-    {
-      "name": "summer",
-      "primary": 'ff53ac7d',
-      "secondary": "ff832400",
     },
   ];
 }

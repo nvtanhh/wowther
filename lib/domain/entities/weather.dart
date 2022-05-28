@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class Weather extends Equatable {
   final String cityName;
+  final String country;
   final String main;
   final String description;
   final String iconCode;
@@ -13,6 +14,7 @@ class Weather extends Equatable {
 
   const Weather({
     required this.cityName,
+    required this.country,
     required this.main,
     required this.description,
     required this.iconCode,

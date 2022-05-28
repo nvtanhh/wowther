@@ -43,25 +43,32 @@ class AppIcon extends StatelessWidget {
       }
     }
 
+    final finalColor = color ?? Theme.of(context).iconTheme.color;
+
     if (iconData.nativeIcon != null) {
       return Icon(
         iconData.nativeIcon,
         size: iconSize,
-        color: color ?? Theme.of(context).primaryColor,
+        color: finalColor,
       );
     }
     final iconFilePath =
-        iconData.filePath ?? 'assets/images/icons/${iconData.filename!}';
+        iconData.filePath ?? 'assets/icons/${iconData.filename!}';
     if (iconFilePath.endsWith('.svg')) {
       return SvgPicture.asset(
         iconFilePath,
-        color: color ?? Theme.of(context).primaryColor,
+        color: finalColor,
         width: iconSize,
         height: iconSize,
         fit: BoxFit.scaleDown,
       );
     } else {
-      return Image.asset(iconFilePath, height: iconSize);
+      return Image.asset(
+        iconFilePath,
+        height: iconSize,
+        color: finalColor,
+        colorBlendMode: BlendMode.modulate,
+      );
     }
   }
 }
@@ -79,10 +86,18 @@ class AppIcons {
       const AppIconData(nativeIcon: Icons.color_lens_outlined);
   static AppIconData font =
       const AppIconData(nativeIcon: Icons.font_download_outlined);
-  static AppIconData weather =
+  static AppIconData weatherOutline =
       const AppIconData(nativeIcon: Icons.cloud_outlined);
-  static AppIconData setting =
+  static AppIconData weather = const AppIconData(nativeIcon: Icons.cloud);
+  static AppIconData settingOutline =
       const AppIconData(nativeIcon: Icons.settings_outlined);
+  static AppIconData setting = const AppIconData(nativeIcon: Icons.settings);
+  static AppIconData search =
+      const AppIconData(nativeIcon: Icons.search_rounded);
+  static AppIconData location =
+      const AppIconData(nativeIcon: Icons.location_on_rounded);
+  static AppIconData locationOff =
+      const AppIconData(nativeIcon: Icons.location_off_rounded);
 }
 
 class AppIconData {

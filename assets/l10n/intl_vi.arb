@@ -17,5 +17,10 @@
   "settings__language_title": "Ngôn ngữ",
   "settings__language_change_language": "Đổi ngôn ngữ",
   "settings__language_search": "Tìm kiếm ngôn ngữ",
-  "weather__title": "Thời tiết"
+  "weather__title": "Thời tiết",
+  "weather__search_placeholder": "Tìm thành phố",
+  "weather__feel_like": "Cảm giác như",
+  "weather__wind": "Gió",
+  "weather__humidity": "Độ ẩm",
+  "weather__pressure": "Áp suất"
 }

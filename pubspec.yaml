@@ -28,8 +28,9 @@ dependencies:
   path_provider: ^2.0.9
   auto_route: ^4.0.1
   logger: ^1.1.0
-  flutter_svg: ^1.0.3
+  flutter_svg: ^1.1.0
   geolocator: ^8.2.1
+  cached_network_image: ^3.2.1
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
 
   fonts:
     - family: OpenSans

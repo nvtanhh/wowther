@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'spacer.dart';
@@ -12,6 +14,7 @@ class CommonPage extends StatelessWidget {
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Color? backgroundColor;
   final String? backgroundImage;
+  final bool isBlurBackground;
 
   const CommonPage({
     Key? key,
@@ -24,6 +27,7 @@ class CommonPage extends StatelessWidget {
     this.floatingActionButtonLocation,
     this.backgroundColor,
     this.backgroundImage,
+    this.isBlurBackground = false,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,7 @@ class CommonPage extends StatelessWidget {
         appBar: appBar,
         body: SafeArea(
           child: Container(
+            padding: padding,
             decoration: backgroundImage == null
                 ? null
                 : BoxDecoration(
@@ -44,8 +49,12 @@ class CommonPage extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-            padding: padding,
-            child: body,
+            child: isBlurBackground
+                ? BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+                    child: body,
+                  )
+                : body,
           ),
         ),
         bottomNavigationBar: bottomAppBar,

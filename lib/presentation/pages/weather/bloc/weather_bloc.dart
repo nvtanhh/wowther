@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
+import '../../../../config/injector/injection.dart';
 import '../../../../core/params/no_params.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/params/weather/get_weather_by_city_name_params.dart';
 import '../../../../core/params/weather/get_weather_by_location_params.dart';
 import '../../../../domain/entities/weather.dart';
 import '../../../../domain/usecases/weather/get_cached_weather.dart';
@@ -38,7 +41,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) : super(WeatherInitial()) {
     on<WeatherInitialEvent>(_initWeatherBloc);
     on<GetWeatherByCityNameEvent>(_getWeatherByCityName);
+    on<RefreshWeather>(_refreshWeather);
   }
+
+  DateTime? lastRefreshTime;
+  final int limitRefreshTimeSecond = 60;
 
   Future<FutureOr<void>> _initWeatherBloc(
     WeatherInitialEvent event,
@@ -47,23 +54,59 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     // get cached weather -> if not null, emit WeatherLoaded
     final cachedWeather = await getCachedWeather(NoParams());
     if (cachedWeather != null) {
-      emit(WeatherLoaded(cachedWeather));
-      emit(const WeatherRefreshing());
+      emit(WeatherLoaded(weather: cachedWeather));
+      emit(WeatherRefreshing(weather: cachedWeather));
     } else {
       emit(const WeatherLoading());
     }
     // refreshing weather by current location
     final Position position = await geolocatorService.getCurrentPosition();
     final weather = await getWeatherByLocation(
-      GetWeatherByLocationParams(position.latitude, position.longitude),
+      GetWeatherByLocationParams(
+        position.latitude,
+        position.longitude,
+        language: event.language,
+      ),
     );
-    emit(WeatherLoaded(weather));
+    emit(WeatherLoaded(weather: weather));
   }
 
-  FutureOr<void> _getWeatherByCityName(
+  Future<FutureOr<void>> _getWeatherByCityName(
     GetWeatherByCityNameEvent event,
     Emitter<WeatherState> emit,
+  ) async {
+    emit(WeatherRefreshing(weather: state.weather));
+    try {
+      final weather = await getWeatherByCityName(
+        GetWeatherByCityNameParams(event.cityName, language: event.language),
+      );
+      emit(WeatherLoaded(weather: weather));
+    } catch (e, stackTrace) {
+      locator<Logger>()
+          .e('[WeatherBloc - _getWeatherByCityName]', e, stackTrace);
+    }
+  }
+
+  FutureOr<void> _refreshWeather(
+    RefreshWeather event,
+    Emitter<WeatherState> emit,
   ) {
-    throw UnimplementedError();
+    if (DateTime.now().difference(lastRefreshTime ?? DateTime.now()).inSeconds <
+        limitRefreshTimeSecond) {
+      return Future.value();
+    }
+    lastRefreshTime = DateTime.now();
+    if (state.weather != null) {
+      add(
+        GetWeatherByCityNameEvent(
+          state.weather!.cityName,
+          language: event.language,
+        ),
+      );
+    } else {
+      add(
+        WeatherInitialEvent(language: event.language),
+      );
+    }
   }
 }

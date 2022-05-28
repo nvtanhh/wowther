@@ -19,6 +19,7 @@ void main() {
     // arrange
     const weather = Weather(
       cityName: 'London',
+      country: 'VN',
       main: 'Clouds',
       description: 'scattered clouds',
       iconCode: '03d',

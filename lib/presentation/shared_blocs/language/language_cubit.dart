@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../config/injector/injection.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/params/language/store_language_code_params.dart';
 import '../../../core/params/no_params.dart';
 import '../../../domain/usecases/langugae/get_stored_or_default_locale.dart';
 import '../../../domain/usecases/langugae/get_supported_locales.dart';
 import '../../../domain/usecases/langugae/store_locale.dart';
+import '../../pages/weather/bloc/weather_bloc.dart';
 
 part 'language_state.dart';
 
@@ -32,6 +34,7 @@ class LanguageCubit extends Cubit<LanguageState> {
 
   void changeLanguage(Locale locale) {
     emit(state.copyWith(locale: locale));
+    locator<WeatherBloc>().add(RefreshWeather(language: locale.languageCode));
     _storeLocale(StoreLocaleParams(locale));
   }
 

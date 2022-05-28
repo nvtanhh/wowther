@@ -492,13 +492,19 @@ class MockWeatherRepository extends _i1.Mock implements _i9.WeatherRepository {
       Invocation.method(#getCachedWeather, []),
       returnValue: Future<_i7.Weather?>.value()) as _i12.Future<_i7.Weather?>);
   @override
-  _i12.Future<_i7.Weather> getWeatherByCityName(String? cityName) =>
-      (super.noSuchMethod(Invocation.method(#getWeatherByCityName, [cityName]),
+  _i12.Future<_i7.Weather> getWeatherByCityName(String? cityName,
+          {String? language}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #getWeatherByCityName, [cityName], {#language: language}),
               returnValue: Future<_i7.Weather>.value(_FakeWeather_5()))
           as _i12.Future<_i7.Weather>);
   @override
-  _i12.Future<_i7.Weather> getWeatherByLocation(double? lat, double? lon) =>
-      (super.noSuchMethod(Invocation.method(#getWeatherByLocation, [lat, lon]),
+  _i12.Future<_i7.Weather> getWeatherByLocation(double? lat, double? lon,
+          {String? language}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #getWeatherByLocation, [lat, lon], {#language: language}),
               returnValue: Future<_i7.Weather>.value(_FakeWeather_5()))
           as _i12.Future<_i7.Weather>);
 }
@@ -513,15 +519,20 @@ class MockWeatherRemoteDatasource extends _i1.Mock
   }
 
   @override
-  _i12.Future<_i8.WeatherModel> getWeatherByCityName(String? cityName) =>
-      (super.noSuchMethod(Invocation.method(#getWeatherByCityName, [cityName]),
+  _i12.Future<_i8.WeatherModel> getWeatherByCityName(String? cityName,
+          {String? language}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #getWeatherByCityName, [cityName], {#language: language}),
               returnValue:
                   Future<_i8.WeatherModel>.value(_FakeWeatherModel_6()))
           as _i12.Future<_i8.WeatherModel>);
   @override
-  _i12.Future<_i8.WeatherModel> getWeatherByLocation(
-          double? lat, double? lon) =>
-      (super.noSuchMethod(Invocation.method(#getWeatherByLocation, [lat, lon]),
+  _i12.Future<_i8.WeatherModel> getWeatherByLocation(double? lat, double? lon,
+          {String? language}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #getWeatherByLocation, [lat, lon], {#language: language}),
               returnValue:
                   Future<_i8.WeatherModel>.value(_FakeWeatherModel_6()))
           as _i12.Future<_i8.WeatherModel>);
@@ -615,6 +626,10 @@ class MockGeolocatorService extends _i1.Mock implements _i40.GeolocatorService {
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i10.Position get defaultPosition =>
+      (super.noSuchMethod(Invocation.getter(#defaultPosition),
+          returnValue: _FakePosition_8()) as _i10.Position);
   @override
   _i12.Future<_i10.Position> getCurrentPosition() =>
       (super.noSuchMethod(Invocation.method(#getCurrentPosition, []),

@@ -14,6 +14,10 @@ class GetWeatherByLocation
 
   @override
   Future<Weather> call(GetWeatherByLocationParams params) {
-    return repository.getWeatherByLocation(params.lat, params.long);
+    return repository.getWeatherByLocation(
+      params.lat,
+      params.long,
+      language: params.language,
+    );
   }
 }

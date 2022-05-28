@@ -10,10 +10,17 @@ import '../../models/weather_model.dart';
 
 abstract class WeatherRemoteDatasource {
   /// Get [WeatherModel] from API by city name.
-  Future<WeatherModel> getWeatherByCityName(String cityName);
+  Future<WeatherModel> getWeatherByCityName(
+    String cityName, {
+    String? language,
+  });
 
   /// Get [WeatherModel] from API by location.
-  Future<WeatherModel> getWeatherByLocation(double lat, double lon);
+  Future<WeatherModel> getWeatherByLocation(
+    double lat,
+    double lon, {
+    String? language,
+  });
 }
 
 @Injectable(as: WeatherRemoteDatasource)
@@ -23,10 +30,14 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
   WeatherRemoteDatasourceImpl(this.client);
 
   @override
-  Future<WeatherModel> getWeatherByCityName(String cityName) async {
+  Future<WeatherModel> getWeatherByCityName(
+    String cityName, {
+    String? language,
+  }) async {
+    language ??= 'en';
     final response = await client.get(
       Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&lang=${Platform.localeName}&appid=${AppConfig.kApiKey}',
+        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&lang=$language&units=metric&appid=${AppConfig.kApiKey}',
       ),
       headers: {
         'Content-Type': 'application/json',
@@ -43,10 +54,15 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
   }
 
   @override
-  Future<WeatherModel> getWeatherByLocation(double lat, double lon) async {
+  Future<WeatherModel> getWeatherByLocation(
+    double lat,
+    double lon, {
+    String? language,
+  }) async {
+    language ??= Platform.localeName;
     final response = await client.get(
       Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&lang=${Platform.localeName}&appid=${AppConfig.kApiKey}',
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&lang=$language&units=metric&appid=${AppConfig.kApiKey}',
       ),
       headers: {
         'Content-Type': 'application/json',

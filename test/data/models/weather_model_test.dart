@@ -9,6 +9,7 @@ import '../../fixtures/fixture_reader.dart';
 void main() {
   const weather = WeatherModel(
     cityName: 'Mountain View',
+    country: 'VN',
     main: 'Clear',
     description: 'clear sky',
     iconCode: '01d',

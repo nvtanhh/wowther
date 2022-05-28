@@ -17,5 +17,11 @@
   "settings__language_title": "Language",
   "settings__language_change_language": "Change language",
   "settings__language_search": "Search language",
-  "weather__title": "Weather"
+  "weather__title": "Weather",
+  "weather__search_placeholder": "Search for city",
+  "weather__feel_like": "Feel like",
+  "weather__wind": "Wind",
+  "weather__humidity": "Humidity",
+  "weather__pressure": "Pressure"
+
 }

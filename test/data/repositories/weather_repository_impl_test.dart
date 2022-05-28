@@ -19,6 +19,7 @@ void main() {
 
   const weather = WeatherModel(
     cityName: 'London',
+    country: 'VN',
     main: 'Clouds',
     description: 'scattered clouds',
     iconCode: '03d',

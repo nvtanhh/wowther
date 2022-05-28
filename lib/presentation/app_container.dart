@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../config/theme/icons.dart';
 import 'pages/setting/ui/setting_wrapper.dart';
@@ -54,14 +53,27 @@ class _AppContainerState extends State<AppContainer>
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
-            icon: AppIcon(AppIcons.weather),
-            label: AppLocalizations.of(context)!.weather__title,
+            icon: AppIcon(AppIcons.weatherOutline),
+            activeIcon: AppIcon(
+              AppIcons.weather,
+              color: Theme.of(context).primaryColor,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: AppIcon(AppIcons.setting),
-            label: AppLocalizations.of(context)!.settings__title,
+            icon: AppIcon(AppIcons.settingOutline),
+            activeIcon: AppIcon(
+              AppIcons.setting,
+              color: Theme.of(context).primaryColor,
+            ),
+            label: '',
           ),
         ],
         selectedFontSize: 12,

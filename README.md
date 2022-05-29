@@ -34,6 +34,6 @@ Open with Editer VSCode or Android Studio and run
 * Home
 * Routing
 * Theme
-* Multiple Theme, Dark Theme, Custom Colors
+* Multiple Theme, Dark Theme
 * Multiple language
 * Multiple font

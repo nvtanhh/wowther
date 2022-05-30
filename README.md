@@ -29,11 +29,10 @@ flutter pub get
 
 Open with Editer VSCode or Android Studio and run
 
-## Boilerplate Features:
+## App features:
 
-* Home
 * Routing
-* Theme
+* Color theme
 * Multiple Theme, Dark Theme
 * Multiple language
 * Multiple font

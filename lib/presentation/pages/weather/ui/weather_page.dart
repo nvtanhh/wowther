@@ -2,16 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../config/theme/common_page.dart';
 import '../../../../config/theme/glass_container.dart';
-import '../../../../config/theme/icons.dart';
 import '../../../../config/theme/spacer.dart';
 import '../../../../config/theme/text.dart';
 import '../../../../core/extensions/extensions.index.dart';
 import '../../../../domain/entities/weather.dart';
 import '../bloc/weather_bloc.dart';
+import 'widgets/searchable_app_bar.dart';
 import 'widgets/temperature.dart';
 
 class WeatherPage extends StatelessWidget {
@@ -29,80 +28,38 @@ class WeatherPage extends StatelessWidget {
       isBlurBackground: true,
       body: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state) {
-          return RefreshIndicator(
-            onRefresh: () => _onRefresh(context),
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
+          if (state.weather != null) {
+            return RefreshIndicator(
+              onRefresh: () => _onRefresh(context),
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                child: Column(
+                  children: [
+                    SearchableWeatherAppBar(
+                      weather: state.weather!,
+                      onSearch: (String city) => _onSearch(context, city),
+                    ),
+                    _buildCurrentWeather(context, state.weather!),
+                    _buildWeatherDetail(context, state.weather!),
+                  ],
+                ),
               ),
-              child: Column(
-                children: [
-                  _buildAppBar(context, state),
-                  _buildCurrentWeather(context, state.weather),
-                  _buildWeatherDetail(context, state.weather),
-                ],
-              ),
-            ),
-          );
+            );
+          }
+          if (state is WeatherLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return const SizedBox();
         },
       ),
     );
   }
 
-  Widget _buildAppBar(BuildContext context, WeatherState state) {
-    final localName = AppLocalizations.of(context)!.localeName;
-    final date = DateFormat.yMMMMd(localName).format(DateTime.now());
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ThemedText(
-                date,
-                type: ThemedTextType.titleMedium,
-              ),
-              AppSpacer.sizedBoxH8,
-              if (state.weather != null)
-                Row(
-                  children: [
-                    Transform.translate(
-                      offset: const Offset(-4.0, 0),
-                      child: AppIcon(AppIcons.location),
-                    ),
-                    ThemedText(
-                      '${state.weather!.cityName}, '.toUpperCase(),
-                      maxLines: 1,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    ThemedText(
-                      state.weather!.country.toUpperCase(),
-                      maxLines: 1,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontWeight: FontWeight.normal),
-                    ),
-                  ],
-                )
-              else
-                AppIcon(AppIcons.locationOff),
-            ],
-          ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCurrentWeather(BuildContext context, Weather? weather) {
-    if (weather == null) return AppSpacer.emptyBox;
+  Widget _buildCurrentWeather(BuildContext context, Weather weather) {
     return Column(
       children: [
         CachedNetworkImage(
@@ -130,10 +87,8 @@ class WeatherPage extends StatelessWidget {
 
   Widget _buildWeatherDetail(
     BuildContext context,
-    Weather? weather,
+    Weather weather,
   ) {
-    if (weather == null) return AppSpacer.emptyBox;
-
     return Padding(
       padding: AppSpacer.edgeInsetsVertical12,
       child: GlassContainer(
@@ -204,4 +159,6 @@ class WeatherPage extends StatelessWidget {
       ),
     );
   }
+
+  void _onSearch(BuildContext context, String city) {}
 }

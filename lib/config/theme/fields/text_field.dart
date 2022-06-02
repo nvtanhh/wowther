@@ -23,6 +23,7 @@ class AppTextField extends StatelessWidget {
   final int? maxLength;
   final bool? enabled;
   final ValueChanged<String>? onSubmitted;
+  final BorderRadius? borderRadius;
 
   const AppTextField({
     Key? key,
@@ -44,6 +45,7 @@ class AppTextField extends StatelessWidget {
     this.maxLength,
     this.enabled,
     this.onSubmitted,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -61,7 +63,6 @@ class AppTextField extends StatelessWidget {
       textCapitalization: textCapitalization,
       enabled: enabled,
       decoration: InputDecoration(
-        isDense: decoration?.isDense ?? true,
         prefix: decoration?.prefix,
         prefixIcon: decoration?.prefixIcon,
         suffix: decoration?.suffix,
@@ -74,14 +75,13 @@ class AppTextField extends StatelessWidget {
         suffixIconConstraints: decoration?.suffixIconConstraints ??
             const BoxConstraints(minHeight: 16.0, minWidth: 16.0),
         hintText: decoration?.hintText,
-        // hintStyle: AppStyles.textMdNormal.copyWith(color: AppColors.gray500),
         contentPadding: decoration?.contentPadding ??
             const EdgeInsets.fromLTRB(14.0, 10.0, 14.0, 10.0),
-        border: const OutlineInputBorder(
-          borderRadius: AppSpacer.radius8,
+        border: OutlineInputBorder(
+          borderRadius: borderRadius ?? AppSpacer.radius8,
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: AppSpacer.radius8,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius ?? AppSpacer.radius8,
         ),
         errorText: decoration?.errorText,
         counterText: '',
@@ -94,6 +94,7 @@ class AppTextField extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (labelText != null)
           Padding(

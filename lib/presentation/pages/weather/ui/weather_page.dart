@@ -105,15 +105,13 @@ class WeatherPage extends StatelessWidget {
     if (weather == null) return AppSpacer.emptyBox;
     return Column(
       children: [
-        SizedBox(
+        CachedNetworkImage(
+          imageUrl:
+              'https://openweathermap.org/img/wn/${weather.iconCode}@4x.png',
+          color: Theme.of(context).primaryColor,
+          filterQuality: FilterQuality.medium,
+          colorBlendMode: BlendMode.modulate,
           height: 150,
-          child: CachedNetworkImage(
-            imageUrl:
-                'https://openweathermap.org/img/wn/${weather.iconCode}@4x.png',
-            color: Theme.of(context).primaryColor,
-            filterQuality: FilterQuality.medium,
-            colorBlendMode: BlendMode.modulate,
-          ),
         ),
         ThemedText(
           weather.description.capitalize(),

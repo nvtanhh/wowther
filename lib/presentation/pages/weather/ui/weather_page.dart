@@ -66,7 +66,10 @@ class WeatherPage extends StatelessWidget {
               if (state.weather != null)
                 Row(
                   children: [
-                    AppIcon(AppIcons.location),
+                    Transform.translate(
+                      offset: const Offset(-4.0, 0),
+                      child: AppIcon(AppIcons.location),
+                    ),
                     ThemedText(
                       '${state.weather!.cityName}, '.toUpperCase(),
                       maxLines: 1,
@@ -102,13 +105,15 @@ class WeatherPage extends StatelessWidget {
     if (weather == null) return AppSpacer.emptyBox;
     return Column(
       children: [
-        AppSpacer.sizedBoxH32,
-        CachedNetworkImage(
-          imageUrl:
-              'https://openweathermap.org/img/wn/${weather.iconCode}@4x.png',
-          color: Theme.of(context).primaryColor,
-          filterQuality: FilterQuality.medium,
-          colorBlendMode: BlendMode.modulate,
+        SizedBox(
+          height: 150,
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://openweathermap.org/img/wn/${weather.iconCode}@4x.png',
+            color: Theme.of(context).primaryColor,
+            filterQuality: FilterQuality.medium,
+            colorBlendMode: BlendMode.modulate,
+          ),
         ),
         ThemedText(
           weather.description.capitalize(),
@@ -139,8 +144,8 @@ class WeatherPage extends StatelessWidget {
         child: GridView.count(
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          childAspectRatio: 2,
-          mainAxisSpacing: 8,
+          childAspectRatio: 2.0,
+          mainAxisSpacing: 4.0,
           shrinkWrap: true,
           children: <Widget>[
             _buildWeatherDetailInfo(

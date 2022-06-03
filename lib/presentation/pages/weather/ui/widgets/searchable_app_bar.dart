@@ -26,104 +26,80 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
   final ValueNotifier<bool> _isSearching = ValueNotifier<bool>(false);
   static const Duration _searchAnimationDuration = Duration(milliseconds: 300);
 
+  void _onSubmitted(String value) {
+    _isSearching.value = false;
+    widget.onSearch(value);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (_, constraints) {
-      return ValueListenableBuilder(
-        valueListenable: _isSearching,
-        builder: (_, bool isSearching, __) {
-          return Stack(
-            alignment: Alignment.center,
-            children: [
-              AnimatedOpacity(
-                opacity: !isSearching ? 1 : 0,
-                duration: _searchAnimationDuration,
-                curve: Curves.easeInOutSine,
-                child: _buildTimeAndPlace(),
-              ),
-              Positioned(
-                top: 0,
-                bottom: 0,
-                right: 0,
-                child: AnimatedContainer(
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        return ValueListenableBuilder(
+          valueListenable: _isSearching,
+          builder: (_, bool isSearching, __) {
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                AnimatedOpacity(
+                  opacity: !isSearching ? 1 : 0,
                   duration: _searchAnimationDuration,
-                  alignment: Alignment.centerRight,
-                  width: isSearching ? constraints.maxWidth : 50,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          child: isSearching
-                              ? AppTextField(
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    hintText: AppLocalizations.of(context)!
-                                        .global__search,
-                                    suffixIcon: GestureDetector(
-                                      onTap: () => _isSearching.value = false,
-                                      child: AppIcon(
-                                        AppIcons.close,
-                                        color: Theme.of(context)
-                                            .inputDecorationTheme
-                                            .suffixIconColor,
+                  curve: Curves.easeInOutSine,
+                  child: _buildTimeAndPlace(),
+                ),
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 0,
+                  child: AnimatedContainer(
+                    duration: _searchAnimationDuration,
+                    alignment: Alignment.centerRight,
+                    width: isSearching ? constraints.maxWidth : 50,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: isSearching
+                                ? AppTextField(
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      hintText: AppLocalizations.of(context)!
+                                          .global__search,
+                                      suffixIcon: GestureDetector(
+                                        onTap: () => _isSearching.value = false,
+                                        child: AppIcon(
+                                          AppIcons.close,
+                                          color: Theme.of(context)
+                                              .inputDecorationTheme
+                                              .suffixIconColor,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  borderRadius: AppSpacer.radius24,
-                                  onSubmitted: widget.onSearch,
-                                  autofocus: true,
-                                )
-                              : null,
-                        ),
-                      ),
-                      if (!isSearching)
-                        GestureDetector(
-                          onTap: () => _isSearching.value = true,
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 14.0),
-                            child: AppIcon(AppIcons.search),
+                                    borderRadius: AppSpacer.radius24,
+                                    onSubmitted: _onSubmitted,
+                                    autofocus: true,
+                                  )
+                                : null,
                           ),
                         ),
-                    ],
+                        if (!isSearching)
+                          GestureDetector(
+                            onTap: () => _isSearching.value = true,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 14.0),
+                              child: AppIcon(AppIcons.search),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
-                  // child: Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: Container(
-                  //         child: isSearching
-                  //             ? AppTextField(
-                  //                 onChanged: widget.onSearch,
-                  //                 decoration: InputDecoration(
-                  //                   hintText: AppLocalizations.of(context)!
-                  //                       .global__search,
-                  //                   suffixIcon: GestureDetector(
-                  //                     onTap: () => _isSearching.value = false,
-                  //                     child: AppIcon(
-                  //                       AppIcons.close,
-                  //                       color: Theme.of(context)
-                  //                           .inputDecorationTheme
-                  //                           .suffixIconColor,
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //                 borderRadius: AppSpacer.radius24,
-                  //               )
-                  //             : null,
-                  //       ),
-                  //     ),
-                  //     GestureDetector(
-                  //       onTap: () => _isSearching.value = true,
-                  //       child: AppIcon(AppIcons.search),
-                  //     ),
-                  //   ],
-                  // ),
                 ),
-              ),
-            ],
-          );
-        },
-      );
-    });
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   Widget _buildTimeAndPlace() {

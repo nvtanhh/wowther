@@ -21,11 +21,11 @@ class WeatherModel extends Weather {
       main: json['weather'][0]['main'] as String,
       description: json['weather'][0]['description'] as String,
       iconCode: json['weather'][0]['icon'] as String,
-      temperature: json['main']['temp'] as double,
-      tempFeelLike: json['main']['feels_like'] as double,
+      temperature: (json['main']['temp'] as num).toDouble(),
+      tempFeelLike: (json['main']['feels_like'] as num).toDouble(),
       pressure: json['main']['pressure'] as int,
       humidity: json['main']['humidity'] as int,
-      windSpeed: json['wind']['speed'] as double,
+      windSpeed: (json['wind']['speed'] as num).toDouble(),
     );
   }
   factory WeatherModel.fromEntity(Weather entity) {

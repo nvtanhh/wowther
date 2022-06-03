@@ -15,9 +15,19 @@ import 'widgets/temperature.dart';
 
 class WeatherPage extends StatelessWidget {
   const WeatherPage({Key? key}) : super(key: key);
+
   Future<void> _onRefresh(BuildContext context) async {
     context.read<WeatherBloc>().add(
           RefreshWeather(language: AppLocalizations.of(context)?.localeName),
+        );
+  }
+
+  void _onSearch(BuildContext context, String cityName) {
+    context.read<WeatherBloc>().add(
+          GetWeatherByCityNameEvent(
+            cityName,
+            language: AppLocalizations.of(context)?.localeName,
+          ),
         );
   }
 
@@ -149,7 +159,6 @@ class WeatherPage extends StatelessWidget {
           AppSpacer.sizedBoxH8,
           ThemedText(
             content,
-            // type: ThemedTextType.heading6,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -159,6 +168,4 @@ class WeatherPage extends StatelessWidget {
       ),
     );
   }
-
-  void _onSearch(BuildContext context, String city) {}
 }

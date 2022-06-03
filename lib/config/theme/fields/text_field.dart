@@ -63,6 +63,8 @@ class AppTextField extends StatelessWidget {
       textCapitalization: textCapitalization,
       enabled: enabled,
       decoration: InputDecoration(
+        isDense: decoration?.isDense ?? true,
+        filled: decoration?.filled,
         prefix: decoration?.prefix,
         prefixIcon: decoration?.prefixIcon,
         suffix: decoration?.suffix,

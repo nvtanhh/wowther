@@ -24,48 +24,106 @@ class SearchableWeatherAppBar extends StatefulWidget {
 
 class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
   final ValueNotifier<bool> _isSearching = ValueNotifier<bool>(false);
+  static const Duration _searchAnimationDuration = Duration(milliseconds: 300);
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: _isSearching,
-      builder: (_, bool isSearching, __) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          width: double.infinity,
-          color: Colors.red,
-          child: Row(
+    return LayoutBuilder(builder: (_, constraints) {
+      return ValueListenableBuilder(
+        valueListenable: _isSearching,
+        builder: (_, bool isSearching, __) {
+          return Stack(
+            alignment: Alignment.center,
             children: [
-              if (!isSearching) Expanded(child: _buildTimeAndPlace()),
-              if (!isSearching)
-                IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () => _isSearching.value = true,
-                )
-              else
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: AppTextField(
-                      onChanged: widget.onSearch,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        hintText: AppLocalizations.of(context)!.global__search,
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () => _isSearching.value = false,
+              AnimatedOpacity(
+                opacity: !isSearching ? 1 : 0,
+                duration: _searchAnimationDuration,
+                curve: Curves.easeInOutSine,
+                child: _buildTimeAndPlace(),
+              ),
+              Positioned(
+                top: 0,
+                bottom: 0,
+                right: 0,
+                child: AnimatedContainer(
+                  duration: _searchAnimationDuration,
+                  alignment: Alignment.centerRight,
+                  width: isSearching ? constraints.maxWidth : 50,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: isSearching
+                              ? AppTextField(
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    hintText: AppLocalizations.of(context)!
+                                        .global__search,
+                                    suffixIcon: GestureDetector(
+                                      onTap: () => _isSearching.value = false,
+                                      child: AppIcon(
+                                        AppIcons.close,
+                                        color: Theme.of(context)
+                                            .inputDecorationTheme
+                                            .suffixIconColor,
+                                      ),
+                                    ),
+                                  ),
+                                  borderRadius: AppSpacer.radius24,
+                                  onSubmitted: widget.onSearch,
+                                  autofocus: true,
+                                )
+                              : null,
                         ),
-                        contentPadding: EdgeInsets.zero,
                       ),
-                      borderRadius: AppSpacer.radius24,
-                    ),
+                      if (!isSearching)
+                        GestureDetector(
+                          onTap: () => _isSearching.value = true,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 14.0),
+                            child: AppIcon(AppIcons.search),
+                          ),
+                        ),
+                    ],
                   ),
+                  // child: Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Container(
+                  //         child: isSearching
+                  //             ? AppTextField(
+                  //                 onChanged: widget.onSearch,
+                  //                 decoration: InputDecoration(
+                  //                   hintText: AppLocalizations.of(context)!
+                  //                       .global__search,
+                  //                   suffixIcon: GestureDetector(
+                  //                     onTap: () => _isSearching.value = false,
+                  //                     child: AppIcon(
+                  //                       AppIcons.close,
+                  //                       color: Theme.of(context)
+                  //                           .inputDecorationTheme
+                  //                           .suffixIconColor,
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //                 borderRadius: AppSpacer.radius24,
+                  //               )
+                  //             : null,
+                  //       ),
+                  //     ),
+                  //     GestureDetector(
+                  //       onTap: () => _isSearching.value = true,
+                  //       child: AppIcon(AppIcons.search),
+                  //     ),
+                  //   ],
+                  // ),
                 ),
+              ),
             ],
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    });
   }
 
   Widget _buildTimeAndPlace() {

@@ -98,6 +98,7 @@ class AppIcons {
       const AppIconData(nativeIcon: Icons.location_on_rounded);
   static AppIconData locationOff =
       const AppIconData(nativeIcon: Icons.location_off_rounded);
+  static AppIconData close = const AppIconData(nativeIcon: Icons.close);
 }
 
 class AppIconData {

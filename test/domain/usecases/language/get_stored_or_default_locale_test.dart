@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resources/core/params/no_params.dart';
-import 'package:flutter_resources/domain/usecases/langugae/get_stored_or_default_locale.dart';
+import 'package:flutter_resources/domain/usecases/language/get_stored_or_default_locale.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

@@ -20,10 +20,10 @@ import '../../data/repositories/weather_repository_impl.dart' as _i16;
 import '../../domain/repositories/language_repository.dart' as _i24;
 import '../../domain/repositories/theme_repository.dart' as _i10;
 import '../../domain/repositories/weather_repository.dart' as _i15;
-import '../../domain/usecases/langugae/get_stored_or_default_locale.dart'
+import '../../domain/usecases/language/get_stored_or_default_locale.dart'
     as _i30;
-import '../../domain/usecases/langugae/get_supported_locales.dart' as _i31;
-import '../../domain/usecases/langugae/store_locale.dart' as _i27;
+import '../../domain/usecases/language/get_supported_locales.dart' as _i31;
+import '../../domain/usecases/language/store_locale.dart' as _i27;
 import '../../domain/usecases/theme/get_stored_theme_data.dart' as _i18;
 import '../../domain/usecases/theme/get_supported_color_themes.dart' as _i19;
 import '../../domain/usecases/theme/get_supported_fonts.dart' as _i20;
@@ -36,7 +36,7 @@ import '../../presentation/shared_blocs/language/language_cubit.dart' as _i32;
 import '../../presentation/shared_blocs/theme/theme_cubit.dart' as _i28;
 import '../../presentation/shared_blocs/user/user_cubit.dart' as _i12;
 import '../../services/firebase_service.dart' as _i5;
-import '../../services/geolocation_service.dart' as _i6;
+import '../../services/geolocator_service.dart' as _i6;
 import '../route/route.dart' as _i3;
 import 'register.module.dart' as _i33; // ignore_for_file: unnecessary_lambdas
 

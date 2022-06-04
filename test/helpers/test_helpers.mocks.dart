@@ -36,11 +36,11 @@ import 'package:flutter_resources/domain/repositories/theme_repository.dart'
     as _i17;
 import 'package:flutter_resources/domain/repositories/weather_repository.dart'
     as _i9;
-import 'package:flutter_resources/domain/usecases/langugae/get_stored_or_default_locale.dart'
+import 'package:flutter_resources/domain/usecases/language/get_stored_or_default_locale.dart'
     as _i29;
-import 'package:flutter_resources/domain/usecases/langugae/get_supported_locales.dart'
+import 'package:flutter_resources/domain/usecases/language/get_supported_locales.dart'
     as _i30;
-import 'package:flutter_resources/domain/usecases/langugae/store_locale.dart'
+import 'package:flutter_resources/domain/usecases/language/store_locale.dart'
     as _i31;
 import 'package:flutter_resources/domain/usecases/theme/get_stored_theme_data.dart'
     as _i24;
@@ -56,7 +56,7 @@ import 'package:flutter_resources/domain/usecases/weather/get_weather_by_city_na
     as _i36;
 import 'package:flutter_resources/domain/usecases/weather/get_weather_by_location.dart'
     as _i38;
-import 'package:flutter_resources/services/geolocation_service.dart' as _i40;
+import 'package:flutter_resources/services/geolocator_service.dart' as _i40;
 import 'package:geolocator/geolocator.dart' as _i10;
 import 'package:http/http.dart' as _i13;
 import 'package:http/src/base_request.dart' as _i16;

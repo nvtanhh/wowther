@@ -14,7 +14,7 @@ import '../../../../domain/entities/weather.dart';
 import '../../../../domain/usecases/weather/get_cached_weather.dart';
 import '../../../../domain/usecases/weather/get_weather_by_city_name.dart';
 import '../../../../domain/usecases/weather/get_weather_by_location.dart';
-import '../../../../services/geolocation_service.dart';
+import '../../../../services/geolocator_service.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';

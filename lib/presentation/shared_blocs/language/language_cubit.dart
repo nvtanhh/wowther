@@ -7,9 +7,9 @@ import '../../../config/injector/injection.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/params/language/store_language_code_params.dart';
 import '../../../core/params/no_params.dart';
-import '../../../domain/usecases/langugae/get_stored_or_default_locale.dart';
-import '../../../domain/usecases/langugae/get_supported_locales.dart';
-import '../../../domain/usecases/langugae/store_locale.dart';
+import '../../../domain/usecases/language/get_stored_or_default_locale.dart';
+import '../../../domain/usecases/language/get_supported_locales.dart';
+import '../../../domain/usecases/language/store_locale.dart';
 import '../../pages/weather/bloc/weather_bloc.dart';
 
 part 'language_state.dart';

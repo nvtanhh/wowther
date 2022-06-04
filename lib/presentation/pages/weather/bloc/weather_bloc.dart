@@ -4,6 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import '../../../../config/injector/injection.dart';
+import '../../../../core/exceptions/exceptions.index.dart';
+import '../../../../core/exceptions/weather_error.dart';
 import '../../../../core/params/no_params.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
@@ -70,9 +72,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         ),
       );
       emit(WeatherLoaded(weather: weather));
-    } on Exception catch (e, stackTrace) {
+    } catch (e, stackTrace) {
       locator<Logger>().e('[WeatherBloc - _initWeatherBloc]', e, stackTrace);
-      emit(WeatherError(errorMessage: e.toString(), weather: state.weather));
     }
   }
 
@@ -86,10 +87,20 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         GetWeatherByCityNameParams(event.cityName, language: event.language),
       );
       emit(WeatherLoaded(weather: weather));
+    } on ServerException catch (e) {
+      WeatherError? error;
+      if (e.isNotFound) {
+        error = CityNotFoundError(e.message);
+      }
+      emit(
+        WeatherErrorState(
+          error: error,
+          weather: state.weather,
+        ),
+      );
     } catch (e, stackTrace) {
       locator<Logger>()
           .e('[WeatherBloc - _getWeatherByCityName]', e, stackTrace);
-      emit(WeatherError(errorMessage: e.toString(), weather: state.weather));
     }
   }
 

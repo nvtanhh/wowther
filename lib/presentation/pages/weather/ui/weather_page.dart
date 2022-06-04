@@ -7,7 +7,9 @@ import '../../../../config/theme/common_page.dart';
 import '../../../../config/theme/glass_container.dart';
 import '../../../../config/theme/spacer.dart';
 import '../../../../config/theme/text.dart';
+import '../../../../core/exceptions/weather_error.dart';
 import '../../../../core/extensions/extensions.index.dart';
+import '../../../../core/utils/utils.index.dart';
 import '../../../../domain/entities/weather.dart';
 import '../bloc/weather_bloc.dart';
 import 'widgets/searchable_app_bar.dart';
@@ -38,8 +40,8 @@ class WeatherPage extends StatelessWidget {
       isBlurBackground: true,
       body: BlocConsumer<WeatherBloc, WeatherState>(
         listener: (context, state) {
-          if (state is WeatherError) {
-            _showErrorSnackBar(context, state.errorMessage);
+          if (state is WeatherErrorState) {
+            _showErrorSnackBar(context, state.error);
           }
         },
         builder: (context, state) {
@@ -178,29 +180,12 @@ class WeatherPage extends StatelessWidget {
     );
   }
 
-  void _showErrorSnackBar(BuildContext context, String errorMessage) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        content: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            padding: AppSpacer.edgeInsetsAll12,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onBackground.withOpacity(.8),
-              borderRadius: AppSpacer.radius24,
-            ),
-            child: ThemedText(
-              errorMessage,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: Theme.of(context).colorScheme.background,
-                  ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ),
-    );
+  void _showErrorSnackBar(BuildContext context, WeatherError? error) {
+    if (error == null) return;
+    String content = error.message;
+    if (error is CityNotFoundError) {
+      content = AppLocalizations.of(context)!.weather__error_city_not_found;
+    }
+    CommonUtils.showSnackBar(context, content);
   }
 }

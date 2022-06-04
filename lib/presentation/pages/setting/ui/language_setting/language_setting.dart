@@ -53,7 +53,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
       supportedLocales = supportedLocales
           .where(
             (item) =>
-                UtilLanguage.getGlobalLanguageName(item.languageCode, context)
+                LanguageUtils.getGlobalLanguageName(item.languageCode, context)
                     .toUpperCase()
                     .contains(text.toUpperCase()),
           )
@@ -95,7 +95,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
                       );
                     }
                     return AppListTitle(
-                      title: UtilLanguage.getGlobalLanguageName(
+                      title: LanguageUtils.getGlobalLanguageName(
                         locale.languageCode,
                         context,
                       ),

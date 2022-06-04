@@ -23,6 +23,6 @@
   "weather__feel_like": "Feel like",
   "weather__wind": "Wind",
   "weather__humidity": "Humidity",
-  "weather__pressure": "Pressure"
-
+  "weather__pressure": "Pressure",
+  "weather__error_city_not_found": "City not found"
 }

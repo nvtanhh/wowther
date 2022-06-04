@@ -126,7 +126,7 @@ class SettingPage extends StatelessWidget {
                   return Row(
                     children: <Widget>[
                       ThemedText(
-                        UtilLanguage.getGlobalLanguageName(
+                        LanguageUtils.getGlobalLanguageName(
                           languageState.locale.languageCode,
                           context,
                         ),

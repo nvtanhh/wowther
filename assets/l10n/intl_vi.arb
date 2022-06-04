@@ -23,5 +23,6 @@
   "weather__feel_like": "Cảm giác như",
   "weather__wind": "Gió",
   "weather__humidity": "Độ ẩm",
-  "weather__pressure": "Áp suất"
+  "weather__pressure": "Áp suất",
+  "weather__error_city_not_found": "Không tìm thấy thành phố"
 }

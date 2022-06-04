@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-class DatabaseUtil {
+class DatabaseUtils {
   static Future<void> initDatabase() async {
     final Directory directory = await getApplicationDocumentsDirectory();
     Hive.init(directory.path);

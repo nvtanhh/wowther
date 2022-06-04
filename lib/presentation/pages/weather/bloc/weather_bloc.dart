@@ -47,28 +47,33 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   DateTime? lastRefreshTime;
   final int limitRefreshTimeSecond = 60;
 
-  Future<FutureOr<void>> _initWeatherBloc(
+  FutureOr<void> _initWeatherBloc(
     WeatherInitialEvent event,
     Emitter<WeatherState> emit,
   ) async {
     // get cached weather -> if not null, emit WeatherLoaded
-    final cachedWeather = await getCachedWeather(NoParams());
-    if (cachedWeather != null) {
-      emit(WeatherLoaded(weather: cachedWeather));
-      emit(WeatherRefreshing(weather: cachedWeather));
-    } else {
-      emit(const WeatherLoading());
+    try {
+      final cachedWeather = await getCachedWeather(NoParams());
+      if (cachedWeather != null) {
+        emit(WeatherLoaded(weather: cachedWeather));
+        emit(WeatherRefreshing(weather: cachedWeather));
+      } else {
+        emit(const WeatherLoading());
+      }
+      // refreshing weather by current location
+      final Position position = await geolocatorService.getCurrentPosition();
+      final weather = await getWeatherByLocation(
+        GetWeatherByLocationParams(
+          position.latitude,
+          position.longitude,
+          language: event.language,
+        ),
+      );
+      emit(WeatherLoaded(weather: weather));
+    } on Exception catch (e, stackTrace) {
+      locator<Logger>().e('[WeatherBloc - _initWeatherBloc]', e, stackTrace);
+      emit(WeatherError(errorMessage: e.toString(), weather: state.weather));
     }
-    // refreshing weather by current location
-    final Position position = await geolocatorService.getCurrentPosition();
-    final weather = await getWeatherByLocation(
-      GetWeatherByLocationParams(
-        position.latitude,
-        position.longitude,
-        language: event.language,
-      ),
-    );
-    emit(WeatherLoaded(weather: weather));
   }
 
   Future<FutureOr<void>> _getWeatherByCityName(
@@ -84,6 +89,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     } catch (e, stackTrace) {
       locator<Logger>()
           .e('[WeatherBloc - _getWeatherByCityName]', e, stackTrace);
+      emit(WeatherError(errorMessage: e.toString(), weather: state.weather));
     }
   }
 

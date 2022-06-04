@@ -49,7 +49,10 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
         jsonDecode(response.body) as Map<String, dynamic>,
       );
     } else {
-      throw ServerException(code: response.statusCode, message: response.body);
+      throw ServerException(
+        code: response.statusCode,
+        message: (jsonDecode(response.body))['message'] as String,
+      );
     }
   }
 
@@ -74,7 +77,10 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
         jsonDecode(response.body) as Map<String, dynamic>,
       );
     } else {
-      throw ServerException(code: response.statusCode, message: response.body);
+      throw ServerException(
+        code: response.statusCode,
+        message: (jsonDecode(response.body))['message'] as String,
+      );
     }
   }
 }

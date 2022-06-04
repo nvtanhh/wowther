@@ -34,13 +34,13 @@ class CommonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop != null ? onWillPop! : () async => true,
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor:
-              backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-          appBar: appBar,
-          body: Container(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor:
+            backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+        appBar: appBar,
+        body: SafeArea(
+          child: Container(
             padding: padding,
             decoration: backgroundImage == null
                 ? null
@@ -57,10 +57,10 @@ class CommonPage extends StatelessWidget {
                   )
                 : body,
           ),
-          bottomNavigationBar: bottomAppBar,
-          floatingActionButton: floatingActionButton,
-          floatingActionButtonLocation: floatingActionButtonLocation,
         ),
+        bottomNavigationBar: bottomAppBar,
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: floatingActionButtonLocation,
       ),
     );
   }

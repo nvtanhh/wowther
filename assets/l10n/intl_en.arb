@@ -2,6 +2,7 @@
   "global__close": "Close",
   "global__apply": "Apply",
   "global__search": "Search",
+  "global__search_city_hint": "Enter city name",
   "language_english": "English",
   "language_vietnamese": "Vietnamese",
   "auth_sign_in__with_facebook": "Continue with Facebook",

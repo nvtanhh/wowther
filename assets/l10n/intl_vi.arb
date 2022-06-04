@@ -2,6 +2,7 @@
   "global__close": "Đóng",
   "global__apply": "Áp dụng",
   "global__search": "Tìm kiếm",
+  "global__search_city_hint": "Nhập tên thành phố",
   "language_english": "Tiếng Anh",
   "language_vietnamese": "Tiếng Việt",
   "auth_sign_in__with_facebook": "Đăng nhập với Facebook",

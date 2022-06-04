@@ -21,3 +21,15 @@ class WeatherRefreshing extends WeatherState {
 class WeatherLoaded extends WeatherState {
   const WeatherLoaded({required Weather super.weather});
 }
+
+class WeatherError extends WeatherState {
+  final String errorMessage;
+
+  const WeatherError({
+    required this.errorMessage,
+    super.weather,
+  });
+
+  @override
+  List<Object?> get props => [errorMessage, ...super.props];
+}

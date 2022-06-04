@@ -9,12 +9,15 @@ import '../../../../../config/theme/text.dart';
 import '../../../../../domain/entities/weather.dart';
 
 class SearchableWeatherAppBar extends StatefulWidget {
-  final Weather weather;
+  final Weather? weather;
   final void Function(String) onSearch;
+  final bool isRefreshing;
+
   const SearchableWeatherAppBar({
     Key? key,
     required this.weather,
     required this.onSearch,
+    this.isRefreshing = false,
   }) : super(key: key);
 
   @override
@@ -23,8 +26,17 @@ class SearchableWeatherAppBar extends StatefulWidget {
 }
 
 class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
-  final ValueNotifier<bool> _isSearching = ValueNotifier<bool>(false);
   static const Duration _searchAnimationDuration = Duration(milliseconds: 300);
+  final ValueNotifier<bool> _isSearching = ValueNotifier<bool>(false);
+
+  void _toggleSearch() {
+    _isSearching.value = !_isSearching.value;
+    if (_isSearching.value) {
+      FocusScope.of(context).requestFocus();
+    } else {
+      FocusScope.of(context).unfocus();
+    }
+  }
 
   void _onSubmitted(String value) {
     _isSearching.value = false;
@@ -39,12 +51,12 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
           valueListenable: _isSearching,
           builder: (_, bool isSearching, __) {
             return Stack(
-              alignment: Alignment.center,
+              alignment: Alignment.centerLeft,
               children: [
                 AnimatedOpacity(
                   opacity: !isSearching ? 1 : 0,
                   duration: _searchAnimationDuration,
-                  curve: Curves.easeInOutSine,
+                  curve: Curves.easeInOutCubic,
                   child: _buildTimeAndPlace(),
                 ),
                 Positioned(
@@ -54,43 +66,31 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
                   child: AnimatedContainer(
                     duration: _searchAnimationDuration,
                     alignment: Alignment.centerRight,
-                    width: isSearching ? constraints.maxWidth : 50,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            child: isSearching
-                                ? AppTextField(
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      hintText: AppLocalizations.of(context)!
-                                          .global__search,
-                                      suffixIcon: GestureDetector(
-                                        onTap: () => _isSearching.value = false,
-                                        child: AppIcon(
-                                          AppIcons.close,
-                                          color: Theme.of(context)
-                                              .inputDecorationTheme
-                                              .suffixIconColor,
-                                        ),
-                                      ),
-                                    ),
-                                    borderRadius: AppSpacer.radius24,
-                                    onSubmitted: _onSubmitted,
-                                    autofocus: true,
-                                  )
-                                : null,
-                          ),
-                        ),
-                        if (!isSearching)
-                          GestureDetector(
-                            onTap: () => _isSearching.value = true,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: AppIcon(AppIcons.search),
-                            ),
-                          ),
-                      ],
+                    width: isSearching ? constraints.maxWidth : 60,
+                    curve: Curves.easeInOutCubic,
+                    child: AppTextField(
+                      controller: TextEditingController(),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: !isSearching ? Colors.transparent : null,
+                        hintText: AppLocalizations.of(context)!
+                            .global__search_city_hint,
+                        suffixIcon: widget.isRefreshing
+                            ? _buildRefreshingIndicator()
+                            : GestureDetector(
+                                onTap: _toggleSearch,
+                                child: isSearching
+                                    ? AppIcon(AppIcons.close)
+                                    : AppIcon(AppIcons.search),
+                              ),
+                        border: isSearching ? null : InputBorder.none,
+                        disabledBorder: isSearching ? null : InputBorder.none,
+                        focusedBorder: isSearching ? null : InputBorder.none,
+                        enabledBorder: isSearching ? null : InputBorder.none,
+                      ),
+                      borderRadius: AppSpacer.radius24,
+                      onTap: !isSearching ? _toggleSearch : null,
+                      onSubmitted: _onSubmitted,
                     ),
                   ),
                 ),
@@ -102,41 +102,59 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
     );
   }
 
+  Widget _buildRefreshingIndicator() {
+    return const SizedBox(
+      height: 20.0,
+      width: 20.0,
+      child: CircularProgressIndicator(
+        strokeWidth: 2.0,
+      ),
+    );
+  }
+
   Widget _buildTimeAndPlace() {
     final localName = AppLocalizations.of(context)!.localeName;
     final date = DateFormat.yMMMMd(localName).format(DateTime.now());
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return SizedBox(
+      height: 56.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ThemedText(
+            date,
+            type: ThemedTextType.titleMedium,
+          ),
+          AppSpacer.sizedBoxH8,
+          if (widget.weather != null) _buildWeatherLocation(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWeatherLocation() {
+    return Row(
       children: [
-        ThemedText(
-          date,
-          type: ThemedTextType.titleMedium,
+        Transform.translate(
+          offset: const Offset(-4.0, 0),
+          child: AppIcon(AppIcons.location),
         ),
-        AppSpacer.sizedBoxH8,
-        Row(
-          children: [
-            Transform.translate(
-              offset: const Offset(-4.0, 0),
-              child: AppIcon(AppIcons.location),
-            ),
-            ThemedText(
-              '${widget.weather.cityName}, '.toUpperCase(),
-              maxLines: 1,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            ThemedText(
-              widget.weather.country.toUpperCase(),
-              maxLines: 1,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.normal),
-            ),
-          ],
-        )
+        ThemedText(
+          '${widget.weather!.cityName}, '.toUpperCase(),
+          maxLines: 1,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        ThemedText(
+          widget.weather!.country.toUpperCase(),
+          maxLines: 1,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.normal),
+        ),
       ],
     );
   }

@@ -36,34 +36,43 @@ class WeatherPage extends StatelessWidget {
     return CommonPage(
       backgroundImage: 'assets/images/world-map-bg.png',
       isBlurBackground: true,
-      body: BlocBuilder<WeatherBloc, WeatherState>(
+      body: BlocConsumer<WeatherBloc, WeatherState>(
+        listener: (context, state) {
+          if (state is WeatherError) {
+            _showErrorSnackBar(context, state.errorMessage);
+          }
+        },
         builder: (context, state) {
-          if (state.weather != null) {
-            return RefreshIndicator(
-              onRefresh: () => _onRefresh(context),
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
+          return RefreshIndicator(
+            onRefresh: () => _onRefresh(context),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: SearchableWeatherAppBar(
+                    weather: state.weather,
+                    onSearch: (String city) => _onSearch(context, city),
+                    isRefreshing: state is WeatherRefreshing,
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    SearchableWeatherAppBar(
-                      weather: state.weather!,
-                      onSearch: (String city) => _onSearch(context, city),
+                if (state.weather != null)
+                  Expanded(
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
+                      child: Column(
+                        children: [
+                          _buildCurrentWeather(context, state.weather!),
+                          _buildWeatherDetail(context, state.weather!),
+                        ],
+                      ),
                     ),
-                    _buildCurrentWeather(context, state.weather!),
-                    _buildWeatherDetail(context, state.weather!),
-                  ],
-                ),
-              ),
-            );
-          }
-          if (state is WeatherLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return const SizedBox();
+                  ),
+              ],
+            ),
+          );
         },
       ),
     );
@@ -165,6 +174,32 @@ class WeatherPage extends StatelessWidget {
                 .copyWith(fontWeight: FontWeight.w600),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showErrorSnackBar(BuildContext context, String errorMessage) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        content: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            padding: AppSpacer.edgeInsetsAll12,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground.withOpacity(.8),
+              borderRadius: AppSpacer.radius24,
+            ),
+            child: ThemedText(
+              errorMessage,
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
       ),
     );
   }

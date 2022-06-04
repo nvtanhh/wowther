@@ -88,7 +88,8 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
                         focusedBorder: isSearching ? null : InputBorder.none,
                         enabledBorder: isSearching ? null : InputBorder.none,
                       ),
-                      borderRadius: AppSpacer.radius24,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(32.0)),
                       onTap: !isSearching ? _toggleSearch : null,
                       onSubmitted: _onSubmitted,
                     ),

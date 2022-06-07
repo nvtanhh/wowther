@@ -67,7 +67,7 @@ flutter:
       fonts:
         - asset: assets/fonts/ProximaNova-Black.otf
         - asset: assets/fonts/ProximaNova-Bold.otf
-        - asset: assets/fonts/ProximaNova-Extrabld.otf
+        - asset: assets/fonts/ProximaNova-ExtraBold.otf
         - asset: assets/fonts/ProximaNova-Regular.otf
         - asset: assets/fonts/ProximaNovaT-Thin.otf
     - family: Raleway

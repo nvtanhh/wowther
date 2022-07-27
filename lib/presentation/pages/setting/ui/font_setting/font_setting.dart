@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../config/theme/common_app_bar.dart';
-import '../../../../../config/theme/common_page.dart';
-import '../../../../../config/theme/list_title.dart';
+import '../../../../common_widgets/common_widget.index.dart';
 import '../../../../shared_blocs/theme/theme_cubit.dart';
 
 class FontSettingPage extends StatelessWidget {

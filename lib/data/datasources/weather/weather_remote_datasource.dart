@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../config/app_config.dart';
+import '../../../configs/app_config.dart';
 import '../../../core/exceptions/exceptions.index.dart';
 import '../../models/weather_model.dart';
 

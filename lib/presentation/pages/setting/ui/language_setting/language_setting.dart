@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../config/injector/injection.dart';
-import '../../../../../config/theme/common_app_bar.dart';
-import '../../../../../config/theme/common_page.dart';
-import '../../../../../config/theme/fields/text_field.dart';
-import '../../../../../config/theme/list_title.dart';
+import '../../../../../configs/configs.index.dart';
 import '../../../../../core/utils/language.dart';
+import '../../../../common_widgets/common_widget.index.dart';
 import '../../../../shared_blocs/language/language_cubit.dart';
 
 class LanguageSettingPage extends StatefulWidget {
@@ -66,7 +63,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
     return CommonPage(
       appBar: _buildAppBar(),
       body: Column(
-        children: <Widget>[
+        children: [
           Padding(
             padding: const EdgeInsets.only(
               top: 16.0,

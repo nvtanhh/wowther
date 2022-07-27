@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import '../../../../config/injector/injection.dart';
+import '../../../../configs/configs.index.dart';
 import '../../../../core/exceptions/exceptions.index.dart';
 import '../../../../core/exceptions/weather_error.dart';
 import '../../../../core/params/no_params.dart';

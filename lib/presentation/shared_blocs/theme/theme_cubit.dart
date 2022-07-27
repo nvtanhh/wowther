@@ -3,38 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/params/no_params.dart';
-import '../../../core/params/theme/store_app_theme_data_params.dart';
-import '../../../core/utils/utils.index.dart';
-import '../../../domain/entities/app_theme_data.dart';
-import '../../../domain/entities/enums/theme_dark_option.dart';
-import '../../../domain/entities/color_theme.dart';
-import '../../../domain/usecases/theme/get_stored_theme_data.dart';
-import '../../../domain/usecases/theme/get_supported_color_themes.dart';
-import '../../../domain/usecases/theme/get_supported_fonts.dart';
-import '../../../domain/usecases/theme/store_app_theme.dart';
+import '../../../configs/configs.index.dart';
 
 part 'theme_state.dart';
 
 @singleton
 class ThemeCubit extends Cubit<ThemeState> {
-  // usecases
-  final GetSupportedFonts _getSupportedFonts;
-  final GetSupportedColorThemes _getSupportedThemes;
-  final GetStoredOrDefaultAppThemeData _getStoredAppThemeData;
-  final StoreAppThemeData _storeTheme;
-
-  ThemeCubit(
-    this._getSupportedFonts,
-    this._getSupportedThemes,
-    this._getStoredAppThemeData,
-    this._storeTheme,
-  ) : super(const ThemeState());
+  ThemeCubit() : super(const ThemeState());
 
   Future<void> init() async {
-    final supportedFonts = await _getSupportedFonts(NoParams());
-    final supportedThemes = await _getSupportedThemes(NoParams());
-    final appTheme = await _getStoredAppThemeData(NoParams());
+    final appTheme = ThemeConfiguration.defaultAppTheme;
     final lightTheme = ThemeUtils.getThemeData(
       theme: appTheme.colorTheme,
       brightness: Brightness.light,
@@ -59,8 +37,8 @@ class ThemeCubit extends Cubit<ThemeState> {
           darkTheme: darkTheme,
           isDarkTheme: true,
         ),
-        supportedFonts: supportedFonts,
-        supportedThemes: supportedThemes,
+        supportedFonts: ThemeConfiguration.supportedFonts,
+        supportedThemes: ThemeConfiguration.supportedColorThemes,
       ),
     );
   }
@@ -90,8 +68,6 @@ class ThemeCubit extends Cubit<ThemeState> {
       font: font,
       darkOption: darkOption,
     );
-
-    _storeTheme(StoreAppThemeDataParams(theme: newTheme));
 
     emit(
       state.copyWith(

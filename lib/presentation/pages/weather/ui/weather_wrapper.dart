@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../config/injector/injection.dart';
+import '../../../../configs/configs.index.dart';
 import '../bloc/weather_bloc.dart';
 import 'weather_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

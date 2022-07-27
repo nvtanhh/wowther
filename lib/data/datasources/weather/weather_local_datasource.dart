@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../config/injector/injection.dart';
+import '../../../configs/injector/injection.dart';
 import '../../../core/constants/storage_constants.dart';
 import '../../models/weather_model.dart';
 

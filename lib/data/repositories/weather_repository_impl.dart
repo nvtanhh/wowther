@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
-import '../../config/injector/injection.dart';
+import '../../configs/injector/injection.dart';
 import '../../core/exceptions/exceptions.index.dart';
 import '../../domain/entities/weather.dart';
 import '../../domain/repositories/weather_repository.dart';

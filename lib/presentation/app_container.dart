@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/theme/icons.dart';
+import 'common_widgets/common_widget.index.dart';
 import 'pages/setting/ui/setting_wrapper.dart';
 import 'pages/weather/ui/weather_wrapper.dart';
 

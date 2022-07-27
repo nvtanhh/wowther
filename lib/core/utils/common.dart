@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../config/theme/spacer.dart';
-import '../../config/theme/text.dart';
+import '../../presentation/common_widgets/common_widget.index.dart';
 
 class CommonUtils {
   static void showSnackBar(BuildContext context, String content) {

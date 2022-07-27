@@ -3,39 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../config/injector/injection.dart';
-import '../../../core/constants/app_constants.dart';
-import '../../../core/params/language/store_language_code_params.dart';
-import '../../../core/params/no_params.dart';
-import '../../../domain/usecases/language/get_stored_or_default_locale.dart';
-import '../../../domain/usecases/language/get_supported_locales.dart';
-import '../../../domain/usecases/language/store_locale.dart';
+import '../../../configs/configs.index.dart';
 import '../../pages/weather/bloc/weather_bloc.dart';
 
 part 'language_state.dart';
 
 @singleton
 class LanguageCubit extends Cubit<LanguageState> {
-  final GetStoredOrDefaultLocale _getStoredOrDefaultLocale;
-  final GetSupportedLocales _getSupportedLocales;
-  final StoreLocale _storeLocale;
-
-  LanguageCubit(
-    this._getStoredOrDefaultLocale,
-    this._getSupportedLocales,
-    this._storeLocale,
-  ) : super(LanguageState.initial());
-
-  Future<void> init() async {
-    final locale = await _getStoredOrDefaultLocale(NoParams());
-    final supportedLocales = await _getSupportedLocales(NoParams());
-    emit(state.copyWith(locale: locale, supportedLocales: supportedLocales));
-  }
+  LanguageCubit() : super(LanguageState.initial());
 
   void changeLanguage(Locale locale) {
     emit(state.copyWith(locale: locale));
     locator<WeatherBloc>().add(RefreshWeather(language: locale.languageCode));
-    _storeLocale(StoreLocaleParams(locale));
   }
 
   Locale? localeResolutionCallback(

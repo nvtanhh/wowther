@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../spacer.dart';
-import '../text.dart';
+import 'spacer.dart';
+import 'text.dart';
 
 class AppTextField extends StatelessWidget {
   final String? labelText;

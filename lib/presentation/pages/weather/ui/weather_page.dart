@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../config/theme/common_page.dart';
-import '../../../../config/theme/glass_container.dart';
-import '../../../../config/theme/spacer.dart';
-import '../../../../config/theme/text.dart';
 import '../../../../core/exceptions/weather_error.dart';
 import '../../../../core/extensions/extensions.index.dart';
 import '../../../../core/utils/utils.index.dart';
 import '../../../../domain/entities/weather.dart';
+import '../../../common_widgets/common_widget.index.dart';
 import '../bloc/weather_bloc.dart';
 import 'widgets/searchable_app_bar.dart';
 import 'widgets/temperature.dart';

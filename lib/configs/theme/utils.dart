@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/color_theme.dart';
+import 'models.dart';
 
 class ThemeUtils {
   static ThemeData getThemeData({

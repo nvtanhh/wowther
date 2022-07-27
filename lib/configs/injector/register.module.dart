@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../presentation/route/route.dart';
 import '../../services/firebase_service.dart';
-import '../route/route.dart';
 
 @module
 abstract class RegisterModule {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../config/theme/text.dart';
+import '../../../../common_widgets/common_widget.index.dart';
 
 class TemperatureWidget extends StatelessWidget {
   final String temperature;

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../config/theme/fields/text_field.dart';
-import '../../../../../config/theme/icons.dart';
-import '../../../../../config/theme/spacer.dart';
-import '../../../../../config/theme/text.dart';
 import '../../../../../domain/entities/weather.dart';
+import '../../../../common_widgets/common_widget.index.dart';
 
 class SearchableWeatherAppBar extends StatefulWidget {
   final Weather? weather;

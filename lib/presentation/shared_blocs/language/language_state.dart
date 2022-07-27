@@ -10,8 +10,8 @@ class LanguageState extends Equatable {
   });
 
   factory LanguageState.initial() => LanguageState(
-        locale: AppConstants.supportedLocales.first,
-        supportedLocales: AppConstants.supportedLocales,
+        locale: LanguageConfiguration.defaultLocale,
+        supportedLocales: LanguageConfiguration.supportedLocales,
       );
 
   LanguageState copyWith({

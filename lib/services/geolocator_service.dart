@@ -2,7 +2,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
-import '../config/injector/injection.dart';
+import '../configs/injector/injection.dart';
 
 @singleton
 class GeolocatorService {

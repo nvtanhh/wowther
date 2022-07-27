@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import '../config/injector/injection.dart';
-import '../config/route/route.dart';
+import '../configs/configs.index.dart';
+import 'route/route.dart';
 import 'shared_blocs/language/language_cubit.dart';
 import 'shared_blocs/theme/theme_cubit.dart';
 import 'shared_blocs/user/user_cubit.dart';
@@ -19,7 +19,7 @@ class TodoApp extends StatelessWidget {
     return BlocProvider<UserCubit>(
       create: (_) => locator<UserCubit>(),
       child: BlocProvider(
-        create: (_) => locator<LanguageCubit>()..init(),
+        create: (_) => locator<LanguageCubit>(),
         child: BlocProvider<ThemeCubit>(
           create: (_) => locator<ThemeCubit>()..init(),
           child: BlocBuilder<UserCubit, UserState>(

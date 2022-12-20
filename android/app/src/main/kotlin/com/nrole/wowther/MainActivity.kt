@@ -1,4 +1,4 @@
-package com.tanhnv.demo
+package com.nrole.wowther
 
 import io.flutter.embedding.android.FlutterActivity
 

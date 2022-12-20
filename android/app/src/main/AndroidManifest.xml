@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tanhnv.demo">
+    package="com.nrole.wowther">
    <application
-        android:label="flutter_boilerplate"
+        android:label="Wowther"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

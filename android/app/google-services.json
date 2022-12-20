@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:989039084471:android:b56bb52cbc0f7987ce5e32",
+        "mobilesdk_app_id": "1:989039084471:android:19a235f7ad83f5cace5e32",
         "android_client_info": {
-          "package_name": "com.tanhnv.demo"
+          "package_name": "com.nrole.wowther"
         }
       },
       "oauth_client": [

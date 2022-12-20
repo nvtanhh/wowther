@@ -67,6 +67,7 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
                     curve: Curves.easeInOutCubic,
                     child: AppTextField(
                       controller: TextEditingController(),
+                      maxLines:1,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: !isSearching ? Colors.transparent : null,

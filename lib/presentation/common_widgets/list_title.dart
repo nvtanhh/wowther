@@ -58,7 +58,7 @@ class AppListTitle extends StatelessWidget {
                   border: borderWidget,
                 ),
                 child: Row(
-                  children: <Widget>[
+                  children: [
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 16, bottom: 16),

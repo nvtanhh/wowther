@@ -5,21 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter-resources",
+            "name": "Wowther",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "flutter-resources (profile mode)",
+            "name": "Wowther (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
-        },
-        {
-            "name": "flutter-resources (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
         }
     ]
 }

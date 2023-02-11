@@ -78,7 +78,7 @@ jobs:
   commit_changes:
     name: Commit changes to staging
     runs-on: ubuntu-latest
-    needs: build
+    needs: deploy
     steps:
       - uses: actions/checkout@v3
 

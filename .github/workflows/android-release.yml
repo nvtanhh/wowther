@@ -85,6 +85,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "[no ci] Build staging"
           delete-branch: true
           title: "Build Staging"

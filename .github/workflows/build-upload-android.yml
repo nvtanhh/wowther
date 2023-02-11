@@ -15,49 +15,48 @@ jobs:
 
       - uses: actions/setup-java@v2
         with:
-          java-version: '12.x'
-          
+          java-version: "12.x"
+
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.0'
-  
+          flutter-version: "3.7.0"
+
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0
           bundler-cache: true
-  
-    #  - name: Run tests
-    #    run: bundle exec fastlane android test
-  
-    - name: Decode Service Account Key JSON File
-      uses: timheuer/base64-to-file@v1
-      id: service_account_json_file
-      with:
-        fileName: "serviceAccount.json"
-        encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
-  
-    - name: Decode Keystore File
-      uses: timheuer/base64-to-file@v1
-      id: android_keystore
-      with:
-        fileName: "android_keystore.keystore"
-        encodedString: ${{ secrets.KEYSTORE_FILE }}
-  
-    - name: prepare to build
-        run: sh auto_versioning.sh
-        run: flutter pub get    
-      
-  
-    - name: Build & deploy Android release
-      run: bundle exec fastlane android deploy
-      env:
-        KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
-        STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-        KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
-        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
- 
+
+      #  - name: Run tests
+      #    run: bundle exec fastlane android test
+
+      - name: Decode Service Account Key JSON File
+        uses: timheuer/base64-to-file@v1
+        id: service_account_json_file
+        with:
+          fileName: "serviceAccount.json"
+          encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: android_keystore
+        with:
+          fileName: "android_keystore.keystore"
+          encodedString: ${{ secrets.KEYSTORE_FILE }}
+
+      # prepare to build
+      - run: sh auto_versioning.sh
+      - run: flutter pub get
+
+      - name: Build & deploy Android release
+        run: bundle exec fastlane android deploy
+        env:
+          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+          STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
+
     # - name: Upload build artifacts
     #   uses: actions/upload-artifact@v2
     #   with:

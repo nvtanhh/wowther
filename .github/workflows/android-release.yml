@@ -1,7 +1,7 @@
 name: Android Build & Deploy
 
 on:
-  push:
+  pull_request:
     branches: ["staging"]
 
   workflow_dispatch:
@@ -85,10 +85,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.1
         with:
-          commit-message: '[ ci skip ] Build staging'
+          commit-message: "[no ci] Build staging"
           delete-branch: true
-          title: 'Build Staging'
+          title: "Build Staging"
           body: ${{github.event.head_commit.message}}
           add-paths: pubspec.yaml
-          branch: 'build-staging'
-          base: 'staging'
+          branch: "build-staging"
+          base: "staging"

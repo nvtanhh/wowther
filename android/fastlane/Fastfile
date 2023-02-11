@@ -1,21 +1,30 @@
-# You can find the documentation at https://docs.fastlane.tools
-
 default_platform(:android)
 
 platform :android do
 
   desc "Submit a new Internal Build to GooglePlay"
-  lane :deployInternal do
-    gradle(task: "bundleRelease")
+  lane :deploy do
+    gradle(
+      task: "bundle",
+      build_type: "release",
+      properties: {
+        "android. injected .signing.store. file" => ENV ["KEYSTORE_FILE"],
+        "android. injected. signing store.password" => ENV ["STORE_PASSWORD"],
+        "android. injected.signing.key alias" => ENV["KEY_ALIAS"],
+        "android. injected .signing.key-password" => ENV["KEY_PASSWORD"]
+      }
+    )
+
     upload_to_play_store(
-    track:'internal',
-    aab: '../build/app/outputs/bundle/release/app-release.aab',
-    skip_upload_apk: true,
-    skip_upload_metadata: true,
-    skip_upload_changelogs: true,
-    skip_upload_screenshots: true,
-    skip_upload_images: true,
-    changes_not_sent_for_review: true,
+      son_key: ENV['ANDROID_JSON_KEY_FILE']
+      track:'internal',
+      # aab: '../build/app/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_screenshots: true,
+      skip_upload_images: true,
+      changes_not_sent_for_review: true,
     )
   end
 end

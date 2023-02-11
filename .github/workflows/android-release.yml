@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Create Android Build
+    name: Build app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
           flutter-version: "3.7.0"
           cache: true
 
-      - name: prepare to build
+      - name: Prepare to build
         run: |
           sh auto_versioning.sh
           flutter pub get
@@ -54,6 +54,7 @@ jobs:
           path: build/app/outputs/bundle/release/app-release.aab
 
   deploy:
+    name: deploy to Internal Test
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -72,3 +73,22 @@ jobs:
           releaseFiles: app-release.aab
           track: internal
           status: completed
+          changesNotSentForReview: true
+
+  commit_changes:
+    name: Commit changes to staging
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.2.1
+        with:
+          commit-message: '[ ci skip ] Build staging'
+          delete-branch: true
+          title: 'Build Staging'
+          body: ${{github.event.head_commit.message}}
+          add-paths: pubspec.yaml
+          branch: 'build-staging'
+          base: 'staging'

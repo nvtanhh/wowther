@@ -95,6 +95,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.version.outputs.new-version }}
+          tag_prefix: "staging-"
 
       - name: Raise PR
         id: raise_pr

@@ -13,6 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: sh auto_versioning.sh
+    
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "[no ci] Build staging"
+          delete-branch: true
+          title: "Build Staging"
+          body: ${{github.event.head_commit.message}}
+          add-paths: pubspec.yaml
+          branch: "staging-version"
+          base: "staging"
+
 
   # build:
   #   name: Build app
@@ -80,21 +93,3 @@ jobs:
   #         status: completed
   #         changesNotSentForReview: true
 
-  commit_changes:
-    name: Commit changes to staging
-    runs-on: ubuntu-latest
-    needs: update_version
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.2.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[no ci] Build staging"
-          delete-branch: true
-          title: "Build Staging"
-          body: ${{github.event.head_commit.message}}
-          add-paths: pubspec.yaml
-          branch: "staging-version"
-          base: "staging"

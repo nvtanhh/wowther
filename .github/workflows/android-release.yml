@@ -57,7 +57,7 @@ jobs:
       - name: Merge Pull request
         uses: juliangruber/merge-pull-request-action@v1
         with:
-          github-token: ${f secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           number: ${{ steps.raise_pr.outputs.pull-request-number }}
           method: squash
 

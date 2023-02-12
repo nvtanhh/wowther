@@ -53,12 +53,17 @@ jobs:
           name: android-release
           path: build/app/outputs/bundle/release/app-release.aab
 
+      - name: Get version from pubspec.yaml
+        id: get_version
+        run: |
+          echo "::set-output name=version::$(grep 'version: ' ./pubspec.yaml)"
+
       - name: Raise PR
         id: raise_pr
         uses: peter-evans/create-pull-request@v4.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[no ci] Build staging"
+          commit-message: "[no ci] Build staging version ${{ steps.get_version.outputs.version }}"
           delete-branch: true
           title: "Build Staging"
           body: ${{github.event.head_commit.message}}

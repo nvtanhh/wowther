@@ -48,15 +48,12 @@ jobs:
           base: "staging"
           labels: "automerge"
 
-      - name: Print PR number
-        run: echo "Pull Request Number - ${{ steps.raise_pr.outputs.pull-request-number }}"
-
       - name: Merge PR
-        if: ${{ steps.raise_pr.outputs.pull-request-number }}
         uses: juliangruber/merge-pull-request-action@v1.1.0
         env:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-          number: "${{ steps.raise_pr.outputs.pull-request-number }}"
+          number: ${{ steps.raise_pr.outputs.pull-request-number }}
+          method: squash
 
       - name: Download Android keystore
         id: android_keystore

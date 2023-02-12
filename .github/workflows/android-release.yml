@@ -88,16 +88,18 @@ jobs:
         id: version
         run: |
           sh auto_versioning.sh
-          echo "::set-output name=new-version::$(grep 'version: ' ./pubspec.yaml)"
+          echo "::set-output name=version_line::$(grep 'version: ' ./pubspec.yaml)"
+          // remove the 'version: ' prefix
+          echo "::set-output name=new-version::$(echo ${version_line:8})"
 
       - name: Raise PR
         id: raise_pr
         uses: peter-evans/create-pull-request@v4.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[no ci] Build staging"
+          commit-message: "[no ci] :rocket: Build staging ${{ steps.version.outputs.new-version }}"
           delete-branch: true
-          title: ":rocket: Build Staging version ${{ steps.version.outputs.new-version }}"
+          title: ":rocket: Build Staging ${{ steps.version.outputs.new-version }}"
           body: ${{github.event.head_commit.message}}
           add-paths: pubspec.yaml
           branch: "staging-version"
@@ -118,7 +120,6 @@ jobs:
           method: squash
 
       - name: Tag version
-        id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

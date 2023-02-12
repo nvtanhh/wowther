@@ -49,16 +49,16 @@ jobs:
           labels: "automerge"
 
       - name: Approve Pull Request
-        uses: juliangruber/approve-pull-request-action@v1 
+        uses: juliangruber/approve-pull-request-action@v1
         with:
-          github-token: ${f secrets.GITHUB_TOKEN }} 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           number: ${{ steps.raise_pr.outputs.pull-request-number }}
-          
+
       - name: Merge Pull request
-        uses: juliangruber/merge-pull-request-action@v1 
+        uses: juliangruber/merge-pull-request-action@v1
         with:
-          github-token: ${f secrets.GITHUB_TOKEN }} 
-          number: ${{ steps.raise_pr.outputs.pull-request-number }} 
+          github-token: ${f secrets.GITHUB_TOKEN }}
+          number: ${{ steps.raise_pr.outputs.pull-request-number }}
           method: squash
 
       - name: Download Android keystore

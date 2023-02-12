@@ -63,19 +63,18 @@ jobs:
         uses: peter-evans/create-pull-request@v4.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[no ci] Build staging version ${{ steps.get_version.outputs.version }}"
+          commit-message: "[no ci] Build staging"
           delete-branch: true
-          title: "Build Staging"
+          title: "Build Staging version ${{ steps.get_version.outputs.version }}"
           body: ${{github.event.head_commit.message}}
           add-paths: pubspec.yaml
           branch: "staging-version"
           base: "staging"
-          labels: "automerge"
 
       - name: Merge PR
-        uses: "pascalgn/automerge-action@v0.15.5"
+        uses: juliangruber/merge-pull-request-action@v1.1.0
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
           number: "${{ steps.raise_pr.outputs.pull-request-number }}"
 
   deploy:

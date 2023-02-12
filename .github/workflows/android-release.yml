@@ -48,6 +48,9 @@ jobs:
           base: "staging"
           labels: "automerge"
 
+      - name: Print PR number
+        run: echo "Pull Request Number - ${{ steps.raise_pr.outputs.pull-request-number }}"
+
       - name: Merge PR
         if: ${{ steps.raise_pr.outputs.pull-request-number }}
         uses: juliangruber/merge-pull-request-action@v1.1.0

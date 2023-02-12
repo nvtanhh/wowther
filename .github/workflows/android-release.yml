@@ -41,7 +41,7 @@ jobs:
 
       - name: Version the app
         id: version
-        uses: |
+        run: |
           sh auto_versioning.sh
           echo "::set-output name=new-version::$(grep 'version: ' ./pubspec.yaml)"
 

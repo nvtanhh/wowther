@@ -51,7 +51,7 @@ jobs:
       - name: Approve Pull Request
         uses: juliangruber/approve-pull-request-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.APPROVE_PR_TOKEN }}
           number: ${{ steps.raise_pr.outputs.pull-request-number }}
 
       - name: Merge Pull request

@@ -71,13 +71,12 @@ jobs:
           base: "staging"
           labels: "automerge"
 
-      - name: Enable Pull Request Automerge
-        if: steps.raise_pr.outputs.pull-request-operation == 'created'
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.raise_pr.outputs.pull-request-number }}
-          merge-method: squash
+      - name: Merge PR
+        if: ${{ steps.raise_pr.outputs.pull-request-number }}
+        uses: juliangruber/merge-pull-request-action@v1.1.0
+        env:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          number: "${{ steps.raise_pr.outputs.pull-request-number }}"
 
   deploy:
     name: Deploy to Internal Test

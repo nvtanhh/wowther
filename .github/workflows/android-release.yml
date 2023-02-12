@@ -48,27 +48,18 @@ jobs:
           base: "staging"
           labels: "automerge"
 
-      - name: automerge
-        uses: "pascalgn/automerge-action@v0.15.5"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: "automerge"
-          MERGE_REMOVE_LABELS: "automerge"
-          MERGE_METHOD: "squash"
-
-
       - name: Approve Pull Request
         uses: juliangruber/approve-pull-request-action@v1
         with:
           github-token: ${{ secrets.APPROVE_PR_TOKEN }}
           number: ${{ steps.raise_pr.outputs.pull-request-number }}
 
-      # - name: Merge Pull request
-      #   uses: juliangruber/merge-pull-request-action@v1
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     number: ${{ steps.raise_pr.outputs.pull-request-number }}
-      #     method: squash
+      - name: Merge Pull request
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.raise_pr.outputs.pull-request-number }}
+          method: squash
 
       - name: Download Android keystore
         id: android_keystore

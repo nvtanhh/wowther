@@ -101,14 +101,14 @@ jobs:
           custom_tag: ${{ steps.version.outputs.new-version }}
           tag_prefix: "release-"
 
-      - name: Raise PR
+      - name: Raise PR to bump version
         id: raise_pr
         uses: peter-evans/create-pull-request@v4.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[no ci] :rocket: Bump release version to ${{ steps.version.outputs.new-version }}"
+          commit-message: "[no ci] 🔖 Bump release version to ${{ steps.version.outputs.new-version }}"
           delete-branch: true
-          title: ":rocket: Bump version to ${{ steps.version.outputs.new-version }}"
+          title: "🔖 Bump version to ${{ steps.version.outputs.new-version }}"
           body: ${{github.event.head_commit.message}}
           add-paths: pubspec.yaml
           branch: "bump-version"
@@ -126,4 +126,31 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           number: ${{ steps.raise_pr.outputs.pull-request-number }}
+          method: squash
+
+      - name: Raise PR to develop
+        id: raise_pr2
+        uses: peter-evans/create-pull-request@v4.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: false
+          title: "PR from main"
+          commit-message: "[no ci] 🔀"
+          body: ${{github.event.head_commit.message}}
+          add-paths: pubspec.yaml
+          branch: "main"
+          base: "develop"
+          labels: "automerge"
+
+      - name: Approve Pull Request to Develop
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.APPROVE_PR_TOKEN }}
+          number: ${{ steps.raise_pr2.outputs.pull-request-number }}
+
+      - name: Merge Pull request to Develop
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.raise_pr2.outputs.pull-request-number }}
           method: squash

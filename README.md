@@ -38,3 +38,4 @@ Open with Editer VSCode or Android Studio and run
 * Multiple font
 * Get weather by current location
 * Search weather by city name
+

@@ -18,6 +18,28 @@ class GeolocatorService {
   );
   Future<Position> getCurrentPosition() async {
     try {
+      bool serviceEnabled;
+      LocationPermission permission;
+
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        throw Future.error('Location services are disabled.');
+      }
+
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw Future.error('Location permissions are denied');
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        throw Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.',
+        );
+      }
+
       return await Geolocator.getCurrentPosition();
     } catch (e) {
       locator<Logger>().e(e.toString());

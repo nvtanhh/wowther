@@ -99,19 +99,20 @@ class AppTextField extends StatelessWidget {
       onSubmitted: onSubmitted,
     );
 
+    if (labelText == null) return textField;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (labelText != null)
-          Padding(
-            padding: AppSpacer.edgeInsetsBottom8,
-            child: ThemedText(
-              labelText!,
-              type: ThemedTextType.labelLarge,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
+        Padding(
+          padding: AppSpacer.edgeInsetsBottom8,
+          child: ThemedText(
+            labelText!,
+            type: ThemedTextType.labelLarge,
+            style: const TextStyle(fontWeight: FontWeight.w500),
           ),
+        ),
         textField,
       ],
     );

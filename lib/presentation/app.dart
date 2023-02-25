@@ -9,8 +9,8 @@ import 'shared_blocs/language/language_cubit.dart';
 import 'shared_blocs/theme/theme_cubit.dart';
 import 'shared_blocs/user/user_cubit.dart';
 
-class TodoApp extends StatelessWidget {
-  TodoApp({Key? key}) : super(key: key);
+class WowtherApp extends StatelessWidget {
+  WowtherApp({Key? key}) : super(key: key);
 
   final _appRouter = locator<AppRouter>();
 

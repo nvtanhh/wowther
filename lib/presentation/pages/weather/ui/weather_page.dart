@@ -47,6 +47,7 @@ class WeatherPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                AppSpacer.sizedBoxH32,
                 SizedBox(
                   width: double.infinity,
                   child: SearchableWeatherAppBar(

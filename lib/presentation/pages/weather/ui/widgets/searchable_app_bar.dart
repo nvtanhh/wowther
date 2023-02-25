@@ -67,7 +67,7 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
                     curve: Curves.easeInOutCubic,
                     child: AppTextField(
                       controller: TextEditingController(),
-                      maxLines:1,
+                      maxLines: 1,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: !isSearching ? Colors.transparent : null,
@@ -114,20 +114,17 @@ class _SearchableWeatherAppBarState extends State<SearchableWeatherAppBar> {
   Widget _buildTimeAndPlace() {
     final localName = AppLocalizations.of(context)!.localeName;
     final date = DateFormat.yMMMMd(localName).format(DateTime.now());
-    return SizedBox(
-      height: 56.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ThemedText(
-            date,
-            type: ThemedTextType.titleMedium,
-          ),
-          AppSpacer.sizedBoxH8,
-          if (widget.weather != null) _buildWeatherLocation(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ThemedText(
+          date,
+          type: ThemedTextType.titleMedium,
+        ),
+        AppSpacer.sizedBoxH8,
+        if (widget.weather != null) _buildWeatherLocation(),
+      ],
     );
   }
 

@@ -12,7 +12,7 @@ Future<void> main() async {
   BlocOverrides.runZoned(
     () async {
       await configureDependencies();
-      runApp(TodoApp());
+      runApp(WowtherApp());
     },
     blocObserver: AppBlocObserver(),
   );

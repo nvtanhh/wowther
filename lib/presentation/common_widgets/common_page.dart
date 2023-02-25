@@ -30,37 +30,44 @@ class CommonPage extends StatelessWidget {
     this.isBlurBackground = false,
   }) : super(key: key);
 
+  void _dismissKeyboard(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop != null ? onWillPop! : () async => true,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor:
-            backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-        appBar: appBar,
-        body: SafeArea(
-          child: Container(
-            padding: padding,
-            decoration: backgroundImage == null
-                ? null
-                : BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(backgroundImage!),
-                      fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () => _dismissKeyboard(context),
+      child: WillPopScope(
+        onWillPop: onWillPop != null ? onWillPop! : () async => true,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor:
+              backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+          appBar: appBar,
+          body: SafeArea(
+            child: Container(
+              padding: padding,
+              decoration: backgroundImage == null
+                  ? null
+                  : BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(backgroundImage!),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-            child: isBlurBackground
-                ? BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
-                    child: body,
-                  )
-                : body,
+              child: isBlurBackground
+                  ? BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+                      child: body,
+                    )
+                  : body,
+            ),
           ),
+          bottomNavigationBar: bottomAppBar,
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
         ),
-        bottomNavigationBar: bottomAppBar,
-        floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: floatingActionButtonLocation,
       ),
     );
   }

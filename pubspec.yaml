@@ -37,6 +37,12 @@ dev_dependencies:
   auto_route_generator: ^4.0.0
   mockito: ^5.2.0
   bloc_test: ^9.0.3
+  flutter_native_splash: ^2.2.18
+
+flutter_native_splash:
+  color: "#383B40"
+  image: assets/images/splash.png
+  android: true
 
 flutter:
   generate: true
